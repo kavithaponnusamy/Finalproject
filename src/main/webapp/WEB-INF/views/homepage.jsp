@@ -31,6 +31,14 @@
 				</form>
 			
 
+<c:forEach var="property" items="${properties}">
+<tr>
+<td><c:out value="${property.property_id}"/></td>
+<td><c:out value="${property.address.line}"/></td>
+<tr>
+</c:forEach>
+
+
 
 </body>
 </html>

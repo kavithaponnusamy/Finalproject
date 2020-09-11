@@ -29,7 +29,7 @@ public class HomeController {
 		System.out.println(places);
 		model.addAttribute("properties",properties);
 		model.addAttribute("places",places);
-		return "homepage";
+		return "details";
 	}
 	@RequestMapping("/details")
 	public String showDetails(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
