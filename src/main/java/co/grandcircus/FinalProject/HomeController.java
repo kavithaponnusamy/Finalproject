@@ -31,11 +31,13 @@ public class HomeController {
 		model.addAttribute("places",places);
 		return "homepage";
 	}
-	/*@RequestMapping("/details")
-	public String showDetails(Model model, @RequestParam(required=false) String state_code) {
+	@RequestMapping("/details")
+	public String showDetails(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
+		List<Property> properties=apiServ.getProperiesByCityState(state_code, city).getProperties();
+		model.addAttribute("properties", properties);
+		return "details";
 		
-		
-	}*/
+	}
 	
 
 }
