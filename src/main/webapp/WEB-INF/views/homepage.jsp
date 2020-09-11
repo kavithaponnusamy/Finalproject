@@ -29,6 +29,11 @@
 <td><c:out value="${place.rating}"/></td>
 <tr>
 </c:forEach>
+<c:forEach var="state" items="${states}">
+<tr>
+<td><c:out value="${state}"/></td>
+<tr>
+</c:forEach>
 
 </table>
 </body>
