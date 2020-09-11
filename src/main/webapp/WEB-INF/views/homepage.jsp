@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <h2>List of properties</h2>
 <table>
 <tr><th>Property Id</th><th>Address</th><tr>
