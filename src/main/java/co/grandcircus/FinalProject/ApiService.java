@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
+import co.grandcircus.FinalProject.entity.State;
 
 @Service
 public class ApiService {
@@ -33,6 +34,18 @@ public class ApiService {
 	//	String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=42.4606,-83.1346&key=AIzaSyDfO7vC2hX5xSfjZ5RBgC3M95vLuw8nHj8&radius=1000";
 		List<NearByPlaces> places=rt.getForObject(url,GoogleResponse.class,key).getResults();
 		return places;
+	}
+public PropertyResponse getProperiesByState(String state_code) {
+		
+		String url="https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city=New%20York%20City&limit=200&offset=0&state_code={state_code}&price_min&rapidapi-key={apiKey}";
+		PropertyResponse propertyResponse= rt.getForObject(url, PropertyResponse.class,state_code,apiKey);
+		return propertyResponse;
+	}
+	public List<String> getStates() {
+		String url="https://worldpopulationreview.com/static/states/abbr-list.json";
+		String[] states=rt.getForObject(url, String[].class);
+		return Arrays.asList(states);
+		
 	}
 
 }
