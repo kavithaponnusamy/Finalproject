@@ -30,7 +30,7 @@ public class ApiService {
 	
 	public List<NearByPlaces> getAllGoogleSearch() {
 		//String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=42.4606,%20-83.1346&key={key}&radius=1000";
-		String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=42.4606,%20-83.1346&key=AIzaSyDfO7vC2hX5xSfjZ5RBgC3M95vLuw8nHj8&radius=1000";
+		String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=42.4606,-83.1346&key=AIzaSyDfO7vC2hX5xSfjZ5RBgC3M95vLuw8nHj8&radius=1000";
 		List<NearByPlaces> places=rt.getForObject(url,GoogleResponse.class,key).getResults();
 		return places;
 	}
