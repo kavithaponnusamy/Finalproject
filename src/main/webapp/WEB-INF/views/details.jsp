@@ -20,16 +20,5 @@
 <tr>
 </c:forEach>
 </table>
-<!-- <table>
-<tr><th>Name</th><th>Rating</th><tr>
-
-<c:forEach var="place" items="${places}">
-<tr>
-<td><c:out value="${place.name}"/></td>
-<td><c:out value="${place.rating}"/></td>
-<tr>
-</c:forEach>
-
-</table> -->
 </body>
 </html>
