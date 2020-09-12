@@ -11,7 +11,7 @@
 
 <h2>Find Homes That Fit Your Lifestyle</h2>
 
-<form class="form-inline" action="/details">
+<form class="form-inline" action="/submit-list">
 
 <table class="table">
 			<tr>
@@ -19,9 +19,9 @@
 				<td><input type="text" name="city" autofocus/></td>
 				<th>State</th>
 			<td>
-				<select name= "state_code">
+				<select name= "states">
 				<c:forEach items="${states}" var="states">
-				<option value= "${states}" name="state_code">${states}</option>
+				<option value= "${states}">${states}</option>
 				</c:forEach>
 				</select>
 				<button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -30,15 +30,6 @@
 				
 				</form>
 			
-
-<c:forEach var="property" items="${properties}">
-<tr>
-<td><c:out value="${property.property_id}"/></td>
-<td><c:out value="${property.address.line}"/></td>
-<tr>
-</c:forEach>
-
-
 
 </body>
 </html>
