@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
+import co.grandcircus.FinalProject.entity.PropertyResponse;
 import co.grandcircus.FinalProject.entity.State;
 
 @Controller
@@ -24,19 +25,27 @@ public class HomeController {
 		List<Property> properties=apiServ.getAllProperties().getProperties();
 		List<NearByPlaces> places=apiServ.getAllGoogleSearch();
 		List<String> states=apiServ.getStates();
-		System.out.println(states);
+		//System.out.println(states);
 		model.addAttribute("states",states);
-		System.out.println(places);
+		//System.out.println(places);
 		model.addAttribute("properties",properties);
 		model.addAttribute("places",places);
 		return "homepage";
 	}
-	@RequestMapping("/details")
-	public String showDetails(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
+	@RequestMapping("/submit-list")
+	public String showList(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
 		List<Property> properties=apiServ.getProperiesByCityState(state_code, city).getProperties();
 		model.addAttribute("properties", properties);
-		return "details";
+		return "list";
 		
+	} 
+	@RequestMapping("/submit-details")
+	public String showDetails(Model model, @RequestParam(required=false) String property_id) {
+		PropertyResponse property=apiServ.getPropertyByPropertyId(property_id);
+		
+		System.out.println(property);
+		model.addAttribute("property",property.getProperties());
+		return "details";
 	}
 	
 

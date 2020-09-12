@@ -7,19 +7,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class State {
 	@JsonProperty("MyArray") 
-    public List<String> myArray;
+    public List<String> states;
 
 	public List<String> getMyArray() {
-		return myArray;
+		return states;
 	}
 
-	public void setMyArray(List<String> myArray) {
-		this.myArray = myArray;
+	public void setMyArray(List<String> states) {
+		this.states = states;
 	}
 
 	@Override
 	public String toString() {
-		return "State [myArray=" + myArray + "]";
+		return "State [states=" + states + "]";
 	}
 
 	
