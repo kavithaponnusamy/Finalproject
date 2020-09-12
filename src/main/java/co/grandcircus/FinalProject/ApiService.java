@@ -36,7 +36,7 @@ public class ApiService {
 		return places;
 	}
 	public PropertyResponse getProperiesByCityState(String state_code,String city) {		
-		String url="https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city={city}&limit=200&offset=0&state_code={state_code}&price_min&rapidapi-key={apiKey}";
+		String url="https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city={city}&limit=5&offset=0&state_code={state_code}&price_min&rapidapi-key={apiKey}";
 		PropertyResponse propertyResponse= rt.getForObject(url, PropertyResponse.class,city, state_code,apiKey);
 		return propertyResponse;
 	}
@@ -47,9 +47,10 @@ public class ApiService {
 		
 	}
 	public PropertyResponse getPropertyByPropertyId(String property_id) {
+		//System.out.println(property_id);
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
-		System.out.println(property);
+		//System.out.println(property);
 		return property;
 	}
 

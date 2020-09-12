@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Property {
 	public String property_id;
     public String listing_id;
-    public String rdc_web_url;
+    @JsonProperty("rdc_web_url")
+    public String weburl;
     public String prop_type;
     public String prop_status;
     public Double price;
@@ -17,12 +18,32 @@ public class Property {
     public Integer beds;
     private Address address;
     private List<Agent> agents;
-    public Date last_update;
-    public Integer photo_count;
     
-    public Integer rank;
-    @JsonProperty("virtual_tour")
-    private VirtualTour virtualTour;
+	public Date last_update;
+    public Integer photo_count;
+    private List<Photo> photos;
+    
+    public String thumbnail;
+    
+    public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public Integer rank;
+//    @JsonProperty("virtual_tour")
+//    private VirtualTour virtualTour;
+    
+    
+    
+    public List<Photo> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+	
 	public String getProperty_id() {
 		return property_id;
 	}
@@ -35,11 +56,11 @@ public class Property {
 	public void setListing_id(String listing_id) {
 		this.listing_id = listing_id;
 	}
-	public String getRdc_web_url() {
-		return rdc_web_url;
+	public String getWeburl() {
+		return weburl;
 	}
-	public void setRdc_web_url(String rdc_web_url) {
-		this.rdc_web_url = rdc_web_url;
+	public void setWeburl(String weburl) {
+		this.weburl = weburl;
 	}
 	public String getProp_type() {
 		return prop_type;
@@ -107,12 +128,12 @@ public class Property {
 	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
-	public VirtualTour getVirtualTour() {
-		return virtualTour;
-	}
-	public void setVirtualTour(VirtualTour virtualTour) {
-		this.virtualTour = virtualTour;
-	}
+//	public VirtualTour getVirtualTour() {
+//		return virtualTour;
+//	}
+//	public void setVirtualTour(VirtualTour virtualTour) {
+//		this.virtualTour = virtualTour;
+//	}
     
     
 }

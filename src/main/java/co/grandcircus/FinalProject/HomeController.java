@@ -36,12 +36,12 @@ public class HomeController {
 	public String showList(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
 		List<Property> properties=apiServ.getProperiesByCityState(state_code, city).getProperties();
 		model.addAttribute("properties", properties);
-		return "list";
+		return "search-results";
 		
 	} 
 	@RequestMapping("/submit-details")
-	public String showDetails(Model model, @RequestParam(required=false) String property_id) {
-		PropertyResponse property=apiServ.getPropertyByPropertyId(property_id);
+	public String showDetails(Model model, @RequestParam(required=false) String propertyId) {
+		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);
 		
 		System.out.println(property);
 		model.addAttribute("property",property.getProperties());
