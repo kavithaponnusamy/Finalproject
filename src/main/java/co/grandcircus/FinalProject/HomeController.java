@@ -26,9 +26,7 @@ public class HomeController {
 		List<Property> properties=apiServ.getAllProperties().getProperties();
 		List<NearByPlaces> places=apiServ.getAllGoogleSearch();
 		List<String> states=apiServ.getStates();
-		//System.out.println(states);
 		model.addAttribute("states",states);
-		//System.out.println(places);
 		model.addAttribute("properties",properties);
 		model.addAttribute("places",places);
 		return "homepage";
@@ -53,10 +51,6 @@ public class HomeController {
 		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
 		List<Property> filteredProperties=new ArrayList<>();
 		boolean boo;
-		// if none of the parameters is passed:
-		//if ( minprice == null && maxprice == null && beds == null && baths == null) {	
-		//		model.addAttribute("properties", properties);
-		//	}else {
 			for (int i=0; i<properties.size(); i++) {
 				boo=true;
 				if ( minprice > 0){
@@ -95,7 +89,6 @@ public class HomeController {
 			model.addAttribute("city", city);
 			model.addAttribute("state", state);
 
-		//}
 		return "search-results";
 	} 
 
