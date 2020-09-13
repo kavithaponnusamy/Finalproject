@@ -6,6 +6,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <h2>List of properties in ${city},${state}</h2>
@@ -61,25 +65,26 @@
 			<input type="hidden" name="state" value="${state}">
 			<input type="hidden" name="city" value="${city}">
 </form>
-
-<table>
-
-<tr>
-<th rowspan="2"></th>
-<th colspan="3"></th>
-</tr>
+<br>
+<div class="container">
+<div class="row">
 <c:forEach var="property" items="${properties}">
-<td><a href="/submit-details?propertyId=${property.property_id}">
+<div class="col-sm">
+<a href="/submit-details?propertyId=${property.property_id}">
 <img src="${property.thumbnail}" />
-</a></td>
-<td>${property.beds} beds ${property.baths} bath </td>
-<td>${property.address.line},</td>
-<td>${city},${state} ${address.postal_code}</td>
-<td>${property.price}</td>
-
-
+</a>
+<br>
+${property.beds} beds ${property.baths} bath
+<br>
+${property.address.line},
+${city}, ${state} ${address.postal_code}
+<br>
+Price: ${property.price}
+</div>
+<br>
 </c:forEach>
 
-</table>
+</div>
+</div>
 </body>
 </html>
