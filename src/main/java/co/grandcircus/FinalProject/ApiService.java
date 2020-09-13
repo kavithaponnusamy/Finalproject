@@ -36,7 +36,7 @@ public class ApiService {
 		return places;
 	}
 	public PropertyResponse getProperiesByCityState(String state_code,String city) {		
-		String url="https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city={city}&limit=5&offset=0&state_code={state_code}&price_min&rapidapi-key={apiKey}";
+		String url="https://realtor.p.rapidapi.com/properties/v2/list-for-sale?city={city}&limit=10&offset=0&state_code={state_code}&price_min&rapidapi-key={apiKey}";
 		PropertyResponse propertyResponse= rt.getForObject(url, PropertyResponse.class,city, state_code,apiKey);
 		return propertyResponse;
 	}
