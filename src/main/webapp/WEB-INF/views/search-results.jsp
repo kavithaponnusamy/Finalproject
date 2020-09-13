@@ -39,54 +39,62 @@
 <body>
 	<h2>List of properties in ${city},${state}</h2>
 	<div class="container">
-		<form action="/search-result">
-			<label for="minprice">Min Price</label> <select id="minprice"
+		<form class="form" action="/search-result">
+		 
+		<fieldset class="border p-2">
+		<legend  class="w-auto">Filters:</legend>
+		 
+			<label for="minprice">Min Price</label> <select id="minprice"  
 				name="minprice">
-				<option value="0">Any Price</option>
-				<option value="90000">90K</option>
-				<option value="180000">180K</option>
-				<option value="250000">250K</option>
-				<option value="350000">350K</option>
-				<option value="450000">450K</option>
-				<option value="500000">500K</option>
-				<option value="600000">600K</option>
+				<option ${ param.minprice==0?'selected':'' } value="0">Any Price</option>
+				<option ${ param.minprice==90000?'selected':'' } value="90000">90K</option>
+				<option ${ param.minprice==180000?'selected':'' } value="180000">180K</option>
+				<option ${ param.minprice==250000?'selected':'' } value="250000">250K</option>
+				<option ${ param.minprice==350000?'selected':'' } value="350000">350K</option>
+				<option ${ param.minprice==450000?'selected':'' } value="450000">450K</option>
+				<option ${ param.minprice==500000?'selected':'' } value="500000">500K</option>
+				<option ${ param.minprice==600000?'selected':'' } value="600000">600K</option>
 
 			</select> <label for="maxprice">Max Price</label> <select id="maxprice"
 				name="maxprice">
-				<option value="100000000">Any Price</option>
-				<option value="150000">150K</option>
-				<option value="300000">300K</option>
-				<option value="450000">450K</option>
-				<option value="600000">600K</option>
-				<option value="800000">800K</option>
-				<option value="900000">900K</option>
-				<option value="1000000">1M</option>
-			</select> <label for="beds">Beds</label> <select id="beds" name="beds">
-				<option value="0">Any</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
+				<option ${ param.maxprice==100000000?'selected':'' }  value="100000000">Any Price</option>
+				<option ${ param.maxprice==150000?'selected':'' } value="150000">150K</option>
+				<option ${ param.maxprice==300000?'selected':'' } value="300000">300K</option>
+				<option ${ param.maxprice==450000?'selected':'' } value="450000">450K</option>
+				<option ${ param.maxprice==600000?'selected':'' } value="600000">600K</option>
+				<option ${ param.maxprice==800000?'selected':'' } value="800000">800K</option>
+				<option ${ param.maxprice==900000?'selected':'' } value="900000">900K</option>
+				<option ${ param.maxprice==1000000?'selected':'' } value="1000000">1M</option>
+			</select> <label for="beds">Beds</label> <select id="beds" name="beds" >
+				<option ${ param.beds==0?'selected':'' } value="0">Any</option>
+				<option ${ param.beds==1?'selected':'' } value="1">1</option>
+				<option ${ param.beds==2?'selected':'' } value="2">2</option>
+				<option ${ param.beds==3?'selected':'' } value="3">3</option>
+				<option ${ param.beds==4?'selected':'' } value="4">4</option>
+				<option ${ param.beds==5?'selected':'' } value="5">5</option>
+				<option ${ param.beds==6?'selected':'' } value="6">6</option>
 			</select> <label for="baths">Baths</label> <select id="baths" name="baths">
-				<option value="0">Any</option>
-				<option value="1">1</option>
-				<option value="1.5">1.5</option>
-				<option value="2">2</option>
-				<option value="2.5">2.5</option>
-				<option value="3">3</option>
-				<option value="3.5">3.5</option>
-				<option value="4">4</option>
-				<option value="4.5">4.5</option>
-				<option value="5">5</option>
+				<option ${ param.baths==0?'selected':'' } value="0">Any</option>
+				<option ${ param.baths==1?'selected':'' } value="1">1</option>
+				<option ${ param.baths==1.5?'selected':'' } value="1.5">1.5</option>
+				<option ${ param.baths==2?'selected':'' } value="2">2</option>
+				<option ${ param.baths==2.5?'selected':'' } value="2.5">2.5</option>
+				<option ${ param.baths==3?'selected':'' } value="3">3</option>
+				<option ${ param.baths==3.5?'selected':'' } value="3.5">3.5</option>
+				<option ${ param.baths==4?'selected':'' } value="4">4</option>
+				<option ${ param.baths==4.5?'selected':'' } value="4.5">4.5</option>
+				<option ${ param.baths==5?'selected':'' } value="5">5</option>
 			</select>
-			<button type="submit">Filter By</button>
+			<button type="submit" class="btn btn-outline-primary">Filter By</button>
 			<input type="hidden" name="state" value="${state}"> <input
 				type="hidden" name="city" value="${city}">
+			 
+			
+		</fieldset>
+		 
 		</form>
 
-
+<br>
 
 
 		<div id="image-list" class="row">
