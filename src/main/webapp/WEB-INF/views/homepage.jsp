@@ -19,7 +19,7 @@
 				<td><input type="text" name="city" autofocus/></td>
 				<th>State</th>
 			<td>
-				<select name= "states">
+				<select name= "state">
 				<c:forEach items="${states}" var="states">
 				<option value= "${states}">${states}</option>
 				</c:forEach>

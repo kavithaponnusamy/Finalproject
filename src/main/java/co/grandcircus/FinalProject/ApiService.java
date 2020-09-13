@@ -47,10 +47,8 @@ public class ApiService {
 		
 	}
 	public PropertyResponse getPropertyByPropertyId(String property_id) {
-		//System.out.println(property_id);
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
-		//System.out.println(property);
 		return property;
 	}
 

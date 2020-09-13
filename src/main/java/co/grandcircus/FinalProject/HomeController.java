@@ -1,5 +1,6 @@
 package co.grandcircus.FinalProject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,71 @@ public class HomeController {
 		return "homepage";
 	}
 	@RequestMapping("/submit-list")
-	public String showList(Model model, @RequestParam(required=false) String state_code, @RequestParam(required=false) String city) {
-		List<Property> properties=apiServ.getProperiesByCityState(state_code, city).getProperties();
-		model.addAttribute("properties", properties);
-		return "search-results";
-		
+	public String showList(Model model, @RequestParam(required=false) String state, 
+										@RequestParam(required=false) String city) {
+		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
+				model.addAttribute("properties", properties);
+				model.addAttribute("city", city);
+				model.addAttribute("state", state);
+		return "search-results";	
 	} 
+	
+	@RequestMapping("/search-result")
+	public String showList(Model model, @RequestParam(required=false) String state, 
+										@RequestParam(required=false) String city,
+										@RequestParam(required=false) Double minprice,
+										@RequestParam(required=false) Double maxprice,
+										@RequestParam(required=false) Integer beds,
+										@RequestParam(required=false) Double baths) {
+		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
+		List<Property> filteredProperties=new ArrayList<>();
+		boolean boo;
+		// if none of the parameters is passed:
+		//if ( minprice == null && maxprice == null && beds == null && baths == null) {	
+		//		model.addAttribute("properties", properties);
+		//	}else {
+			for (int i=0; i<properties.size(); i++) {
+				boo=true;
+				if ( minprice > 0){
+					if (properties.get(i).getPrice()>= minprice) {
+						boo = true;
+					}else{
+						boo = false;
+					}
+				}
+				if ( boo && maxprice > 0){
+					if (properties.get(i).getPrice()<= maxprice) {
+						boo = true;
+					}else{
+						boo = false;
+					}
+				}
+				if ( boo && beds > 0 ){
+					if (properties.get(i).getBeds() != null && properties.get(i).getBeds()>= beds) {
+						boo = true;
+					}else{
+						boo = false;
+					}
+				}
+				if ( boo && baths > 0){
+					if ( properties.get(i).getBaths() != null && properties.get(i).getBaths()>= baths) {
+						boo = true;
+					}else{
+						boo = false;
+					}
+				}
+				if (boo) {
+					filteredProperties.add(properties.get(i));
+				}
+			}
+			model.addAttribute("properties", filteredProperties);
+			model.addAttribute("city", city);
+			model.addAttribute("state", state);
+
+		//}
+		return "search-results";
+	} 
+
 	@RequestMapping("/submit-details")
 	public String showDetails(Model model, @RequestParam(required=false) String propertyId) {
 		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);

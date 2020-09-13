@@ -1,8 +1,6 @@
 package co.grandcircus.FinalProject.entity;
-
 import java.sql.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 public class Property {
 	public String property_id;
@@ -13,18 +11,14 @@ public class Property {
     public String prop_status;
     public Double price;
     public Integer baths_full;
-   
-    public Integer baths;
+    public Double baths;
     public Integer beds;
     private Address address;
     private List<Agent> agents;
-    
 	public Date last_update;
     public Integer photo_count;
     private List<Photo> photos;
-    
     public String thumbnail;
-    
     public String getThumbnail() {
 		return thumbnail;
 	}
@@ -34,9 +28,6 @@ public class Property {
 	public Integer rank;
 //    @JsonProperty("virtual_tour")
 //    private VirtualTour virtualTour;
-    
-    
-    
     public List<Photo> getPhotos() {
 		return photos;
 	}
@@ -86,10 +77,10 @@ public class Property {
 	public void setBaths_full(Integer baths_full) {
 		this.baths_full = baths_full;
 	}
-	public Integer getBaths() {
+	public Double getBaths() {
 		return baths;
 	}
-	public void setBaths(Integer baths) {
+	public void setBaths(Double baths) {
 		this.baths = baths;
 	}
 	public Integer getBeds() {
@@ -134,6 +125,4 @@ public class Property {
 //	public void setVirtualTour(VirtualTour virtualTour) {
 //		this.virtualTour = virtualTour;
 //	}
-    
-    
 }
