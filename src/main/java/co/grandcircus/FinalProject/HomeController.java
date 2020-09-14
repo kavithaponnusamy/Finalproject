@@ -7,9 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.grandcircus.FinalProject.dao.FavoritesDao;
+import co.grandcircus.FinalProject.dao.SavedSearchesDao;
+import co.grandcircus.FinalProject.entity.Favorites;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
@@ -23,6 +28,13 @@ public class HomeController {
 	
 	@Autowired
 	private ApiService apiServ;
+	
+	@Autowired
+	private FavoritesDao favsDao;
+	
+	@Autowired
+	private SavedSearchesDao searchesDao;
+	
 	
 	@RequestMapping("/")
 	public String showHome(Model model) {
@@ -103,5 +115,19 @@ public class HomeController {
 		return "details";
 	}
 	
+	@RequestMapping("/addFavorites")
+	public String addToFavoriteList(Model model, RedirectAttributes redir, @RequestParam(required=false) String weburl, 
+			@RequestParam(required=false) String propertyId,
+			@RequestParam(required=false) String thumbnail) {
+		Favorites newFav = new Favorites();
+		newFav.setPropertyId(propertyId);
+		newFav.setThumbnail(thumbnail);
+		newFav.setWeburl(weburl);
+		favsDao.save(newFav);
+		redir.addFlashAttribute("message", "House added to favorites.");
+		return "redirect:/search-results";
+	}{
+		
+	}
 
 }
