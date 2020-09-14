@@ -90,8 +90,8 @@
 							<img class="img-fav" style="width: 100%; height: 400px" alt="no image"
 							src="${property.thumbnail}">
 						</a> 
-							<a class="img_fav_a" href="" data-toggle="tooltip" title="Add Favorite">
-								<i class="fa fa-star-o" style="font-size: 30px"></i>	
+							<a class="img_fav_a" href="/addFavorites?propertyId=${property.property_id}&thumbnail=${property.thumbnail}&weburl=${property.weburl}" data-toggle="tooltip" title="Add Favorite">
+								<i class="fa fa-star-o" style="font-size: 30px"></i>
 							</a>
 
 					</div>
