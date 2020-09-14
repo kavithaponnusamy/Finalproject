@@ -127,7 +127,7 @@
 				<strong>Map View</strong>
 				<div>
 					<img
-						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=AIzaSyDfO7vC2hX5xSfjZ5RBgC3M95vLuw8nHj8" />
+						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
 				</div>
 
 			</div>

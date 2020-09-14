@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import co.grandcircus.FinalProject.entity.State;
 @Controller
 public class HomeController {
 	
+	@Value("${key}")
+	public String key;
 	
 	@Autowired
 	private ApiService apiServ;
@@ -96,6 +99,7 @@ public class HomeController {
 	public String showDetails(Model model, @RequestParam(required=false) String propertyId) {
 		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);		
 		model.addAttribute("property",property.getProperties());
+		model.addAttribute("key", key);
 		return "details";
 	}
 	
