@@ -6,6 +6,6 @@ import co.grandcircus.FinalProject.entity.Favorites;
 
 
 public interface FavoritesDao extends JpaRepository<Favorites, Long>{
-	
+	Favorites findByPropertyId(String propertyId);
 
 }

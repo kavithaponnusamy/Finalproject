@@ -38,7 +38,7 @@
 </head>
 <body>
 	<h2>List of properties in ${city}, ${state}</h2>
-	<div class="container">
+	<div class="container-fluid">
 		<form class="form" action="/search-result">
 		 
 		<fieldset class="border p-2">
