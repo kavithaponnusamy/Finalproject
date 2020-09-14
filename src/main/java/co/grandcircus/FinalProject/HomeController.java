@@ -142,8 +142,9 @@ public class HomeController {
 		newFav.setThumbnail(thumbnail);
 		newFav.setWeburl(weburl);
 		favsDao.save(newFav);
-		session.getAttribute("state");
-		return "redirect:/submit-list";
+		String state = (String) session.getAttribute("state");
+		String city = (String) session.getAttribute("city");
+		return "redirect:/submit-list?city=" + city +"&state="+ state;
 	}{
 		
 	}
