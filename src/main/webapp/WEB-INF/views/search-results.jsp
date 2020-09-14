@@ -8,7 +8,25 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 
- 
+<style>
+.img-fav {
+	position: relative;
+}
+
+.img-fav > a {
+	position: absolute;
+	background: white;
+	bottom: 0px;
+	right: 0;
+}
+
+.img_fav_a {
+	position: absolute;
+	background: white;
+	top: 1em;
+	left: 1em;
+}
+</style>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,19 +34,18 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
-	<link href="/style.css" rel="stylesheet" /> 
 
 </head>
 <body>
-	<h2>List of properties in ${city},${state}</h2>
+	<h2>List of properties in ${city}, ${state}</h2>
 	<div class="container-fluid">
 		<form class="form" action="/search-result">
 		 
 		<fieldset class="border p-2">
 		<legend  class="w-auto">Filters:</legend>
 		 
-			<label for="minprice">Min Price</label> <select id="minprice"  
-				name="minprice">
+			<label for="minprice">Min Price</label> 
+			<select id="minprice" name="minprice">
 				<option ${ param.minprice==0?'selected':'' } value="0">Any Price</option>
 				<option ${ param.minprice==90000?'selected':'' } value="90000">90K</option>
 				<option ${ param.minprice==180000?'selected':'' } value="180000">180K</option>
@@ -38,8 +55,9 @@
 				<option ${ param.minprice==500000?'selected':'' } value="500000">500K</option>
 				<option ${ param.minprice==600000?'selected':'' } value="600000">600K</option>
 
-			</select> <label for="maxprice">Max Price</label> <select id="maxprice"
-				name="maxprice">
+			</select>
+			 <label for="maxprice">Max Price</label>
+			 <select id="maxprice" name="maxprice">
 				<option ${ param.maxprice==100000000?'selected':'' }  value="100000000">Any Price</option>
 				<option ${ param.maxprice==150000?'selected':'' } value="150000">150K</option>
 				<option ${ param.maxprice==300000?'selected':'' } value="300000">300K</option>
@@ -69,9 +87,8 @@
 				<option ${ param.baths==5?'selected':'' } value="5">5</option>
 			</select>
 			<button type="submit" class="btn btn-outline-primary">Filter By</button>
-			<input type="hidden" name="state" value="${state}"> <input
-				type="hidden" name="city" value="${city}">
-			 
+			<input type="hidden" name="state" value="${state}"> 
+			<input type="hidden" name="city" value="${city}"> 
 			
 		</fieldset>
 		 
@@ -82,8 +99,6 @@
 
 		<div id="image-list" class="row">
 			<c:forEach var="property" items="${properties}">
-
-
 				<div class="card col-md-4">
 					<div >
 						<a href="/submit-details?propertyId=${property.property_id}">
@@ -101,20 +116,22 @@
 							<span>Type: ${property.prop_type}</span><br> <span>Price:
 								<fmt:formatNumber value="${property.price}" type="currency" />
 							</span><br> <span>${property.address.line} </span><br>
+
+							<p>${city}, ${state} ${property.address.postal_code}</p>
+
 							<p>${city},${state}${property.address.postal_code}</p>
+
 						</div>
-						<div class="float-right mt-1">
+						 <div class="float-right mt-1">			 	
 							<a href="/" class="btn btn-outline-primary">Contact Agent</a>
 						</div>
 					</div>
 
 				</div>
-
 			</c:forEach>
 		</div>
 	</div>
 	<br>
-
 
 </body>
 </html>

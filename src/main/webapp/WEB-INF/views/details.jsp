@@ -126,6 +126,7 @@
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
 				<div>
+			<img src="https://maps.googleapis.com/maps/api/js?q=${prop.address.lat},${prop.address.lon}&key=${key}&zoom=11&size=200x200&sensor=false"/>
 					<img
 						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
 				</div>
@@ -135,6 +136,27 @@
 
 		</div>
 	</div>
+	
+ 	<c:forEach var="supermarket" items="${supermarkets}">
+	<p>
+								name:
+								<c:out value="${supermarket.name}" />
+							</p>
+							<p>
+								Rating:
+								<c:out value="${supermarket.rating}" />
+							</p>
+	</c:forEach>
+	<c:forEach var="gym" items="${gyms}">
+	<p>
+								name:
+								<c:out value="${gym.name}" />
+							</p>
+							<p>
+								Rating:
+								<c:out value="${gym.rating}" />
+							</p>
+	</c:forEach>
 
 </body>
 </html>
