@@ -37,15 +37,15 @@
 
 </head>
 <body>
-	<h2>List of properties in ${city},${state}</h2>
+	<h2>List of properties in ${city}, ${state}</h2>
 	<div class="container">
 		<form class="form" action="/search-result">
 		 
 		<fieldset class="border p-2">
 		<legend  class="w-auto">Filters:</legend>
 		 
-			<label for="minprice">Min Price</label> <select id="minprice"  
-				name="minprice">
+			<label for="minprice">Min Price</label> 
+			<select id="minprice" name="minprice">
 				<option ${ param.minprice==0?'selected':'' } value="0">Any Price</option>
 				<option ${ param.minprice==90000?'selected':'' } value="90000">90K</option>
 				<option ${ param.minprice==180000?'selected':'' } value="180000">180K</option>
@@ -55,8 +55,9 @@
 				<option ${ param.minprice==500000?'selected':'' } value="500000">500K</option>
 				<option ${ param.minprice==600000?'selected':'' } value="600000">600K</option>
 
-			</select> <label for="maxprice">Max Price</label> <select id="maxprice"
-				name="maxprice">
+			</select>
+			 <label for="maxprice">Max Price</label>
+			 <select id="maxprice" name="maxprice">
 				<option ${ param.maxprice==100000000?'selected':'' }  value="100000000">Any Price</option>
 				<option ${ param.maxprice==150000?'selected':'' } value="150000">150K</option>
 				<option ${ param.maxprice==300000?'selected':'' } value="300000">300K</option>
@@ -86,8 +87,8 @@
 				<option ${ param.baths==5?'selected':'' } value="5">5</option>
 			</select>
 			<button type="submit" class="btn btn-outline-primary">Filter By</button>
-			<input type="hidden" name="state" value="${state}"> <input
-				type="hidden" name="city" value="${city}">
+			<input type="hidden" name="state" value="${state}"> 
+			<input type="hidden" name="city" value="${city}">
 			 
 			
 		</fieldset>
@@ -118,10 +119,11 @@
 							<span>Type: ${property.prop_type}</span><br> <span>Price:
 								<fmt:formatNumber value="${property.price}" type="currency" />
 							</span><br> <span>${property.address.line} </span><br>
-							<p>${city},${state}${address.postal_code}</p>
+							<p>${city}, ${state} ${property.address.postal_code}</p>
 						</div>
-						<div class="float-right mt-1">
-							<a href="/" class="btn btn-outline-primary">Contact Agent</a>
+					 	<div class="float-right mt-1">
+						  	<a href="/" class="btn btn-outline-primary">Contact Agent</a> 
+						
 						</div>
 					</div>
 
@@ -131,7 +133,5 @@
 		</div>
 	</div>
 	<br>
-
-
 </body>
 </html>

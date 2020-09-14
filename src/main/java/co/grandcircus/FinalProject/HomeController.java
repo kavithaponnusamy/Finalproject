@@ -36,7 +36,7 @@ public class HomeController {
 										@RequestParam(required=false) String city) {
 		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
 				model.addAttribute("properties", properties);
-				model.addAttribute("city", city);
+				model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
 				model.addAttribute("state", state);
 		return "search-results";	
 	} 
@@ -86,7 +86,7 @@ public class HomeController {
 				}
 			}
 			model.addAttribute("properties", filteredProperties);
-			model.addAttribute("city", city);
+			model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
 			model.addAttribute("state", state);
 
 		return "search-results";
@@ -94,9 +94,7 @@ public class HomeController {
 
 	@RequestMapping("/submit-details")
 	public String showDetails(Model model, @RequestParam(required=false) String propertyId) {
-		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);
-		
-		System.out.println(property);
+		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);		
 		model.addAttribute("property",property.getProperties());
 		return "details";
 	}
