@@ -88,8 +88,7 @@
 			</select>
 			<button type="submit" class="btn btn-outline-primary">Filter By</button>
 			<input type="hidden" name="state" value="${state}"> 
-			<input type="hidden" name="city" value="${city}">
-			 
+			<input type="hidden" name="city" value="${city}"> 
 			
 		</fieldset>
 		 
@@ -100,8 +99,6 @@
 
 		<div id="image-list" class="row">
 			<c:forEach var="property" items="${properties}">
-
-
 				<div class="card col-md-4">
 					<div >
 						<a href="/submit-details?propertyId=${property.property_id}">
@@ -121,17 +118,16 @@
 							</span><br> <span>${property.address.line} </span><br>
 							<p>${city}, ${state} ${property.address.postal_code}</p>
 						</div>
-					 	<div class="float-right mt-1">
-						  	<a href="/" class="btn btn-outline-primary">Contact Agent</a> 
-						
+						 <div class="float-right mt-1">			 	
+							<a href="/" class="btn btn-outline-primary">Contact Agent</a>
 						</div>
 					</div>
 
 				</div>
-
 			</c:forEach>
 		</div>
 	</div>
 	<br>
+
 </body>
 </html>
