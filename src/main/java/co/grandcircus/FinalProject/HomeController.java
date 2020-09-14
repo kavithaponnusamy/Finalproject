@@ -114,6 +114,8 @@ public class HomeController {
 			session.setAttribute("maxprice", maxprice);
 			session.setAttribute("beds", beds);
 			session.setAttribute("baths", baths);
+			session.setAttribute("city", city);
+			session.setAttribute("state", state);
 			model.addAttribute("properties", filteredProperties);
 			model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
 			model.addAttribute("state", state);
@@ -142,8 +144,9 @@ public class HomeController {
 		newFav.setThumbnail(thumbnail);
 		newFav.setWeburl(weburl);
 		favsDao.save(newFav);
-		session.getAttribute("state");
-		return "redirect:/submit-list";
+		String state=(String) session.getAttribute("state");
+		String city=(String) session.getAttribute("city");
+		return "redirect:/submit-list?city="+city+"&state="+state;
 	}{
 		
 	}
