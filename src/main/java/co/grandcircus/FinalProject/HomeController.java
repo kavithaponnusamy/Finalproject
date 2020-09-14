@@ -55,10 +55,18 @@ public class HomeController {
 	@RequestMapping("/submit-list")
 	public String showList(Model model, @RequestParam(required=false) String state, 
 										@RequestParam(required=false) String city) {
+		session.invalidate();
+ 
 		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
 				model.addAttribute("properties", properties);
 				model.addAttribute("city", city);
-				model.addAttribute("state", state);
+				model.addAttribute("state", state); 
+				
+				//session.setAttribute("sumbitListPropertyResponse", propertyResponse);
+				session.removeAttribute("searchUrl");
+				 
+				String searchUrl="submit-list?state="+state+"&city="+city;
+				session.setAttribute("searchUrl", searchUrl);
 				session.setAttribute("city", city);
 				session.setAttribute("state", state);
 		return "search-results";	
@@ -67,11 +75,14 @@ public class HomeController {
 	@RequestMapping("/search-result")
 	public String showList(Model model, @RequestParam(required=false) String state, 
 										@RequestParam(required=false) String city,
-										@RequestParam(required=false) Double minprice,
-										@RequestParam(required=false) Double maxprice,
+										@RequestParam(required=false) Integer minprice,
+										@RequestParam(required=false) Integer maxprice,
 										@RequestParam(required=false) Integer beds,
-										@RequestParam(required=false) Double baths) {
+										@RequestParam(required=false) Double baths) { 
 		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
+		
+		
+		
 		List<Property> filteredProperties=new ArrayList<>();
 		boolean boo;
 			for (int i=0; i<properties.size(); i++) {
@@ -108,10 +119,14 @@ public class HomeController {
 					filteredProperties.add(properties.get(i));
 				}
 			}
-			session.setAttribute("minprice", minprice);
-			session.setAttribute("maxprice", maxprice);
-			session.setAttribute("beds", beds);
-			session.setAttribute("baths", baths);
+			 
+			session.removeAttribute("searchUrl");
+			 
+			String searchUrl="search-result?state="+state+"&city="+city+"&minprice="+minprice+"&maxprice="+maxprice+"&beds="+beds+"&baths="+baths;
+			session.setAttribute("searchUrl", searchUrl);
+			session.setAttribute("city", city);
+			session.setAttribute("state", state); 
+			
 			model.addAttribute("properties", filteredProperties);
 			model.addAttribute("city", city);
 			model.addAttribute("state", state);
@@ -129,17 +144,44 @@ public class HomeController {
 		return "details";
 	}
 	
+
+	
 	@RequestMapping("/addFavorites")
-	public String addToFavoriteList(Model model,RedirectAttributes redir, @RequestParam(required=false) String weburl, 
+	public String addToFavoriteList(Model model, @RequestParam(required=false) String weburl, 
 			@RequestParam(required=false) String propertyId,
 			@RequestParam(required=false) String thumbnail) {
 		Favorites newFav = new Favorites();
-		newFav.setPropertyId(propertyId);
-		newFav.setThumbnail(thumbnail);
-		newFav.setWeburl(weburl);
-		favsDao.save(newFav);
-		session.getAttribute("state");
-		return "redirect:/submit-list";
+		Favorites existingFav=favsDao.findByPropertyId(propertyId);
+		
+		if(existingFav ==null) {
+			newFav.setPropertyId(propertyId);
+			newFav.setThumbnail(thumbnail);
+			newFav.setWeburl(weburl);
+		}
+		else {
+			newFav.setId(existingFav.getId());
+			newFav.setPropertyId(propertyId);
+			newFav.setThumbnail(thumbnail);
+			newFav.setWeburl(weburl);
+		}
+		
+		
+		favsDao.save(newFav); 
+		
+		
+		
+		String searchUrl= (String) session.getAttribute("searchUrl");
+		System.out.println("searchUrlExisting"+ searchUrl);
+		if( searchUrl !=null) {
+			
+			return "redirect:/"+searchUrl;
+		}
+		else {
+			return "/";
+		}
+		
+		
+		//return "redirect:/ExistingList";
 	}{
 		
 	}
