@@ -1,1 +1,13 @@
 @charset "ISO-8859-1";
+
+.img-fav {
+	position: relative;
+}
+ 
+
+.img_fav_a {
+	position: absolute;
+	background: white;
+	top: 1em;
+	left: 1em;
+}

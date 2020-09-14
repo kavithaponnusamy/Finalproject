@@ -8,25 +8,7 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 
-<style>
-.img-fav {
-	position: relative;
-}
-
-.img-fav > a {
-	position: absolute;
-	background: white;
-	bottom: 0px;
-	right: 0;
-}
-
-.img_fav_a {
-	position: absolute;
-	background: white;
-	top: 1em;
-	left: 1em;
-}
-</style>
+ 
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,11 +16,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
+	<link href="/style.css" rel="stylesheet" /> 
 
 </head>
 <body>
 	<h2>List of properties in ${city},${state}</h2>
-	<div class="container">
+	<div class="container-fluid">
 		<form class="form" action="/search-result">
 		 
 		<fieldset class="border p-2">
