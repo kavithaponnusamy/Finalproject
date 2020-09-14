@@ -144,11 +144,19 @@ public class HomeController {
 		newFav.setThumbnail(thumbnail);
 		newFav.setWeburl(weburl);
 		favsDao.save(newFav);
-
 		String state = (String) session.getAttribute("state");
 		String city = (String) session.getAttribute("city");
-		return "redirect:/submit-list?city=" + city +"&state="+ state;
+		String url = "redirect:/submit-list?city=" + city +"&state="+ state;
+		//return "redirect:/submit-list?city=" + city +"&state="+ state;
 
+		Double minPrice =  (Double) session.getAttribute("minprice");
+		Double maxPrice = (Double) session.getAttribute("maxprice");
+		Integer beds= (Integer) session.getAttribute("beds");
+		Double baths= (Double) session.getAttribute("baths");
+		if (minPrice!=null){
+			url += "&minprice="+minPrice+"&maxprice="+maxPrice+"&beds="+beds+"&baths="+baths;
+		}		
+		return url;
 	}
 		
 	
