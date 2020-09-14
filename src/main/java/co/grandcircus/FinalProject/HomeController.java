@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.FinalProject.dao.FavoritesDao;
 import co.grandcircus.FinalProject.dao.SavedSearchesDao;
 import co.grandcircus.FinalProject.entity.Favorites;
+import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
@@ -64,6 +65,7 @@ public class HomeController {
 										@RequestParam(required=false) Integer beds,
 										@RequestParam(required=false) Double baths) {
 		List<Property> properties=apiServ.getProperiesByCityState(state, city).getProperties();
+		
 		List<Property> filteredProperties=new ArrayList<>();
 		boolean boo;
 			for (int i=0; i<properties.size(); i++) {
@@ -110,7 +112,11 @@ public class HomeController {
 	@RequestMapping("/submit-details")
 	public String showDetails(Model model, @RequestParam(required=false) String propertyId) {
 		PropertyResponse property=apiServ.getPropertyByPropertyId(propertyId);		
+		GoogleResponse supermarkets=apiServ.getAllGoogleSearchBySupermarket(propertyId);
+		GoogleResponse gyms=apiServ.getAllGoogleSearchByGym(propertyId);
 		model.addAttribute("property",property.getProperties());
+		model.addAttribute("supermarkets",supermarkets.getResults());
+		model.addAttribute("gyms",gyms.getResults());
 		model.addAttribute("key", key);
 		return "details";
 	}
