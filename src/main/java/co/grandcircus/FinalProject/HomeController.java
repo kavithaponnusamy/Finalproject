@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
- 
+
+import co.grandcircus.FinalProject.dao.BuyerInformationDao;
 import co.grandcircus.FinalProject.dao.FavoritesDao;
 import co.grandcircus.FinalProject.dao.SavedSearchesDao;
+import co.grandcircus.FinalProject.entity.BuyerInformation;
 import co.grandcircus.FinalProject.entity.Favorites;
 import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
 import co.grandcircus.FinalProject.entity.SavedSearches;
-import co.grandcircus.FinalProject.entity.State; 
+
 
 @Controller
 public class HomeController {
@@ -40,6 +42,9 @@ public class HomeController {
 
 	@Autowired
 	private SavedSearchesDao searchesDao;
+	
+	@Autowired
+	private BuyerInformationDao buyerInfoDao;
 
 	@Autowired
 	HttpSession session;
@@ -285,6 +290,18 @@ public class HomeController {
 	public String removeSavedSearch(@RequestParam Long id, Model model) {
 		searchesDao.deleteById(id);  
 		return "redirect:/";
+	}
+	@RequestMapping("/contact-submit")
+	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
+		model.addAttribute("propertyId",propertyId);		
+		return "contact-agent";
+	}
+	
+	@PostMapping("/contact-submit")
+	public String addUserDetails(BuyerInformation buyerInfo) {			
+		String searchUrl = (String) session.getAttribute("searchUrl");		
+		buyerInfoDao.save(buyerInfo);
+		return "redirect:/" + searchUrl;
 	}
 
 }

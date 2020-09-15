@@ -129,7 +129,7 @@
 							 
 						</div>
 						<div class="float-right mt-1">
-							<a href="/" class="border-primary btn btn-outline-primary">Contact
+							<a href="/contact-submit?propertyId=${prop.property_id}" class="border-primary btn btn-outline-primary">Contact
 								Agent</a>
 						</div>
 					</div>

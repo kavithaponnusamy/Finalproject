@@ -106,7 +106,7 @@
 
 						</div>
 						 <div class="float-right mt-1">			 	
-							<a href="/contact-agent" class="btn btn-outline-primary">Contact Agent</a>
+							<a href="/contact-submit?propertyId=${property.property_id}" class="btn btn-outline-primary">Contact Agent</a>
 						</div>
 					</div>
 
