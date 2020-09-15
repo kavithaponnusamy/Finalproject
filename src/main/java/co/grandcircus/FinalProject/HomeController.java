@@ -9,20 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
- 
+
+import co.grandcircus.FinalProject.dao.BuyerInformationDao;
 import co.grandcircus.FinalProject.dao.FavoritesDao;
 import co.grandcircus.FinalProject.dao.SavedSearchesDao;
+import co.grandcircus.FinalProject.entity.BuyerInformation;
 import co.grandcircus.FinalProject.entity.Favorites;
 import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
-import co.grandcircus.FinalProject.entity.State; 
+import co.grandcircus.FinalProject.entity.SavedSearches;
+
 
 @Controller
 public class HomeController {
@@ -38,6 +42,9 @@ public class HomeController {
 
 	@Autowired
 	private SavedSearchesDao searchesDao;
+	
+	@Autowired
+	private BuyerInformationDao buyerInfoDao;
 
 	@Autowired
 	HttpSession session;
@@ -47,6 +54,8 @@ public class HomeController {
 		List<Property> properties = apiServ.getAllProperties().getProperties();
 		List<NearByPlaces> places = apiServ.getAllGoogleSearch();
 		List<String> states = apiServ.getStates();
+		List<SavedSearches> searches = searchesDao.findAll();
+		model.addAttribute("searches", searches);
 		model.addAttribute("states", states);
 		model.addAttribute("properties", properties);
 		model.addAttribute("places", places);
@@ -221,8 +230,11 @@ public class HomeController {
 	
 
 		// return "redirect:/ExistingList";
+
 	//}
 	
+
+
 //	
 //	@RequestMapping("/favorite-list")
 //	public String showfavoriteList(Model model) {
@@ -263,7 +275,34 @@ public class HomeController {
 		favsDao.deleteByPropertyId(propertyId);  
 		return "redirect:/favorite-list";
 	}
+	
+	@RequestMapping("/addSearch")
+	public String addSavedSearch(Model model, @RequestParam String name) {
+		SavedSearches newSearch = new SavedSearches();
+		String searchUrl = (String) session.getAttribute("searchUrl");
+		newSearch.setName(name);
+		newSearch.setSearchUrl(searchUrl);
+		searchesDao.save(newSearch);
+		
+		return "redirect:/" + searchUrl;
+		}
 
-
+	@RequestMapping("/removeSearch")
+	public String removeSavedSearch(@RequestParam Long id, Model model) {
+		searchesDao.deleteById(id);  
+		return "redirect:/";
+	}
+	@RequestMapping("/contact-submit")
+	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
+		model.addAttribute("propertyId",propertyId);		
+		return "contact-agent";
+	}
+	
+	@PostMapping("/contact-submit")
+	public String addUserDetails(BuyerInformation buyerInfo) {			
+		String searchUrl = (String) session.getAttribute("searchUrl");		
+		buyerInfoDao.save(buyerInfo);
+		return "redirect:/" + searchUrl;
+	}
 
 }

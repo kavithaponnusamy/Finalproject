@@ -78,7 +78,10 @@
 
 <br>
 
-
+<form class="form" action="addSearch">
+<input type="text" name="name"> 
+<button type="submit" class="btn btn-outline-primary">Save Search</button>
+</form>
 		<div id="image-list" class="row">
 			<c:forEach var="property" items="${properties}">
 				<div class="card col-md-4">
@@ -103,7 +106,7 @@
 
 						</div>
 						 <div class="float-right mt-1">			 	
-							<a href="/contact-agent" class="btn btn-outline-primary">Contact Agent</a>
+							<a href="/contact-submit?propertyId=${property.property_id}" class="btn btn-outline-primary">Contact Agent</a>
 						</div>
 					</div>
 
