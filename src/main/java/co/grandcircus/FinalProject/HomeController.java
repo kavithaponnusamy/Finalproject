@@ -61,10 +61,10 @@ public class HomeController {
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
 		model.addAttribute("properties", properties);
 
-		model.addAttribute("city", city);
+		//model.addAttribute("city", city);
+		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
 
-		// session.setAttribute("sumbitListPropertyResponse", propertyResponse);
 		session.removeAttribute("searchUrl");
 
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;
@@ -113,7 +113,7 @@ public class HomeController {
 					boo = false;
 				}
 			}
-<<<<<<< HEAD
+
 			session.setAttribute("minprice", minprice);
 			session.setAttribute("maxprice", maxprice);
 			session.setAttribute("beds", beds);
@@ -123,7 +123,7 @@ public class HomeController {
 			model.addAttribute("properties", filteredProperties);
 			model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
 			model.addAttribute("state", state);
-=======
+
 			if (boo) {
 				filteredProperties.add(properties.get(i));
 			}
@@ -140,7 +140,7 @@ public class HomeController {
 		model.addAttribute("properties", filteredProperties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
->>>>>>> c7d2689bdf770421d0a6e5010aae6813136538b6
+
 
 		return "search-results";
 	}
@@ -150,10 +150,32 @@ public class HomeController {
 		PropertyResponse property = apiServ.getPropertyByPropertyId(propertyId);
 		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(propertyId);
 		GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(propertyId);
+		
+		// Getting the list of Map Markers as string and passing to the page.
+		// In the page, we will pass these markers in the map URL.
+		// Maximum of 15 Map Markers allowed. We will show 1 property, 7 super markets and 7 gyms.
+		// Getting the Map Markers for Super Markets:
+		String sMarkers="markers=color:blue%7Clabel:S";
+		for(int i=0;i<supermarkets.getResults().size();i++) {
+			if (i==7) {break;}
+			sMarkers+="%7C"+supermarkets.getResults().get(i).getGeometry().getLocation().getLat()+","+
+					supermarkets.getResults().get(i).getGeometry().getLocation().getLng();
+		}
+		// Getting the Map Markers for Gyms:
+		String gMarkers="markers=color:yellow%7Clabel:G";
+		for(int i=0;i<gyms.getResults().size();i++) {
+			if (i==7) {break;}
+			gMarkers+="%7C"+gyms.getResults().get(i).getGeometry().getLocation().getLat()+","+
+					gyms.getResults().get(i).getGeometry().getLocation().getLng();
+		}
 		model.addAttribute("property", property.getProperties());
 		model.addAttribute("supermarkets", supermarkets.getResults());
 		model.addAttribute("gyms", gyms.getResults());
 		model.addAttribute("key", key);
+		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
+		model.addAttribute("lon", property.getProperties().get(0).getAddress().getLon());
+		model.addAttribute("sMarkers",sMarkers);// passing the super market markers to the page
+		model.addAttribute("gMarkers",gMarkers);// passing the gym markers to the page
 		return "details";
 	}
 
@@ -175,24 +197,10 @@ public class HomeController {
 		}
 
 		favsDao.save(newFav);
-<<<<<<< HEAD
-		String state = (String) session.getAttribute("state");
-		String city = (String) session.getAttribute("city");
-		String url = "redirect:/submit-list?city=" + city +"&state="+ state;
-		//return "redirect:/submit-list?city=" + city +"&state="+ state;
 
-		Double minPrice =  (Double) session.getAttribute("minprice");
-		Double maxPrice = (Double) session.getAttribute("maxprice");
-		Integer beds= (Integer) session.getAttribute("beds");
-		Double baths= (Double) session.getAttribute("baths");
-		if (minPrice!=null){
-			url += "&minprice="+minPrice+"&maxprice="+maxPrice+"&beds="+beds+"&baths="+baths;
-		}		
-		return url;
-=======
-
+		
 		String searchUrl = (String) session.getAttribute("searchUrl");
-		System.out.println("searchUrlExisting" + searchUrl);
+		//System.out.println("searchUrlExisting" + searchUrl);
 		if (searchUrl != null) {
 
 			return "redirect:/" + searchUrl;
@@ -200,9 +208,7 @@ public class HomeController {
 			return "/";
 		}
 
-		// return "redirect:/ExistingList";
->>>>>>> c7d2689bdf770421d0a6e5010aae6813136538b6
-	}
+		}
 		
 	
 

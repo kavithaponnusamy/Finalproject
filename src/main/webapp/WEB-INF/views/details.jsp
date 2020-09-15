@@ -26,6 +26,7 @@
 	src="/script.js"></script>
 </head>
 <body>
+
 	<h3>Property Details</h3>
 	<div class="container-fluid">
 		<div class="btn-group float-right">
@@ -111,6 +112,8 @@
 							<p>
 								Address:
 								<c:out value="${prop.address.line}" />
+								<c:out value="${prop.address.lat}" />
+								<c:out value="${prop.address.lon}" />
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
@@ -122,14 +125,13 @@
 					</div>
 				</c:forEach>
 			</div>
-			
+
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
 				<div>
-			<img src="https://maps.googleapis.com/maps/api/js?q=${prop.address.lat},${prop.address.lon}&key=${key}&zoom=11&size=200x200&sensor=false"/>
-					<img
-						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
-				</div>
+			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
+			<!-- <img src="https://maps.googleapis.com/maps/api/js?q=42.575348,-83.131971&key=${key}&zoom=11&size=200x200&sensor=false"/> -->
+			</div>
 
 			</div>
 

@@ -49,16 +49,16 @@ public class ApiService {
 	public PropertyResponse getPropertyByPropertyId(String property_id) {
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
-		Double lat=property.getProperties().get(0).getAddress().getLat();
 		return property;
 	}
 	public Double getLat(String property_id) {
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
 		Double lat=property.getProperties().get(0).getAddress().getLat();
+		
 		return lat;
 	}
-	public Double getLan(String property_id) {
+	public Double getLon(String property_id) {
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
 		Double lon=property.getProperties().get(0).getAddress().getLon();
@@ -66,14 +66,14 @@ public class ApiService {
 	}
 	public GoogleResponse getAllGoogleSearchBySupermarket(String property_id) {
 		Double lat=getLat(property_id);
-		Double lon=getLan(property_id);
+		Double lon=getLon(property_id);
 		String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat},{lon}&key={key}&radius=10000&type=supermarket";
 		GoogleResponse supermarkets=rt.getForObject(url,GoogleResponse.class,lat,lon,key);
 		return supermarkets;
 	}
 	public GoogleResponse getAllGoogleSearchByGym(String property_id) {
 		Double lat=getLat(property_id);
-		Double lon=getLan(property_id);
+		Double lon=getLon(property_id);
 		String url="https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat},{lon}&key={key}&radius=10000&type=gym";
 		GoogleResponse gyms=rt.getForObject(url,GoogleResponse.class,lat,lon,key);
 		return gyms;

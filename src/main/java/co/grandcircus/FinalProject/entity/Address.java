@@ -9,8 +9,8 @@ public class Address {
     public String state;
     public String county;
     
-    public double lat;
-    public double lon;
+    public Double lat;
+    public Double lon;
 	public String getCity() {
 		return city;
 	}
@@ -47,16 +47,16 @@ public class Address {
 	public void setCounty(String county) {
 		this.county = county;
 	}
-	public double getLat() {
+	public Double getLat() {
 		return lat;
 	}
-	public void setLat(double lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
-	public double getLon() {
+	public Double getLon() {
 		return lon;
 	}
-	public void setLon(double lon) {
+	public void setLon(Double lon) {
 		this.lon = lon;
 	}
    

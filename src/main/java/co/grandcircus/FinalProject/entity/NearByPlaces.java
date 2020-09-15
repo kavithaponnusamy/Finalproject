@@ -39,11 +39,6 @@ public class NearByPlaces {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	
-	
 
-	
-	
-	
 
 }

@@ -119,11 +119,9 @@
 
 							<p>${city}, ${state} ${property.address.postal_code}</p>
 
-							<p>${city},${state}${property.address.postal_code}</p>
-
 						</div>
 						 <div class="float-right mt-1">			 	
-							<a href="/" class="btn btn-outline-primary">Contact Agent</a>
+							<a href="/contact-agent" class="btn btn-outline-primary">Contact Agent</a>
 						</div>
 					</div>
 
