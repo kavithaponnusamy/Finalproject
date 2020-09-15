@@ -128,13 +128,12 @@
 			
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
-				<c:forEach var="prop" items="${property}">
+			  
 				<div>
-				<iframe width="680px"  
-  height="800px"  src = "https://maps.google.com/maps?q=${prop.address.lat},${prop.address.lon}&center=${prop.address.lat},${prop.address.lon}&hl=es;z=14&amp;output=embed&zoom=18&maptype=satellite"></iframe>
- 
+					<img
+						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
 				</div>
-		</c:forEach>
+				 
 			</div>
 
 
