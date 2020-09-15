@@ -26,6 +26,12 @@
 	src="/script.js"></script>
 </head>
 <body>
+<header class="header" id="myHeader" onclick="window.location = '/';">
+		<h1>Find Homes That Fit Your Lifestyle</h1>
+		<nav>
+			<a href="/">Home</a> | <a href="/favorite-list">Favorites</a>
+		</nav>
+	</header>
 
 	<h3>Property Details</h3>
 	<div class="container-fluid">
@@ -187,6 +193,12 @@
 								<c:out value="${gym.rating}" />
 							</p>
 	</c:forEach>
+	<footer>
+		<div>
+			<p>© Copyright 2020 All rights reserved by</p>
+		</div>
+	</footer>
+	
 
 </body>
 </html>

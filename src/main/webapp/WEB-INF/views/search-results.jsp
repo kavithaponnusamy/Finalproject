@@ -19,6 +19,13 @@
 <link href="/style.css" rel="stylesheet" />
 </head>
 <body>
+<header class="header" id="myHeader" onclick="window.location = '/';">
+		<h1>Find Homes That Fit Your Lifestyle</h1>
+		<nav>
+			<a href="/">Home</a> | <a href="/favorite-list">Favorites</a>
+		</nav>
+	</header>
+
 	<h2>List of properties in ${city}, ${state}</h2>
 	<div class="container-fluid">
 		<form class="form" action="/search-result">
@@ -115,6 +122,12 @@
 		</div>
 	</div>
 	<br>
+	<footer>
+		<div>
+			<p>© Copyright 2020 All rights reserved by</p>
+		</div>
+	</footer>
+	
 
 </body>
 </html>
