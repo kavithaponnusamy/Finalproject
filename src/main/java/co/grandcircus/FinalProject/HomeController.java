@@ -221,7 +221,7 @@ public class HomeController {
 	
 
 		// return "redirect:/ExistingList";
-	}
+	//}
 	
 //	
 //	@RequestMapping("/favorite-list")
