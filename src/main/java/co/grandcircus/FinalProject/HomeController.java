@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
+import co.grandcircus.FinalProject.entity.SavedSearches;
 import co.grandcircus.FinalProject.entity.State; 
 
 @Controller
@@ -47,6 +49,8 @@ public class HomeController {
 		List<Property> properties = apiServ.getAllProperties().getProperties();
 		List<NearByPlaces> places = apiServ.getAllGoogleSearch();
 		List<String> states = apiServ.getStates();
+		List<SavedSearches> searches = searchesDao.findAll();
+		model.addAttribute("searches", searches);
 		model.addAttribute("states", states);
 		model.addAttribute("properties", properties);
 		model.addAttribute("places", places);
@@ -221,7 +225,7 @@ public class HomeController {
 	
 
 		// return "redirect:/ExistingList";
-	}
+//	}
 	
 //	
 //	@RequestMapping("/favorite-list")
@@ -263,7 +267,22 @@ public class HomeController {
 		favsDao.deleteByPropertyId(propertyId);  
 		return "redirect:/favorite-list";
 	}
+	
+	@RequestMapping("/addSearch")
+	public String addSavedSearch(Model model, @RequestParam String name) {
+		SavedSearches newSearch = new SavedSearches();
+		String searchUrl = (String) session.getAttribute("searchUrl");
+		newSearch.setName(name);
+		newSearch.setSearchUrl(searchUrl);
+		searchesDao.save(newSearch);
+		
+		return "redirect:/" + searchUrl;
+		}
 
-
+	@RequestMapping("/removeSearch")
+	public String removeSavedSearch(@RequestParam Long id, Model model) {
+		searchesDao.deleteById(id);  
+		return "redirect:/";
+	}
 
 }

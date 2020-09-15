@@ -78,7 +78,10 @@
 
 <br>
 
-
+<form class="form" action="addSearch">
+<input type="text" name="name"> 
+<button type="submit" class="btn btn-outline-primary">Save Search</button>
+</form>
 		<div id="image-list" class="row">
 			<c:forEach var="property" items="${properties}">
 				<div class="card col-md-4">

@@ -113,12 +113,9 @@
 							<p>
 								Address:
 								<c:out value="${prop.address.line}" />
-<<<<<<< HEAD
 								<c:out value="${prop.address.lat}" />
 								<c:out value="${prop.address.lon}" />
-=======
-								
->>>>>>> f9ce9149d8ec3ff7d3ed51c6e8f6a572774db8db
+
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
@@ -136,17 +133,15 @@
 				<strong>Map View</strong>
 			  
 				<div>
-<<<<<<< HEAD
 			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
 			<!-- <img src="https://maps.googleapis.com/maps/api/js?q=42.575348,-83.131971&key=${key}&zoom=11&size=200x200&sensor=false"/> -->
 			</div>
 
-=======
 					<img
 						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
 				</div>
 				 
->>>>>>> f9ce9149d8ec3ff7d3ed51c6e8f6a572774db8db
+
 			</div>
 
 
