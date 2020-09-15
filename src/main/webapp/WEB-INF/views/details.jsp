@@ -65,8 +65,9 @@
 								<c:set var="cnts" value="${cnts+1}" />
 								<div class="${cnts==1? 'item active':'item'}">
 									<img class="img-fav" style="height: 400px; width: 100%;"
-										src="${photo.href}" alt="no image"> <a href=""
-										class="img_fav_a" data-toggle="tooltip" title="Add Favorite">
+										src="${photo.href}" alt="no image"> 
+										<a href="/addFavorites?propertyId=${prop.property_id}&thumbnail=${prop.photos[0].href}&weburl=${prop.weburl}"
+										class="img_fav_details_a" data-toggle="tooltip" title="Add Favorite">
 										<i class="fa fa-star-o" style="font-size:30px"></i>
 									</a>
 								</div>
@@ -112,11 +113,16 @@
 							<p>
 								Address:
 								<c:out value="${prop.address.line}" />
+<<<<<<< HEAD
 								<c:out value="${prop.address.lat}" />
 								<c:out value="${prop.address.lon}" />
+=======
+								
+>>>>>>> f9ce9149d8ec3ff7d3ed51c6e8f6a572774db8db
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
+							 
 						</div>
 						<div class="float-right mt-1">
 							<a href="/" class="border-primary btn btn-outline-primary">Contact
@@ -128,11 +134,19 @@
 
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
+			  
 				<div>
+<<<<<<< HEAD
 			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
 			<!-- <img src="https://maps.googleapis.com/maps/api/js?q=42.575348,-83.131971&key=${key}&zoom=11&size=200x200&sensor=false"/> -->
 			</div>
 
+=======
+					<img
+						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
+				</div>
+				 
+>>>>>>> f9ce9149d8ec3ff7d3ed51c6e8f6a572774db8db
 			</div>
 
 

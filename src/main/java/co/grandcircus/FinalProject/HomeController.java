@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+ 
 import co.grandcircus.FinalProject.dao.FavoritesDao;
 import co.grandcircus.FinalProject.dao.SavedSearchesDao;
 import co.grandcircus.FinalProject.entity.Favorites;
@@ -22,7 +22,7 @@ import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
-import co.grandcircus.FinalProject.entity.State;
+import co.grandcircus.FinalProject.entity.State; 
 
 @Controller
 public class HomeController {
@@ -172,10 +172,17 @@ public class HomeController {
 		model.addAttribute("supermarkets", supermarkets.getResults());
 		model.addAttribute("gyms", gyms.getResults());
 		model.addAttribute("key", key);
+
 		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
 		model.addAttribute("lon", property.getProperties().get(0).getAddress().getLon());
 		model.addAttribute("sMarkers",sMarkers);// passing the super market markers to the page
-		model.addAttribute("gMarkers",gMarkers);// passing the gym markers to the page
+		model.addAttribute("gMarkers",gMarkers);// passing the gym markers to the pag
+		
+		session.removeAttribute("searchUrl");
+		String searchUrl = "submit-details?propertyId=" + propertyId;
+		session.setAttribute("searchUrl", searchUrl);
+		
+
 		return "details";
 	}
 
@@ -208,8 +215,55 @@ public class HomeController {
 			return "/";
 		}
 
+
 		}
 		
 	
+
+		// return "redirect:/ExistingList";
+	}
+	
+//	
+//	@RequestMapping("/favorite-list")
+//	public String showfavoriteList(Model model) {
+ 
+//		List<Favorites> favs = new ArrayList<Favorites>();
+//		PropertyResponse response;
+//		List<Property> properties = new ArrayList<Property>();
+//		favs = favsDao.findAll();
+//
+//		for (Favorites fav : favs) {
+
+//			response=apiServ.getPropertyByPropertyId(fav.getPropertyId());
+//			Property prop=response.getProperties().get(0);
+//			prop.setThumbnail(fav.getThumbnail()); 
+//			
+//			properties.add(prop);
+//		}
+// 
+//		model.addAttribute("properties", properties);
+//		return "favoriteList";
+//
+//	}
+//	
+	
+	@RequestMapping("/favorite-list")
+	public String showfavoriteList(Model model) {
+		// Recipe recipe[];
+		List<Favorites> favs = new ArrayList<Favorites>();  
+		favs = favsDao.findAll(); 
+		model.addAttribute("properties", favs);
+		return "favoriteList";
+
+	}
+	
+
+	@RequestMapping("/removeFavorites")
+	public String removeFavorite(@RequestParam String propertyId, Model model) {
+		favsDao.deleteByPropertyId(propertyId);  
+		return "redirect:/favorite-list";
+	}
+
+
 
 }
