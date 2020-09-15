@@ -34,6 +34,28 @@
 				</select>
 				<button type="submit" class="btn btn-primary mb-2">Search</button>
 			</div>
+			<br>
+			<div>
+			<h3>Saved Searches</h3>
+			<table class="table"> 
+			<thead>
+				<tr>
+					<th>Name</th>
+				</tr>
+			</thead>
+			<tbody>
+					<c:forEach items="${searches}" var="searches">
+					
+					<tr>
+
+
+					<td><a class = "nav-link" href="${searches.searchUrl}">${searches.name}</a></td>
+				    <td><a href="<c:url value="/removeSearch?id=${searches.id}"/>" class="btn btn-dark">Delete</a></td>
+             </tr>
+					</c:forEach>
+					</tbody>
+					</table>
+			</div>
 
 
 		</form>

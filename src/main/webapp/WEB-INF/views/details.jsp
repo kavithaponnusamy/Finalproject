@@ -114,10 +114,14 @@
 								Address:
 								<c:out value="${prop.address.line}" />
 
+
 								<c:out value="${prop.address.lat}" />
 								<c:out value="${prop.address.lon}" />
 
 								
+
+								<c:out value="${prop.address.lat}" />
+								<c:out value="${prop.address.lon}" />
 
 							<p>
 								Baths:
@@ -137,12 +141,16 @@
 			  
 				<div>
 
+
+
 			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
-			<!-- <img src="https://maps.googleapis.com/maps/api/js?q=42.575348,-83.131971&key=${key}&zoom=11&size=200x200&sensor=false"/> -->
+		
 			</div>
 
 
-					
+
+			
+
 
 			</div>
 
