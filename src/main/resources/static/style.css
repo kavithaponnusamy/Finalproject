@@ -1,5 +1,30 @@
 @charset "ISO-8859-1";
 
+ 
+
+nav a:active { 
+    color: #0000ff
+}
+
+nav a {
+	color: #ffffff;
+}
+
+.header {
+	padding: 10px 16px;
+	background: #800040;
+	color: #f1f1f1;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%; 
+	padding: 10px 16px;
+	background: #800040;
+	color: #f1f1f1;
+}
+
 .img-fav {
 	position: relative;
 }
@@ -10,4 +35,11 @@
 	background: white;
 	top: 1em;
 	left: 1em;
+}
+
+.img_fav_details_a {
+	position: absolute;
+	background: white;
+	top: 1em;
+	left: 30em;
 }

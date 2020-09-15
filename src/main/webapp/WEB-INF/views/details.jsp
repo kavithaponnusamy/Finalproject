@@ -64,8 +64,9 @@
 								<c:set var="cnts" value="${cnts+1}" />
 								<div class="${cnts==1? 'item active':'item'}">
 									<img class="img-fav" style="height: 400px; width: 100%;"
-										src="${photo.href}" alt="no image"> <a href=""
-										class="img_fav_a" data-toggle="tooltip" title="Add Favorite">
+										src="${photo.href}" alt="no image"> 
+										<a href="/addFavorites?propertyId=${prop.property_id}&thumbnail=${prop.photos[0].href}&weburl=${prop.weburl}"
+										class="img_fav_details_a" data-toggle="tooltip" title="Add Favorite">
 										<i class="fa fa-star-o" style="font-size:30px"></i>
 									</a>
 								</div>
@@ -111,9 +112,11 @@
 							<p>
 								Address:
 								<c:out value="${prop.address.line}" />
+								
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
+							 
 						</div>
 						<div class="float-right mt-1">
 							<a href="/" class="border-primary btn btn-outline-primary">Contact
@@ -125,12 +128,13 @@
 			
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
+				<c:forEach var="prop" items="${property}">
 				<div>
-			<img src="https://maps.googleapis.com/maps/api/js?q=${prop.address.lat},${prop.address.lon}&key=${key}&zoom=11&size=200x200&sensor=false"/>
-					<img
-						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
+				<iframe width="680px"  
+  height="800px"  src = "https://maps.google.com/maps?q=${prop.address.lat},${prop.address.lon}&center=${prop.address.lat},${prop.address.lon}&hl=es;z=14&amp;output=embed&zoom=18&maptype=satellite"></iframe>
+ 
 				</div>
-
+		</c:forEach>
 			</div>
 
 
