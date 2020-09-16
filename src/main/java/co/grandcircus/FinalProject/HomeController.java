@@ -287,20 +287,41 @@ public class HomeController {
 	
 	@RequestMapping("/addSearch")
 	public String addSavedSearch(Model model, @RequestParam String name) {
-		SavedSearches newSearch = new SavedSearches();
-		String searchUrl = (String) session.getAttribute("searchUrl");
-		newSearch.setName(name);
-		newSearch.setSearchUrl(searchUrl);
-		searchesDao.save(newSearch);
-		
-		return "redirect:/" + searchUrl;
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			SavedSearches newSearch = new SavedSearches();
+			// Favorites existingFav = favsDao.findByPropertyIdAndUserId(propertyId,
+			// user.getId());
+			String searchUrl = (String) session.getAttribute("searchUrl");
+			SavedSearches existingSearch = searchesDao.findByNameAndUserIdAndSearchUrl(name, user.getId(),searchUrl);
+			
+			if (existingSearch == null) {
+				newSearch.setName(name);
+				newSearch.setSearchUrl(searchUrl);
+				newSearch.setUser(user);
+			} else {
+				newSearch.setId(existingSearch.getId());
+				newSearch.setName(existingSearch.getName());
+				newSearch.setSearchUrl(searchUrl);
+				newSearch.setUser(user);
+			}
+			searchesDao.save(newSearch);
+			return "redirect:/" + searchUrl;
+		} else {
+			return "login";
 		}
-
+	}
 	@RequestMapping("/removeSearch")
 	public String removeSavedSearch(@RequestParam Long id, Model model) {
-		searchesDao.deleteById(id);  
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+		searchesDao.deleteById(id);
 		return "redirect:/";
 	}
+
+
 	@RequestMapping("/contact-submit")
 	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
 		model.addAttribute("propertyId",propertyId);		
