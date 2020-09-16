@@ -315,13 +315,12 @@ public class HomeController {
 	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
 		User user = (User) session.getAttribute("user");
 		
+		// searchUrl will be changed if the login page is called.
+		// so, saving the calling page URL in a session attribute searchUrlMain:
 		String searchUrlMain = (String) session.getAttribute("searchUrlMain");		
 		if (searchUrlMain == null ) {
 			session.setAttribute("searchUrlMain",session.getAttribute("searchUrl"));
 		}
-		
-		String searchUrl = "contact-submit?propertyId=" + propertyId;
-		session.setAttribute("searchUrl", searchUrl);
 		
 		if (user != null) {
 			
@@ -334,16 +333,16 @@ public class HomeController {
 			model.addAttribute("propertyId", propertyId);
 			return "contact-agent";
 		} else {
-			session.setAttribute("searchUrl", searchUrl);	
+			//session.setAttribute("searchUrl", searchUrl);
+			// Changing the searchUrl to contact form. because, after login, it has to come back to contact form.
+			session.setAttribute("searchUrl", "contact-submit?propertyId=" + propertyId);	
 			return "login";
 		}
 	}
 	
 	@PostMapping("/contact-submit")
 	public String addUserDetails(BuyerInformation buyerInfo ) {			
-		String searchUrlMain = (String) session.getAttribute("searchUrlMain");
-		session.removeAttribute("searchUrlMain");
-
+		
 		User user = (User) session.getAttribute("user");
 
 		BuyerInformation newBI = new BuyerInformation();
@@ -363,8 +362,12 @@ public class HomeController {
 		}
 				
 		buyerInfoDao.save(newBI);
+
+		// we need to go back to the calling page. the Url was saved in the session attribute searchUrlMain
+		// after taking the url into a variable, session attribute is removed.
+		String searchUrlMain = (String) session.getAttribute("searchUrlMain");
+		session.removeAttribute("searchUrlMain");
 		return "redirect:/" + searchUrlMain;
-		//session.setAttribute("propertyId", "");
 	}
 
 }
