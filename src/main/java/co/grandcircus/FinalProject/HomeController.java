@@ -226,38 +226,7 @@ public class HomeController {
 
 
 		}
-		
 	
-
-		// return "redirect:/ExistingList";
-
-	//}
-	
-
-
-//	
-//	@RequestMapping("/favorite-list")
-//	public String showfavoriteList(Model model) {
- 
-//		List<Favorites> favs = new ArrayList<Favorites>();
-//		PropertyResponse response;
-//		List<Property> properties = new ArrayList<Property>();
-//		favs = favsDao.findAll();
-//
-//		for (Favorites fav : favs) {
-
-//			response=apiServ.getPropertyByPropertyId(fav.getPropertyId());
-//			Property prop=response.getProperties().get(0);
-//			prop.setThumbnail(fav.getThumbnail()); 
-//			
-//			properties.add(prop);
-//		}
-// 
-//		model.addAttribute("properties", properties);
-//		return "favoriteList";
-//
-//	}
-//	
 	
 	@RequestMapping("/favorite-list")
 	public String showfavoriteList(Model model) {

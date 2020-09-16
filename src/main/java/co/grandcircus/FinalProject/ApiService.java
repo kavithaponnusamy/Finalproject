@@ -9,9 +9,9 @@ import org.springframework.web.client.RestTemplate;
 
 import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
-import co.grandcircus.FinalProject.entity.Property;
+
 import co.grandcircus.FinalProject.entity.PropertyResponse;
-import co.grandcircus.FinalProject.entity.State;
+
 
 @Service
 public class ApiService {

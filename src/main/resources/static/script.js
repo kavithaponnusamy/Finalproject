@@ -14,3 +14,12 @@ function onBtnDetailViewClick(){
 	btnmapview.classList.remove("btn-primary");
 		btnmapview.classList.add("btn-secondary");
 }
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
