@@ -26,6 +26,8 @@ import co.grandcircus.FinalProject.entity.NearByPlaces;
 import co.grandcircus.FinalProject.entity.Property;
 import co.grandcircus.FinalProject.entity.PropertyResponse;
 import co.grandcircus.FinalProject.entity.SavedSearches;
+import co.grandcircus.FinalProject.entity.User;
+import co.grandcircus.FinalProject.dao.UserDao;
 
 
 @Controller
@@ -39,6 +41,8 @@ public class HomeController {
 
 	@Autowired
 	private FavoritesDao favsDao;
+	@Autowired
+	UserDao userDao;
 
 	@Autowired
 	private SavedSearchesDao searchesDao;
@@ -51,13 +55,13 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String showHome(Model model) {
-		List<Property> properties = apiServ.getAllProperties().getProperties();
+		//List<Property> properties = apiServ.getAllProperties().getProperties();
 		List<NearByPlaces> places = apiServ.getAllGoogleSearch();
 		List<String> states = apiServ.getStates();
 		List<SavedSearches> searches = searchesDao.findAll();
 		model.addAttribute("searches", searches);
 		model.addAttribute("states", states);
-		model.addAttribute("properties", properties);
+		//model.addAttribute("properties", properties);
 		model.addAttribute("places", places);
 		return "homepage";
 	}
@@ -65,7 +69,7 @@ public class HomeController {
 	@RequestMapping("/submit-list")
 	public String showList(Model model, @RequestParam(required = false) String state,
 			@RequestParam(required = false) String city) {
-		session.invalidate();
+		//session.invalidate();
 
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
 		model.addAttribute("properties", properties);
@@ -198,34 +202,47 @@ public class HomeController {
 	@RequestMapping("/addFavorites")
 	public String addToFavoriteList(Model model, @RequestParam(required = false) String weburl,
 			@RequestParam(required = false) String propertyId, @RequestParam(required = false) String thumbnail) {
-		Favorites newFav = new Favorites();
-		Favorites existingFav = favsDao.findByPropertyId(propertyId);
 
-		if (existingFav == null) {
-			newFav.setPropertyId(propertyId);
-			newFav.setThumbnail(thumbnail);
-			newFav.setWeburl(weburl);
+		User user = (User) session.getAttribute("user");
+
+		if (user != null) {
+
+			model.addAttribute("userId", user.getId());
+
+			Favorites newFav = new Favorites();
+			// Favorites existingFav = favsDao.findByPropertyId(propertyId);
+			Favorites existingFav = favsDao.findByPropertyIdAndUserId(propertyId, user.getId());
+
+			if (existingFav == null) {
+				newFav.setPropertyId(propertyId);
+				newFav.setThumbnail(thumbnail);
+				newFav.setWeburl(weburl);
+				newFav.setUser(user);
+			} else {
+				newFav.setId(existingFav.getId());
+				newFav.setPropertyId(propertyId);
+				newFav.setThumbnail(thumbnail);
+				newFav.setWeburl(weburl);
+				newFav.setUser(user);
+			}
+
+			favsDao.save(newFav);
+
+			String searchUrl = (String) session.getAttribute("searchUrl");
+			// System.out.println("searchUrlExisting" + searchUrl);
+			if (searchUrl != null) {
+
+				return "redirect:/" + searchUrl;
+			} else {
+				return "redirect:/";
+			}
+
 		} else {
-			newFav.setId(existingFav.getId());
-			newFav.setPropertyId(propertyId);
-			newFav.setThumbnail(thumbnail);
-			newFav.setWeburl(weburl);
+			return "login";
 		}
 
-		favsDao.save(newFav);
+	}
 
-		
-		String searchUrl = (String) session.getAttribute("searchUrl");
-		//System.out.println("searchUrlExisting" + searchUrl);
-		if (searchUrl != null) {
-
-			return "redirect:/" + searchUrl;
-		} else {
-			return "/";
-		}
-
-
-		}
 		
 	
 
@@ -261,18 +278,31 @@ public class HomeController {
 	
 	@RequestMapping("/favorite-list")
 	public String showfavoriteList(Model model) {
-		// Recipe recipe[];
-		List<Favorites> favs = new ArrayList<Favorites>();  
-		favs = favsDao.findAll(); 
+		List<Favorites> favs = new ArrayList<Favorites>();
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+		// favs = favsDao.findAll();
+		favs = favsDao.findByUserId(user.getId());
 		model.addAttribute("properties", favs);
 		return "favoriteList";
+
 
 	}
 	
 
 	@RequestMapping("/removeFavorites")
-	public String removeFavorite(@RequestParam String propertyId, Model model) {
-		favsDao.deleteByPropertyId(propertyId);  
+	public String removeFavorite( Model model,@RequestParam Long id) {
+
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+
+		// favsDao.deleteByPropertyId(propertyId);
+		//favsDao.deleteByPropertyIdAndUserId(propertyId, user.getId());
+		favsDao.deleteById(id);
 		return "redirect:/favorite-list";
 	}
 	

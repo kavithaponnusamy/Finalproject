@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -26,12 +26,9 @@
 	src="/script.js"></script>
 </head>
 <body>
-<header class="header" id="myHeader" onclick="window.location = '/';">
-		<h1>Find Homes That Fit Your Lifestyle</h1>
-		<nav>
-			<a href="/">Home</a> | <a href="/favorite-list">Favorites</a>
-		</nav>
-	</header>
+<%@include file="partials/header.jsp" %>
+	<p class="message"><c:out value="${ message }"/></p>
+
 
 	<h3>Property Details</h3>
 	<div class="container-fluid">
@@ -195,7 +192,7 @@
 	</c:forEach>
 	<footer>
 		<div>
-			<p>© Copyright 2020 All rights reserved by</p>
+			<p>Â© Copyright 2020 All rights reserved by</p>
 		</div>
 	</footer>
 	

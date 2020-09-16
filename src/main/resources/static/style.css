@@ -1,5 +1,18 @@
 @charset "ISO-8859-1";
+.message {
+	padding: 8px;
+	background-color: pink;
+}
 
+.message:empty {
+	display: none;
+}
+
+.secret {
+	font-family: 'Comic Sans', cursive, monospace;
+	font-size: 130%;
+}
+ 
  
 
 nav a:active { 
@@ -11,7 +24,7 @@ nav a {
 }
 
 .header {
-	padding: 10px 16px;
+	padding: 27px 16px;
 	background: #800040;
 	color: #f1f1f1;
 }

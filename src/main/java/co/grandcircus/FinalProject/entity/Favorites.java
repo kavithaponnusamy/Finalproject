@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import co.grandcircus.FinalProject.entity.User;
 
 @Entity
 public class Favorites {
@@ -13,6 +16,17 @@ public class Favorites {
 		private String propertyId;
 		private String thumbnail;
 		private String weburl;
+		  @ManyToOne
+			private User user;
+		    
+			
+		    public User getUser() {
+				return user;
+			}
+
+			public void setUser(User user) {
+				this.user = user;
+			}
 		public Long getId() {
 			return id;
 		}
