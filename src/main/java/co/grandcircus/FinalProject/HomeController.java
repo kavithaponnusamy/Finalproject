@@ -329,7 +329,9 @@ public class HomeController {
 				model.addAttribute("existingBI", existingBI);
 			}
 			model.addAttribute("userId", user.getId());
-			System.out.println(user.getId());
+			model.addAttribute("name",user.getUsername());
+			model.addAttribute("email",user.getEmail());
+			model.addAttribute("phoneno",user.getPhone());
 			model.addAttribute("propertyId", propertyId);
 			return "contact-agent";
 		} else {
@@ -348,17 +350,18 @@ public class HomeController {
 		BuyerInformation newBI = new BuyerInformation();
 		BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),buyerInfo.getPropertyId());
 		
-		if (existingBI == null) {
+		if (existingBI == null) {			
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
 			newBI.setUser(user);
 		} else {
-			newBI.setId(existingBI.getId());;
+			newBI.setId(existingBI.getId());
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
 			newBI.setUser(user);
+			
 		}
 				
 		buyerInfoDao.save(newBI);

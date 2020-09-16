@@ -12,19 +12,18 @@ public class BuyerInformation {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String comments;
+	@ManyToOne
+	private User user;
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	private String quote;
 	public String propertyId;
 	
-	@ManyToOne
-	private User user;
+	
 
 	public String getComments() {
 		return comments;
