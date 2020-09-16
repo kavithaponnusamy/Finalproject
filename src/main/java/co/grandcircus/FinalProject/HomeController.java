@@ -127,15 +127,15 @@ public class HomeController {
 				}
 			}
 
-			session.setAttribute("minprice", minprice);
-			session.setAttribute("maxprice", maxprice);
-			session.setAttribute("beds", beds);
-			session.setAttribute("baths", baths);
-			session.setAttribute("city", city);
-			session.setAttribute("state", state);
-			model.addAttribute("properties", filteredProperties);
-			model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
-			model.addAttribute("state", state);
+			//session.setAttribute("minprice", minprice);
+			//session.setAttribute("maxprice", maxprice);
+			//session.setAttribute("beds", beds);
+			//session.setAttribute("baths", baths);
+			//session.setAttribute("city", city);
+			//session.setAttribute("state", state);
+			//model.addAttribute("properties", filteredProperties);
+			//model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
+			//model.addAttribute("state", state);
 
 			if (boo) {
 				filteredProperties.add(properties.get(i));
