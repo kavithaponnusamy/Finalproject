@@ -243,38 +243,6 @@ public class HomeController {
 
 	}
 
-		
-	
-
-		// return "redirect:/ExistingList";
-
-	//}
-	
-
-
-//	
-//	@RequestMapping("/favorite-list")
-//	public String showfavoriteList(Model model) {
- 
-//		List<Favorites> favs = new ArrayList<Favorites>();
-//		PropertyResponse response;
-//		List<Property> properties = new ArrayList<Property>();
-//		favs = favsDao.findAll();
-//
-//		for (Favorites fav : favs) {
-
-//			response=apiServ.getPropertyByPropertyId(fav.getPropertyId());
-//			Property prop=response.getProperties().get(0);
-//			prop.setThumbnail(fav.getThumbnail()); 
-//			
-//			properties.add(prop);
-//		}
-// 
-//		model.addAttribute("properties", properties);
-//		return "favoriteList";
-//
-//	}
-//	
 	
 	@RequestMapping("/favorite-list")
 	public String showfavoriteList(Model model) {
@@ -345,15 +313,58 @@ public class HomeController {
 
 	@RequestMapping("/contact-submit")
 	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
-		model.addAttribute("propertyId",propertyId);		
-		return "contact-agent";
+		User user = (User) session.getAttribute("user");
+		
+		String searchUrlMain = (String) session.getAttribute("searchUrlMain");		
+		if (searchUrlMain == null ) {
+			session.setAttribute("searchUrlMain",session.getAttribute("searchUrl"));
+		}
+		
+		String searchUrl = "contact-submit?propertyId=" + propertyId;
+		session.setAttribute("searchUrl", searchUrl);
+		
+		if (user != null) {
+			
+			BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),propertyId);
+			if (existingBI != null) {
+				model.addAttribute("existingBI", existingBI);
+			}
+			model.addAttribute("userId", user.getId());
+			System.out.println(user.getId());
+			model.addAttribute("propertyId", propertyId);
+			return "contact-agent";
+		} else {
+			session.setAttribute("searchUrl", searchUrl);	
+			return "login";
+		}
 	}
 	
 	@PostMapping("/contact-submit")
-	public String addUserDetails(BuyerInformation buyerInfo) {			
-		String searchUrl = (String) session.getAttribute("searchUrl");		
-		buyerInfoDao.save(buyerInfo);
-		return "redirect:/" + searchUrl;
+	public String addUserDetails(BuyerInformation buyerInfo ) {			
+		String searchUrlMain = (String) session.getAttribute("searchUrlMain");
+		session.removeAttribute("searchUrlMain");
+
+		User user = (User) session.getAttribute("user");
+
+		BuyerInformation newBI = new BuyerInformation();
+		BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),buyerInfo.getPropertyId());
+		
+		if (existingBI == null) {
+			newBI.setComments(buyerInfo.getComments());
+			newBI.setQuote(buyerInfo.getQuote());
+			newBI.setPropertyId(buyerInfo.getPropertyId());
+			newBI.setUser(user);
+		} else {
+			newBI.setId(existingBI.getId());;
+			newBI.setComments(buyerInfo.getComments());
+			newBI.setQuote(buyerInfo.getQuote());
+			newBI.setPropertyId(buyerInfo.getPropertyId());
+			newBI.setUser(user);
+		}
+				
+		buyerInfoDao.save(newBI);
+		return "redirect:/" + searchUrlMain;
+		//session.setAttribute("propertyId", "");
 	}
 
 }

@@ -115,29 +115,28 @@
 							</p>
 							<p>
 								Address:
-								<c:out value="${prop.address.line}" />
-
-
-								<c:out value="${prop.address.lat}" />
-								<c:out value="${prop.address.lon}" />
-
-								
-
-								<c:out value="${prop.address.lat}" />
-								<c:out value="${prop.address.lon}" />
-
+								<c:out value="${prop.address.line}" />					
+						
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
+								<p>
+								Beds:
+								<c:out value="${prop.beds}" />
 							 
 						</div>
 						<div class="float-right mt-1">
 							<a href="/contact-submit?propertyId=${prop.property_id}" class="border-primary btn btn-outline-primary">Contact
 								Agent</a>
+
+						
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			
+			
+			
 
 			<div id="divMapView" style="display:none;" class="border col-md">
 				<strong>Map View</strong>
@@ -153,17 +152,7 @@
 			</div>
 
 
-					<img
-						src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />
-				</div>
-				 
-
-
-
-			
-
-
-
+					<!-- <img src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />  -->
 			</div>
 
 

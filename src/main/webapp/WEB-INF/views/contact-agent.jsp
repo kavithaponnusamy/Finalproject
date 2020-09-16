@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,22 +12,16 @@
 
   <form action="/contact-submit" class="form-container" method="post">
  <h3>Find out more about this property</h3>
-	<label for="fullname"><b>Name</b></label>
-	 <input type="text" placeholder="Enter Fullname" name="name" required>	
-	 <br>
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
-    <br>
-    <label for="phone"><b>Phone Number</b></label>    
-    <input type="number" placeholder="Enter Phone Number" name="phoneNo" required>
-    <br>
+	
      <label for="comments"><b>Comments</b></label>
-    <input type="text" name="comments" required>
+    <input type="text" name="comments" value="${existingBI.comments}" required>
     <br>
      <label for="comments"><b>Quote</b></label>
-    <input type="number" placeholder="Enter Quote" name="quote" required>    
+    <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" required>    
     <button type="submit" class="btn">Submit</button>   
     <input type="hidden" name="propertyId" value="${propertyId}">
+     <input type="hidden" name="userId" value="${userId}">
+    
     
   </form>
 
