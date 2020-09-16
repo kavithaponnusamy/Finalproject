@@ -6,4 +6,9 @@ import co.grandcircus.FinalProject.entity.BuyerInformation;
 
 public interface BuyerInformationDao extends JpaRepository<BuyerInformation, Long> {
 
+	
+
+	BuyerInformation findByUserIdAndPropertyId(Long id, String propertyId);
+	
+
 }
