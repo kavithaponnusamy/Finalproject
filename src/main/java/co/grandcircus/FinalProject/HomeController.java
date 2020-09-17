@@ -354,12 +354,18 @@ public class HomeController {
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
+//			newBI.setName(user.getUsername());
+//			newBI.setPhoneNo(user.getPhone());
+//			newBI.setEmail(user.getEmail());
 			newBI.setUser(user);
 		} else {
 			newBI.setId(existingBI.getId());
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
+//			newBI.setName(user.getUsername());
+//			newBI.setPhoneNo(user.getPhone());
+//			newBI.setEmail(user.getEmail());
 			newBI.setUser(user);
 			
 		}

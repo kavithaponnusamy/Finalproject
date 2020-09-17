@@ -32,10 +32,12 @@
 
 	<h3>Property Details</h3>
 	<div class="container-fluid">
+	
 		<div class="btn-group float-right">
 			<button class="btn btn-primary" value="Details" onClick="onBtnDetailViewClick();">Details</button>
 			<button id="btnMapView" class="btn btn-secondary" onClick="onBtnMapViewClick();">Maps</button>
 		</div>
+	
 		<br>
 		<br>
 
@@ -138,7 +140,7 @@
 			
 			
 
-			<div id="divMapView" style="display:none;" class="border col-md">
+			<div id="divMapView" style="display:block; class="border col-md">
 				<strong>Map View</strong>
 			  
 				<div>

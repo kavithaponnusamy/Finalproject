@@ -49,7 +49,7 @@ public class UserController {
 		
 
 		String searchUrl = (String) session.getAttribute("searchUrl");
-		// System.out.println("searchUrlExisting" + searchUrl);
+		System.out.println("searchUrlExisting" + searchUrl);
 		if (searchUrl != null) {
 
 			return "redirect:/" + searchUrl;
