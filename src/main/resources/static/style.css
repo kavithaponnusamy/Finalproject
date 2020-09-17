@@ -28,6 +28,20 @@ nav a {
 	background: #800040;
 	color: #f1f1f1;
 }
+.fixed-header{
+	padding:10px 16px;
+	background:#99ff66;
+	color:#ff9966;
+}
+.footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: DarkSalmon;
+	color:white;
+	text-align: center;
+}
 
 footer {
 	position: fixed;
