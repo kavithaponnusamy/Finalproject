@@ -1,6 +1,8 @@
 package co.grandcircus.FinalProject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -55,14 +57,13 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String showHome(Model model) {
-		//List<Property> properties = apiServ.getAllProperties().getProperties();
-		List<NearByPlaces> places = apiServ.getAllGoogleSearch();
+		
+		//List<NearByPlaces> places = apiServ.getAllGoogleSearch();
 		List<String> states = apiServ.getStates();
 		List<SavedSearches> searches = searchesDao.findAll();
 		model.addAttribute("searches", searches);
-		model.addAttribute("states", states);
-		//model.addAttribute("properties", properties);
-		model.addAttribute("places", places);
+		model.addAttribute("states", states);		
+		//model.addAttribute("places", places);
 		return "homepage";
 	}
 	
@@ -82,11 +83,8 @@ public class HomeController {
 	public String showList(Model model, @RequestParam(required = false) String state,
 			@RequestParam(required = false) String city) {
 		//session.invalidate();
-
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
 		model.addAttribute("properties", properties);
-
-		//model.addAttribute("city", city);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
 
@@ -176,6 +174,13 @@ public class HomeController {
 		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(propertyId);
 		GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(propertyId);
 		
+		List<NearByPlaces> smSorted = supermarkets.getResults();
+		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+		Collections.reverse(smSorted);//sort by Descending Order
+		List<NearByPlaces> gymSorted = gyms.getResults();
+		Collections.sort(gymSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+		Collections.reverse(gymSorted);//sort by Descending Order
+
 		// Getting the list of Map Markers as string and passing to the page.
 		// In the page, we will pass these markers in the map URL.
 		// Maximum of 15 Map Markers allowed. We will show 1 property, 7 super markets and 7 gyms.
@@ -193,9 +198,10 @@ public class HomeController {
 			gMarkers+="%7C"+gyms.getResults().get(i).getGeometry().getLocation().getLat()+","+
 					gyms.getResults().get(i).getGeometry().getLocation().getLng();
 		}
+		
 		model.addAttribute("property", property.getProperties());
-		model.addAttribute("supermarkets", supermarkets.getResults());
-		model.addAttribute("gyms", gyms.getResults());
+		model.addAttribute("supermarkets", smSorted);
+		model.addAttribute("gyms", gymSorted);
 		model.addAttribute("key", key);
 
 		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
@@ -362,13 +368,19 @@ public class HomeController {
 		BuyerInformation newBI = new BuyerInformation();
 		BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),buyerInfo.getPropertyId());
 		
-		if (existingBI == null) {			
+		if (existingBI == null) {	
+			newBI.setName(user.getUsername());
+			newBI.setEmail(user.getEmail());
+			newBI.setPhone(user.getPhone());	
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
 			newBI.setUser(user);
 		} else {
 			newBI.setId(existingBI.getId());
+			newBI.setName(user.getUsername());
+			newBI.setEmail(user.getEmail());
+			newBI.setPhone(user.getPhone());			
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());

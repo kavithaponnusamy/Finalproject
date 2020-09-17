@@ -16,8 +16,6 @@
 <body>
 <%@include file="partials/header.jsp" %>
 	<p class="message"><c:out value="${ message }"/></p>
-
-
 	<div>
 		<form class="form-inline" action="/submit-list">
 
