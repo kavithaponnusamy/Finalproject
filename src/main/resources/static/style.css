@@ -122,3 +122,9 @@ footer {
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+.logo {
+	padding: top;
+	width: 10px;
+	length: 10px;
+}

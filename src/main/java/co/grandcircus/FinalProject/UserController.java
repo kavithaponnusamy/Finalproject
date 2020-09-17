@@ -101,7 +101,14 @@ public class UserController {
 		// A flash message will only show on the very next page. Then it will go away.
 		// It is useful with redirects since you can't add attributes to the mav.
 		redir.addFlashAttribute("message", "Thanks for signing up!");
-		return "redirect:/";
+		String searchUrl = (String) session.getAttribute("searchUrl");
+		// System.out.println("searchUrlExisting" + searchUrl);
+		if (searchUrl != null) {
+
+			return "redirect:/" + searchUrl;
+		} else {
+			return "redirect:/";
+		} 
 	}
 
  

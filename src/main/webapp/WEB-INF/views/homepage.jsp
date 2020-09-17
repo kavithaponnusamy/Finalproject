@@ -35,7 +35,8 @@
 
 	<footer>
 		<div>
-			<p>© Copyright 2020 All rights reserved by</p>
+			<p>© Copyright 2020 All rights reserved by 
+			<img src="logo.png" class="float-right" class="logo"/> </p>
 		</div>
 	</footer>
 
