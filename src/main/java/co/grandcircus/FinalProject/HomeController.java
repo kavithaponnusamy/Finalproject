@@ -65,6 +65,18 @@ public class HomeController {
 		model.addAttribute("places", places);
 		return "homepage";
 	}
+	
+	@RequestMapping("/saved-searches")
+	public String showSearches(Model model) {
+		//List<Property> properties = apiServ.getAllProperties().getProperties();
+		List<SavedSearches> searches = searchesDao.findAll();
+		model.addAttribute("searches", searches);
+		
+		//model.addAttribute("properties", properties);
+		
+		return "saved-searches";
+	}
+
 
 	@RequestMapping("/submit-list")
 	public String showList(Model model, @RequestParam(required = false) String state,
@@ -307,7 +319,7 @@ public class HomeController {
 			return "login";
 		}
 		searchesDao.deleteById(id);
-		return "redirect:/";
+		return "redirect:/saved-searches";
 	}
 
 

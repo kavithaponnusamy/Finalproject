@@ -29,10 +29,7 @@
     <button type="submit" class="btn">Submit</button>   
     <input type="hidden" name="propertyId" value="${propertyId}">
      <input type="hidden" name="userId" value="${userId}">
-     <input type="hidden" name="name" value="${name}">
-     <input type="hidden" name="email" value="${email}">
-     <input type="hidden" name="phone" value="${phoneno}">
-    
+  
     
   </form>
 
