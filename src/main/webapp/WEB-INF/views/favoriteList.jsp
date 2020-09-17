@@ -57,11 +57,12 @@
 		</div>
 	</div>
 	<br>
-	<footer>
+
+<!--	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
-	</footer>
+	</footer> -->
 
 </body>
 </html>
