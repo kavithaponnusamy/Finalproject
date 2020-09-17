@@ -7,7 +7,8 @@
 	<nav class="float-left">
 		<a href="/">Home</a> 
 		<c:if test = "${ not empty user }"> 
-		 | <a href="/favorite-list">Favorites</a> 
+		 | <a href="/favorite-list">Favorites |</a> 
+		   <a href="/saved-searches">Saved Searches</a> 
 		</c:if>
 	</nav>
 

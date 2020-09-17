@@ -14,24 +14,29 @@
 <link href="/style.css" rel="stylesheet" />
 </head>
 <body>
-<%@include file="partials/header.jsp" %>
-	<p class="message"><c:out value="${ message }"/></p>
+
+
+	<h1>Saved Searches</h1>
 	<div>
-		<form class="form-inline" action="/submit-list">
+			<table class="table"> 
+			<thead>
+				<tr>
+					<th>Search Name</th>
+				</tr>
+			</thead>
+			<tbody>
+					<c:forEach items="${searches}" var="searches">
+					
+					<tr>
 
-			<div>
-				Enter City <input type="text" name="city" autofocus /> State <select
-					name="state">
-					<c:forEach items="${states}" var="states">
-						<option value="${states}">${states}</option>
+
+					<td><a class = "nav-link" href="${searches.searchUrl}">${searches.name}</a></td>
+				    <td><a href="<c:url value="/removeSearch?id=${searches.id}"/>" class="btn btn-dark">Delete</a></td>
+             </tr>
 					</c:forEach>
-				</select>
-				<button type="submit" class="btn btn-primary mb-2">Search</button>
+					</tbody>
+					</table>
 			</div>
-
-
-		</form>
-	</div>
 
 	<footer>
 		<div>

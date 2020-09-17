@@ -137,50 +137,54 @@
 				</c:forEach>
 			</div>
 			
-			
-			
 
 			<div id="divMapView" style="display:block; class="border col-md">
 				<strong>Map View</strong>
 			  
 				<div>
 
-
-
-
-
 			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
 		
 			</div>
 
 
-					<!-- <img src="https://maps.googleapis.com/maps/api/staticmap?q=1570+Woodward+Ave+floor+3,+Detroit,+MI+48226&size=200x200&key=${key}" />  -->
 			</div>
 
 
 		</div>
 	</div>
-	
- 	<c:forEach var="supermarket" items="${supermarkets}">
-	<p>
-								name:
-								<c:out value="${supermarket.name}" />
-							</p>
-							<p>
-								Rating:
-								<c:out value="${supermarket.rating}" />
-							</p>
-	</c:forEach>
-	<c:forEach var="gym" items="${gyms}">
-	<p>
-								name:
-								<c:out value="${gym.name}" />
-							</p>
-							<p>
-								Rating:
-								<c:out value="${gym.rating}" />
-							</p>
-	</c:forEach>
+
+<h2>Nearby locations</h2>
+<table>
+	<tr>
+		<td style="vertical-align:top" >
+			<h3>Super Markets</h3>
+			<table>
+				<tr><th>Name</th><th>Rating</th></tr>
+				<c:forEach var="supermarket" items="${supermarkets}">
+					<tr>	<td> <c:out value="${supermarket.name}" /> </td>
+							<td> <c:out value="${supermarket.rating}" /> </td>
+					</tr>
+				</c:forEach>
+			</table>
+		</td>
+
+		<td style="vertical-align:top">
+			<h3>Gyms</h3>
+			<table>
+				<tr><th>Name</th><th>Rating</th></tr>
+				<c:forEach var="gym" items="${gyms}">
+					<tr>	<td> <c:out value="${gym.name}" /> </td>
+							<td> <c:out value="${gym.rating}" /> </td>
+					</tr>
+				</c:forEach>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+<br>
+<br>
 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
