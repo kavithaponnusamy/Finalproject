@@ -15,7 +15,7 @@
 </head>
 <body>
 
-
+<%@include file="partials/header.jsp" %>
 	<h1>Saved Searches</h1>
 	<div>
 			<table class="table"> 

@@ -31,6 +31,7 @@
 
 
 	<h3>Property Details</h3>
+	<a href="<c:url value="${searchUrl}"/>" class="btn btn-secondary">Back to Results</a>
 	<div class="container-fluid">
 	
 		<div class="btn-group float-right">

@@ -209,10 +209,11 @@ public class HomeController {
 		model.addAttribute("sMarkers",sMarkers);// passing the super market markers to the page
 		model.addAttribute("gMarkers",gMarkers);// passing the gym markers to the pag
 		
-		session.removeAttribute("searchUrl");
-		String searchUrl = "submit-details?propertyId=" + propertyId;
-		session.setAttribute("searchUrl", searchUrl);
-		
+		//session.removeAttribute("searchUrl");
+		//String searchUrl = "submit-details?propertyId=" + propertyId;
+		//session.setAttribute("searchUrl", searchUrl);
+		String searchUrl = (String) session.getAttribute("searchUrl"); 
+		model.addAttribute("searchUrl", searchUrl);
 
 		return "details";
 	}
