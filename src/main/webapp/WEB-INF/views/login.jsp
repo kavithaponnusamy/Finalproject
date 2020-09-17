@@ -34,5 +34,11 @@
 	<p>
 		Don't have an account yet? <a href="/signup">Sign up here</a>.
 	</p>
+	<br>
+	<footer>
+		<div>
+			<p>© Copyright 2020 All rights reserved by</p>
+		</div>
+	</footer>
 </body>
 </html>

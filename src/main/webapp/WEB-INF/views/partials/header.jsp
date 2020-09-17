@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <header class="header" >
+
 <h2 style="text-align:center;">Find Homes That Fit Your Lifestyle</h2>
 <div>
 	<nav class="float-left">
