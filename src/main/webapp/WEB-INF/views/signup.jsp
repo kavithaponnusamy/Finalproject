@@ -29,7 +29,7 @@
 			<label for="name">Email:</label> <input id="email" name="email" value="<c:out value="${ param.email }"/>" required minlength="2" autocomplete="off"/>
 		</p>
 		<p>
-			<label for="name">phone:</label> <input id="phone" name="phone"  type="number" value="<c:out value="${ param.phone }"/>" required minlength="2" autocomplete="off"/>
+			<label for="name">phone:</label> <input id="phone" name="phone"  type="number" value="<c:out value="${ param.phone }"/>" pattern="[2-9]\d{2}-\d{3}-\d{4}$"  autocomplete="off"/>
 		</p>
 		<p>
 			<button>Sign me Up!</button>
