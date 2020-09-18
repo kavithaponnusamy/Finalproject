@@ -19,12 +19,6 @@ public class AutoCompleteResponse {
 		CityAndStateInfo = cityAndStateInfo;
 	}
 
-
-
-
-	
-	
-	
 }
 
 

@@ -65,7 +65,6 @@ $(document).ready(
 			
 		});
 
-
 </script>
 </head>
 <body>
@@ -85,17 +84,13 @@ $(document).ready(
 		<br>
 
 
+
 				</div>
 			</div>
 
+
 		</form>	 
 </div>
-<footer>
-
-
-
-		</form>
-	</div>
 
 	<div class="container">
 	<form action="/saveLifestyle">
@@ -129,7 +124,7 @@ $(document).ready(
 
 	</footer>
 
-	</footer> 
+	
 	
 
 

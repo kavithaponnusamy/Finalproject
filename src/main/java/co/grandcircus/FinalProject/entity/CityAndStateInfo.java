@@ -20,4 +20,8 @@ public class CityAndStateInfo{
 	public void setState(String state) {
 		this.state = state;
 	} 
+
 }
+
+
+

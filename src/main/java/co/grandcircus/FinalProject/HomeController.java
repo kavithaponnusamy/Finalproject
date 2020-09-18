@@ -66,8 +66,7 @@ public class HomeController {
 		
 		try {
 			
-		
-		String[] ctST=search.split("-");
+			String[] ctST=search.split("-");
 		String state="";
 		String city= ctST[0];
 		//state=ctST[1];
@@ -84,7 +83,7 @@ public class HomeController {
 			return "error";
 		}
 	}
-
+	
 	@RequestMapping("/submit-list")
 	public String showList(Model model, @RequestParam(required = false) String state,
 			@RequestParam(required = false) String city) {
@@ -144,17 +143,6 @@ public class HomeController {
 					boo = false;
 				}
 			}
-
-			// session.setAttribute("minprice", minprice);
-			// session.setAttribute("maxprice", maxprice);
-			// session.setAttribute("beds", beds);
-			// session.setAttribute("baths", baths);
-			// session.setAttribute("city", city);
-			// session.setAttribute("state", state);
-			// model.addAttribute("properties", filteredProperties);
-			// model.addAttribute("city",
-			// (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
-			// model.addAttribute("state", state);
 
 			if (boo) {
 				filteredProperties.add(properties.get(i));
