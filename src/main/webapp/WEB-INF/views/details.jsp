@@ -139,7 +139,7 @@
 			</div>
 			
 
-			<div id="divMapView" style="display:block; class="border col-md">
+			<div id="divMapView" style="display:block;" class="border col-md">
 				<strong>Map View</strong>
 			  
 				<div>

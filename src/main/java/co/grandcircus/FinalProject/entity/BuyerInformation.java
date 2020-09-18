@@ -25,10 +25,7 @@ public class BuyerInformation {
 	public void setId(Long id) {
 		this.id = id;
 	}
-<<<<<<< HEAD
-	private String quote;
-	public String propertyId;
-	
+
 //	private String name;
 //	
 //	public String email;
@@ -57,8 +54,7 @@ public class BuyerInformation {
 //		this.phoneNo = phoneNo;
 //	}
 
-=======
->>>>>>> 8ceda01564d5a7bbdbc37edd8e80810b9829fdb8
+
 	public String getComments() {
 		return comments;
 	}

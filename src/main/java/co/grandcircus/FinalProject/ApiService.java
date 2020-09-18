@@ -11,6 +11,7 @@ import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 
 import co.grandcircus.FinalProject.entity.PropertyResponse;
+import co.grandcircus.FinalProject.entity.AutoCompleteResponse;
 
 
 @Service
@@ -40,12 +41,13 @@ public class ApiService {
 		PropertyResponse propertyResponse= rt.getForObject(url, PropertyResponse.class,city, state_code,apiKey);
 		return propertyResponse;
 	}
+	/*
 	public List<String> getStates() {
 		String url="https://worldpopulationreview.com/static/states/abbr-list.json";
 		String[] states=rt.getForObject(url, String[].class);
 		return Arrays.asList(states);
 		
-	}
+	}*/
 	public PropertyResponse getPropertyByPropertyId(String property_id) {
 		String url="https://realtor.p.rapidapi.com/properties/v2/detail?property_id={property_id}&rapidapi-key={apiKey}";
 		PropertyResponse property=rt.getForObject(url, PropertyResponse.class,property_id,apiKey);
@@ -78,8 +80,16 @@ public class ApiService {
 		GoogleResponse gyms=rt.getForObject(url,GoogleResponse.class,lat,lon,key);
 		return gyms;
 	}
+	public AutoCompleteResponse getCityStateResponse(String citytext ) {
+
+		 
+		String url="https://realtor.p.rapidapi.com/locations/auto-complete?input={citytext}&rapidapi-key={apiKey}";
+		AutoCompleteResponse response = rt.getForObject(url, AutoCompleteResponse.class,citytext,apiKey);
+
+		return response;
+
 	
-	
+	}
 	
 	
 	
