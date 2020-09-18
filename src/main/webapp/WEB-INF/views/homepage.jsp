@@ -78,21 +78,11 @@ $(document).ready(
 					City/State: <input type="text" id="search" name="search" required
 						class="search" /> <span id="loadSpinner"></span>
 					<button type="submit" class="btn btn-primary mb-2">Search</button>
-
-	<div class = "container">
-		<form class="form-inline" action="/submit-list">
-		<br>
-
-
-
-				</div>
-			</div>
-
-
-		</form>	 
+				
+</form>
 </div>
 
-	<div class="container">
+	<div class = "container">
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>
