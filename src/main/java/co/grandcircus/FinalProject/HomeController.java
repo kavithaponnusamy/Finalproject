@@ -1,6 +1,7 @@
 package co.grandcircus.FinalProject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -174,6 +175,7 @@ public class HomeController {
 		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(propertyId);
 		GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(propertyId);
 		
+		
 		List<NearByPlaces> smSorted = supermarkets.getResults();
 		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(smSorted);//sort by Descending Order
@@ -203,6 +205,14 @@ public class HomeController {
 		model.addAttribute("supermarkets", smSorted);
 		model.addAttribute("gyms", gymSorted);
 		model.addAttribute("key", key);
+		//model.addAttribute("supermarkets",supermarkets);
+		
+		//double[][] smarket=new double[supermarkets.getResults().size()][2];
+		//for(int i=0;i<supermarkets.getResults().size();i++) {
+		//smarket[i][0]=supermarkets.getResults().get(i).getGeometry().getLocation().getLat();		
+		//smarket[i][1]=supermarkets.getResults().get(i).getGeometry().getLocation().getLng();
+		//}System.out.println(Arrays.toString(smarket));
+		//model.addAttribute("smarket",smarket);
 
 		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
 		model.addAttribute("lon", property.getProperties().get(0).getAddress().getLon());
@@ -214,7 +224,6 @@ public class HomeController {
 		//session.setAttribute("searchUrl", searchUrl);
 		String searchUrl = (String) session.getAttribute("searchUrl"); 
 		model.addAttribute("searchUrl", searchUrl);
-
 		return "details";
 	}
 
