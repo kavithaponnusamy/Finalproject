@@ -450,6 +450,17 @@ public class HomeController {
 	
 				return "redirect:/";
 			}
+	
+	@RequestMapping("/saved-searches")
+	public String showSearches(Model model) {
+		//List<Property> properties = apiServ.getAllProperties().getProperties();
+		List<SavedSearches> searches = searchesDao.findAll();
+		model.addAttribute("searches", searches);
+		
+		//model.addAttribute("properties", properties);
+		
+		return "saved-searches";
+	}
 
 
 }

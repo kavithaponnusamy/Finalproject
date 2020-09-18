@@ -158,15 +158,7 @@ public class ApiService {
 		GoogleResponse vet=rt.getForObject(url,GoogleResponse.class,lat,lon,key);
 		return vet;
 	}
-	public AutoCompleteResponse getCityStateResponse(String citytext ) {
-
-		 
-		String url="https://realtor.p.rapidapi.com/locations/auto-complete?input={citytext}&rapidapi-key={apiKey}";
-		AutoCompleteResponse response = rt.getForObject(url, AutoCompleteResponse.class,citytext,apiKey);
-
-		return response;
-
-	}
+	
 
 
 }
