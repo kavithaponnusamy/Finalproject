@@ -142,7 +142,7 @@
 			  
 				<div>
 
-			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
+			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=13&size=640x640&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${rMarkers}&${gMarkers}&${bMarkers}&${tMarkers}&${scMarkers}&${pMarkers}&key=${key}"/>
 		
 			</div>
 
