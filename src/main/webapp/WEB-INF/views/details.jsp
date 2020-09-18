@@ -141,12 +141,7 @@
 
 				<strong>Map View</strong>
 			  
-				<div>
-
-			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=13&size=640x640&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${rMarkers}&${gMarkers}&${bMarkers}&${tMarkers}&${scMarkers}&${pMarkers}&key=${key}"/>
-
-			<strong>Map View</strong>
-<div id="map" class="details-map"></div>
+				<div id="map" class="details-map"></div>
 <script>
 let map;
 function initMap() {
@@ -161,31 +156,75 @@ function initMap() {
 	  title: 'House',
 	  label: 'H'
 	 }); 
-<c:forEach var="smarket" items="${supermarkets}"> 
- new google.maps.Marker({
+
+ <c:forEach var="smarket" items="${supermarkets}"> 
+	new google.maps.Marker({
 		  position: { lat: ${smarket.geometry.location.lat}, lng: ${smarket.geometry.location.lng}},
 		  map: map,
 		  title: 'SuperMarket',
-		  label: 'S'
+		  label: 'SM'
 		 });
-
 </c:forEach>
+
+<c:forEach var="restaurant" items="${restaurants}">
+new google.maps.Marker({
+  position: { lat: ${restaurant.geometry.location.lat}, lng: ${restaurant.geometry.location.lng}},
+  map: map,
+  title: 'PetStore',
+  label: 'P'
+ });
+</c:forEach> 
+
 <c:forEach var="gym" items="${gyms}"> 	
-	 new google.maps.Marker({
+	new google.maps.Marker({
 		  position: { lat: ${gym.geometry.location.lat}, lng: ${gym.geometry.location.lng}},
 		  map: map,
 		  title: 'Gym',
 		  label: 'G'
 		 });
 </c:forEach> 
+
+<c:forEach var="school" items="${schools}"> 	
+	new google.maps.Marker({
+		  position: { lat: ${school.geometry.location.lat}, lng: ${school.geometry.location.lng}},
+		  map: map,
+		  title: 'School',
+		  label: 'S'
+		 });
+</c:forEach>
+
+<c:forEach var="petstore" items="${petstores}">
+	new google.maps.Marker({
+	  position: { lat: ${petstore.geometry.location.lat}, lng: ${petstore.geometry.location.lng}},
+	  map: map,
+	  title: 'PetStore',
+	  label: 'P'
+	 });
+</c:forEach> 
+
+<c:forEach var="bar" items="${bars}">
+new google.maps.Marker({
+  position: { lat: ${bar.geometry.location.lat}, lng: ${bar.geometry.location.lng}},
+  map: map,
+  title: 'Bar',
+  label: 'B'
+ });
+</c:forEach> 
+
+<c:forEach var="transit" items="${transits}">
+new google.maps.Marker({
+  position: { lat: ${transit.geometry.location.lat}, lng: ${transit.geometry.location.lng}},
+  map: map,
+  title: 'Transport',
+  label: 'T'
+ });
+</c:forEach> 
+
+
+
 }
  </script>
-			
-				
-			
-
-		
-			</div>
+ 			</div>
 
 
 		</div>

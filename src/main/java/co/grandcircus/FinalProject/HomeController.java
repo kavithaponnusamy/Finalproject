@@ -184,46 +184,25 @@ public class HomeController {
 		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(propertyId);
 		
 		if (pets != null) {
-		GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(propertyId);
-		List<NearByPlaces> petSorted = petStores.getResults();
-		Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
-		Collections.reverse(petSorted);
-		model.addAttribute("petStores", petSorted);
-		String pMarkers="markers=color:purple%7Clabel:PS";
-		for(int i=0;i<petStores.getResults().size();i++) {
-			if (i==3) {break;}
-			pMarkers+="%7C"+petStores.getResults().get(i).getGeometry().getLocation().getLat()+","+
-					petStores.getResults().get(i).getGeometry().getLocation().getLng();
-			
-		}model.addAttribute("pMarkers",pMarkers);
-		}
+			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(propertyId);
+			List<NearByPlaces> petSorted = petStores.getResults();
+			Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+			Collections.reverse(petSorted);
+			model.addAttribute("petstores", petSorted);
+			}
 		if (kids != null) {
 			GoogleResponse schools = apiServ.getAllGoogleSearchByPrimarySchool(propertyId);
 			List<NearByPlaces> schoolsSorted = schools.getResults();
 			Collections.sort(schoolsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(schoolsSorted);
 			model.addAttribute("schools", schoolsSorted);
-			String scMarkers="markers=color:orange%7Clabel:Sc";
-			for(int i=0;i<schools.getResults().size();i++) {
-				if (i==3) {break;}
-				scMarkers+="%7C"+schools.getResults().get(i).getGeometry().getLocation().getLat()+","+
-						schools.getResults().get(i).getGeometry().getLocation().getLng();
-				
-			}model.addAttribute("scMarkers",scMarkers);
 			}
 		if (active != null) {
 			GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(propertyId);
 			List<NearByPlaces> gymSorted = gyms.getResults();
 			Collections.sort(gymSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(gymSorted);
-			model.addAttribute("gyms", gymSorted);
-			String gMarkers="markers=color:yellow%7Clabel:G";
-			for(int i=0;i<gyms.getResults().size();i++) {
-				if (i==3) {break;}
-				gMarkers+="%7C"+gyms.getResults().get(i).getGeometry().getLocation().getLat()+","+
-						gyms.getResults().get(i).getGeometry().getLocation().getLng();
-				
-			}model.addAttribute("gMarkers",gMarkers);
+			model.addAttribute("gyms", gymSorted);			
 			}
 		if (nightLife != null) {
 			GoogleResponse bars = apiServ.getAllGoogleSearchByBar(propertyId);
@@ -231,29 +210,15 @@ public class HomeController {
 			Collections.sort(barsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(barsSorted);
 			model.addAttribute("bars", barsSorted);
-			String bMarkers="markers=color:pink%7Clabel:B";
-			for(int i=0;i<bars.getResults().size();i++) {
-				if (i==3) {break;}
-				bMarkers+="%7C"+bars.getResults().get(i).getGeometry().getLocation().getLat()+","+
-						bars.getResults().get(i).getGeometry().getLocation().getLng();
-				
-			}model.addAttribute("bMarkers",bMarkers);
+			
 			}
 		if (publicTransit != null) {
 			GoogleResponse transit = apiServ.getAllGoogleSearchByTransitStation(propertyId);
 			List<NearByPlaces> transitSorted = transit.getResults();
 			Collections.sort(transitSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(transitSorted);
-			model.addAttribute("transit", transitSorted);
-			String tMarkers="markers=color:brown%7Clabel:T";
-			for(int i=0;i<transit.getResults().size();i++) {
-				if (i==3) {break;}
-				tMarkers+="%7C"+transit.getResults().get(i).getGeometry().getLocation().getLat()+","+
-						transit.getResults().get(i).getGeometry().getLocation().getLng();
-				
-			}model.addAttribute("tMarkers",tMarkers);
-			}
-		
+			model.addAttribute("transits", transitSorted);
+			}		
 		
 		
 		List<NearByPlaces> smSorted = supermarkets.getResults();
@@ -263,45 +228,17 @@ public class HomeController {
 		List<NearByPlaces> restSorted = restaurants.getResults();
 		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(restSorted);//sort by Descending Order
-		//sort by Descending Order
 		
-		// Getting the list of Map Markers as string and passing to the page.
-		// In the page, we will pass these markers in the map URL.
-		// Maximum of 15 Map Markers allowed. We will show 1 property, 7 super markets and 7 gyms.
-		// Getting the Map Markers for Super Markets:
-		String sMarkers="markers=color:blue%7Clabel:S";
-		for(int i=0;i<supermarkets.getResults().size();i++) {
-			if (i==3) {break;}
-			sMarkers+="%7C"+supermarkets.getResults().get(i).getGeometry().getLocation().getLat()+","+
-					supermarkets.getResults().get(i).getGeometry().getLocation().getLng();
-		}
 		
-		String rMarkers="markers=color:red%7Clabel:R";
-		for(int i=0;i<restaurants.getResults().size();i++) {
-			if (i==3) {break;}
-			rMarkers+="%7C"+restaurants.getResults().get(i).getGeometry().getLocation().getLat()+","+
-					restaurants.getResults().get(i).getGeometry().getLocation().getLng();
-		}
-	
+		
 		
 		model.addAttribute("property", property.getProperties());
 		model.addAttribute("supermarkets", smSorted);
 		model.addAttribute("restaurants", restSorted);
 		model.addAttribute("key", key);
-		//model.addAttribute("supermarkets",supermarkets);
 		
-		//double[][] smarket=new double[supermarkets.getResults().size()][2];
-		//for(int i=0;i<supermarkets.getResults().size();i++) {
-		//smarket[i][0]=supermarkets.getResults().get(i).getGeometry().getLocation().getLat();		
-		//smarket[i][1]=supermarkets.getResults().get(i).getGeometry().getLocation().getLng();
-		//}System.out.println(Arrays.toString(smarket));
-		//model.addAttribute("smarket",smarket);
-
 		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
 		model.addAttribute("lon", property.getProperties().get(0).getAddress().getLon());
-		model.addAttribute("sMarkers",sMarkers);// passing the super market markers to the page
-		model.addAttribute("rMarkers",rMarkers);
-		
 		//session.removeAttribute("searchUrl");
 		//String searchUrl = "submit-details?propertyId=" + propertyId;
 		//session.setAttribute("searchUrl", searchUrl);
