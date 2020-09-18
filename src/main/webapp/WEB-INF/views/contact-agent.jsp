@@ -25,7 +25,7 @@
     <input type="text" name="email" value="${email}" required>
      <br>
      <label for="phoneno"><b>Phoneno</b></label>
-     <input type="text" name="phoneno" value="${phoneno}" required>	
+     <input type="text" name="phoneno" value="${phoneno}"  required>	
       <br>
        <label for="comments"><b>Comments</b></label>
       <textarea id="comment" name="comment"  value="${existingBI.comments}" rows="4" cols="50"></textarea>
@@ -45,6 +45,13 @@
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
+
 	</footer>  
+	
+	<div class="footer">
+		<p>© Copyright 2020 All rights reserved by</p>
+	</div>
+	
+
 </body>
 </html>

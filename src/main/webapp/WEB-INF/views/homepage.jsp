@@ -70,6 +70,7 @@ $(document).ready(
 <body>
 <%@include file="partials/header.jsp" %>
 	<p class="message"><c:out value="${ message }"/></p>
+
 	<div class="container-fluid">
 		<form action="/search">		
 			<div class="search-container">
@@ -78,15 +79,58 @@ $(document).ready(
 						class="search" /> <span id="loadSpinner"></span>
 					<button type="submit" class="btn btn-primary mb-2">Search</button>
 
+	<div class = "container">
+		<form class="form-inline" action="/submit-list">
+		<br>
+
+
 				</div>
 			</div>
+
 		</form>	 
 </div>
 <footer>
+
+
+
+		</form>
+	</div>
+
+	<div class="container">
+	<form action="/saveLifestyle">
+	<fieldset>
+	<legend>Select all that fit your lifestyle:</legend>
+	<label>Kids</label>
+	<input type="checkbox" name="kids" value="kids"/><br>
+	<label>Pets</label>
+	<input type="checkbox" name="pets" value="pets"/><br>
+	<label>Active</label>
+	<input type="checkbox" name="active" value="active"/><br>
+	<label>Night Life</label>
+	<input type="checkbox" name="nightLife" value="nightLife"/><br>
+	<label>Public Transportation</label>
+	<input type="checkbox" name="publicTransit" value="publicTransit"/><br>
+	<button type="submit" class="btn btn-primary mb-2">Save Selected</button>
+	</fieldset>
+	</form>
+	</div>
+	<p></p>
+
+
+
+	 <footer>
+
+
 		<div>
 			<p>© Copyright 2020 All rights reserved by 
 			<img style="width:100px;"  src="logo.png" class="float-right" class="logo"/> </p>
 		</div>
+
 	</footer>
+
+	</footer> 
+	
+
+
 </body>
 </html>

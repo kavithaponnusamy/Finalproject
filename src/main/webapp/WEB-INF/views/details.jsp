@@ -140,15 +140,56 @@
 			
 
 			<div id="divMapView" style="display:block;" class="border col-md">
+
+			<div id="divMapView" style="display:none;" class="border col-md">
+
+
 				<strong>Map View</strong>
 			  
 				<div>
 
-			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=500x500&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${gMarkers}&key=${key}"/>
+			<img src="https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=13&size=640x640&markers=color:green%7Clabel:.%7C${lat},${lon}&${sMarkers}&${rMarkers}&${gMarkers}&${bMarkers}&${tMarkers}&${scMarkers}&${pMarkers}&key=${key}"/>
+
+			<strong>Map View</strong>
+<div id="map" class="details-map"></div>
+<script>
+let map;
+function initMap() {
+	console.log("API LOADED");
+ map = new google.maps.Map(document.getElementById("map"), {
+  center: { lat: ${lat}, lng: ${lon} },
+  zoom: 12
+ });
+ new google.maps.Marker({
+	  position: { lat: ${lat}, lng: ${lon} },
+	  map: map,
+	  title: 'House',
+	  label: 'H'
+	 }); 
+<c:forEach var="smarket" items="${supermarkets}"> 
+ new google.maps.Marker({
+		  position: { lat: ${smarket.geometry.location.lat}, lng: ${smarket.geometry.location.lng}},
+		  map: map,
+		  title: 'SuperMarket',
+		  label: 'S'
+		 });
+
+</c:forEach>
+<c:forEach var="gym" items="${gyms}"> 	
+	 new google.maps.Marker({
+		  position: { lat: ${gym.geometry.location.lat}, lng: ${gym.geometry.location.lng}},
+		  map: map,
+		  title: 'Gym',
+		  label: 'G'
+		 });
+</c:forEach> 
+}
+ </script>
+			
+				
+			
+
 		
-			</div>
-
-
 			</div>
 
 
@@ -191,7 +232,11 @@
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
 	</footer>
-	
+	<script
+   src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
+   defer
+  ></script>
+			  	
 
 </body>
 </html>
