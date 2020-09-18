@@ -56,6 +56,7 @@ $(document).ready(
 							//Stopping the loading spinner as we got the response
 							$("#loadSpinner").removeClass('spinner-border text-primary');
 							 response(null);
+							 window.location="/error";
 							
 						 }
 					 });
