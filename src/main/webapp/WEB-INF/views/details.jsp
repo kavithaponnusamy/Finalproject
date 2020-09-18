@@ -141,10 +141,7 @@
 
 			<div id="divMapView" style="display:block;" class="border col-md">
 
-			<div id="divMapView" style="display:none;" class="border col-md">
-
-
-				<strong>Map View</strong>
+			<strong>Map View</strong>
 			  
 				<div id="map" class="details-map"></div>
 <script>
