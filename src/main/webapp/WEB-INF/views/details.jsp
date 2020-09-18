@@ -33,10 +33,12 @@
 	<h3>Property Details</h3>
 	<a href="<c:url value="${searchUrl}"/>" class="btn btn-secondary">Back to Results</a>
 	<div class="container-fluid">
+	
 		<div class="btn-group float-right">
 			<button class="btn btn-primary" value="Details" onClick="onBtnDetailViewClick();">Details</button>
 			<button id="btnMapView" class="btn btn-secondary" onClick="onBtnMapViewClick();">Maps</button>
 		</div>
+	
 		<br>
 		<br>
 
@@ -137,7 +139,10 @@
 			</div>
 			
 
+			<div id="divMapView" style="display:block;" class="border col-md">
+
 			<div id="divMapView" style="display:none;" class="border col-md">
+
 
 				<strong>Map View</strong>
 			  
@@ -165,6 +170,7 @@ function initMap() {
 		  label: 'SM'
 		 });
 </c:forEach>
+
 
 <c:forEach var="restaurant" items="${restaurants}">
 new google.maps.Marker({

@@ -32,7 +32,6 @@ import co.grandcircus.FinalProject.entity.SavedSearches;
 import co.grandcircus.FinalProject.entity.User;
 import co.grandcircus.FinalProject.dao.UserDao;
 
-
 @Controller
 public class HomeController {
 
@@ -49,7 +48,7 @@ public class HomeController {
 
 	@Autowired
 	private SavedSearchesDao searchesDao;
-	
+
 	@Autowired
 	private BuyerInformationDao buyerInfoDao;
 
@@ -57,33 +56,39 @@ public class HomeController {
 	HttpSession session;
 
 	@RequestMapping("/")
-	public String showHome(Model model) {
-		
-		//List<NearByPlaces> places = apiServ.getAllGoogleSearch();
-		List<String> states = apiServ.getStates();
-		List<SavedSearches> searches = searchesDao.findAll();
-		model.addAttribute("searches", searches);
-		model.addAttribute("states", states);		
-		//model.addAttribute("places", places);
+	public String showProperty(Model model) {
+
 		return "homepage";
 	}
-	
-	@RequestMapping("/saved-searches")
-	public String showSearches(Model model) {
-		//List<Property> properties = apiServ.getAllProperties().getProperties();
-		List<SavedSearches> searches = searchesDao.findAll();
-		model.addAttribute("searches", searches);
-		
-		//model.addAttribute("properties", properties);
-		
-		return "saved-searches";
-	}
 
+	@RequestMapping("/search")
+	public String showPropertyList(@RequestParam String search, Model model) {
+		
+		try {
+			
+		
+		String[] ctST=search.split("-");
+		String state="";
+		String city= ctST[0];
+		//state=ctST[1];
+		if( ctST.length>1) {
+		
+		 state=ctST[1];
+		} 
+		 
+
+		return "redirect:/submit-list?city="+city+"&state="+state;
+		}
+		catch(Exception e) {
+			model.addAttribute("errorMsg",e.getMessage());
+			return "error";
+		}
+	}
 
 	@RequestMapping("/submit-list")
 	public String showList(Model model, @RequestParam(required = false) String state,
 			@RequestParam(required = false) String city) {
-		//session.invalidate();
+		// session.invalidate();
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
@@ -103,10 +108,12 @@ public class HomeController {
 			@RequestParam(required = false) String city, @RequestParam(required = false) Integer minprice,
 			@RequestParam(required = false) Integer maxprice, @RequestParam(required = false) Integer beds,
 			@RequestParam(required = false) Double baths) {
+		try {
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
 
 		List<Property> filteredProperties = new ArrayList<>();
 		boolean boo;
+	
 		for (int i = 0; i < properties.size(); i++) {
 			boo = true;
 			if (minprice > 0) {
@@ -138,15 +145,16 @@ public class HomeController {
 				}
 			}
 
-			session.setAttribute("minprice", minprice);
-			session.setAttribute("maxprice", maxprice);
-			session.setAttribute("beds", beds);
-			session.setAttribute("baths", baths);
-			session.setAttribute("city", city);
-			session.setAttribute("state", state);
-			model.addAttribute("properties", filteredProperties);
-			model.addAttribute("city", (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
-			model.addAttribute("state", state);
+			// session.setAttribute("minprice", minprice);
+			// session.setAttribute("maxprice", maxprice);
+			// session.setAttribute("beds", beds);
+			// session.setAttribute("baths", baths);
+			// session.setAttribute("city", city);
+			// session.setAttribute("state", state);
+			// model.addAttribute("properties", filteredProperties);
+			// model.addAttribute("city",
+			// (city.substring(0,1).toUpperCase()+city.substring(1).toLowerCase()));
+			// model.addAttribute("state", state);
 
 			if (boo) {
 				filteredProperties.add(properties.get(i));
@@ -164,9 +172,13 @@ public class HomeController {
 		model.addAttribute("properties", filteredProperties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
-
-
 		return "search-results";
+		}catch(Exception e) {
+			model.addAttribute("error message", e.getMessage());
+			return "error";
+		}
+
+		
 	}
 
 	@RequestMapping("/submit-details")
@@ -182,6 +194,14 @@ public class HomeController {
 		PropertyResponse property = apiServ.getPropertyByPropertyId(propertyId);
 		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(propertyId);
 		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(propertyId);
+
+		
+		List<NearByPlaces> smSorted = supermarkets.getResults();
+		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+		Collections.reverse(smSorted);// sort by Descending Order
+		
+
+		
 		
 		if (pets != null) {
 			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(propertyId);
@@ -221,7 +241,7 @@ public class HomeController {
 			}		
 		
 		
-		List<NearByPlaces> smSorted = supermarkets.getResults();
+		//List<NearByPlaces> smSorted = supermarkets.getResults();
 		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(smSorted);
 		
@@ -229,9 +249,8 @@ public class HomeController {
 		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(restSorted);//sort by Descending Order
 		
-		
-		
-		
+
+
 		model.addAttribute("property", property.getProperties());
 		model.addAttribute("supermarkets", smSorted);
 		model.addAttribute("restaurants", restSorted);
@@ -239,10 +258,15 @@ public class HomeController {
 		
 		model.addAttribute("lat", property.getProperties().get(0).getAddress().getLat());
 		model.addAttribute("lon", property.getProperties().get(0).getAddress().getLon());
+
+
+		
+		
 		//session.removeAttribute("searchUrl");
 		//String searchUrl = "submit-details?propertyId=" + propertyId;
 		//session.setAttribute("searchUrl", searchUrl);
 		String searchUrl = (String) session.getAttribute("searchUrl"); 
+
 		model.addAttribute("searchUrl", searchUrl);
 		return "details";
 	}
@@ -291,7 +315,6 @@ public class HomeController {
 
 	}
 
-	
 	@RequestMapping("/favorite-list")
 	public String showfavoriteList(Model model) {
 		List<Favorites> favs = new ArrayList<Favorites>();
@@ -304,12 +327,10 @@ public class HomeController {
 		model.addAttribute("properties", favs);
 		return "favoriteList";
 
-
 	}
-	
 
 	@RequestMapping("/removeFavorites")
-	public String removeFavorite( Model model,@RequestParam Long id) {
+	public String removeFavorite(Model model, @RequestParam Long id) {
 
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
@@ -317,11 +338,11 @@ public class HomeController {
 		}
 
 		// favsDao.deleteByPropertyId(propertyId);
-		//favsDao.deleteByPropertyIdAndUserId(propertyId, user.getId());
+		// favsDao.deleteByPropertyIdAndUserId(propertyId, user.getId());
 		favsDao.deleteById(id);
 		return "redirect:/favorite-list";
 	}
-	
+
 	@RequestMapping("/addSearch")
 	public String addSavedSearch(Model model, @RequestParam String name) {
 		User user = (User) session.getAttribute("user");
@@ -330,8 +351,8 @@ public class HomeController {
 			// Favorites existingFav = favsDao.findByPropertyIdAndUserId(propertyId,
 			// user.getId());
 			String searchUrl = (String) session.getAttribute("searchUrl");
-			SavedSearches existingSearch = searchesDao.findByNameAndUserIdAndSearchUrl(name, user.getId(),searchUrl);
-			
+			SavedSearches existingSearch = searchesDao.findByNameAndUserIdAndSearchUrl(name, user.getId(), searchUrl);
+
 			if (existingSearch == null) {
 				newSearch.setName(name);
 				newSearch.setSearchUrl(searchUrl);
@@ -348,6 +369,7 @@ public class HomeController {
 			return "login";
 		}
 	}
+
 	@RequestMapping("/removeSearch")
 	public String removeSavedSearch(@RequestParam Long id, Model model) {
 		User user = (User) session.getAttribute("user");
@@ -358,50 +380,50 @@ public class HomeController {
 		return "redirect:/saved-searches";
 	}
 
-
 	@RequestMapping("/contact-submit")
-	public String showContactFrom(Model model, @RequestParam(required=false) String propertyId) {
+	public String showContactFrom(Model model, @RequestParam(required = false) String propertyId) {
 		User user = (User) session.getAttribute("user");
-		
+
 		// searchUrl will be changed if the login page is called.
 		// so, saving the calling page URL in a session attribute searchUrlMain:
-		String searchUrlMain = (String) session.getAttribute("searchUrlMain");		
-		if (searchUrlMain == null ) {
-			session.setAttribute("searchUrlMain",session.getAttribute("searchUrl"));
+		String searchUrlMain = (String) session.getAttribute("searchUrlMain");
+		if (searchUrlMain == null) {
+			session.setAttribute("searchUrlMain", session.getAttribute("searchUrl"));
 		}
-		
+
 		if (user != null) {
-			
-			BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),propertyId);
+
+			BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(), propertyId);
 			if (existingBI != null) {
 				model.addAttribute("existingBI", existingBI);
 			}
 			model.addAttribute("userId", user.getId());
-			model.addAttribute("name",user.getUsername());
-			model.addAttribute("email",user.getEmail());
-			model.addAttribute("phoneno",user.getPhone());
+			model.addAttribute("name", user.getUsername());
+			model.addAttribute("email", user.getEmail());
+			model.addAttribute("phoneno", user.getPhone());
 			model.addAttribute("propertyId", propertyId);
 			return "contact-agent";
 		} else {
-			//session.setAttribute("searchUrl", searchUrl);
-			// Changing the searchUrl to contact form. because, after login, it has to come back to contact form.
-			session.setAttribute("searchUrl", "contact-submit?propertyId=" + propertyId);	
+			// session.setAttribute("searchUrl", searchUrl);
+			// Changing the searchUrl to contact form. because, after login, it has to come
+			// back to contact form.
+			session.setAttribute("searchUrl", "contact-submit?propertyId=" + propertyId);
 			return "login";
 		}
 	}
-	
+
 	@PostMapping("/contact-submit")
-	public String addUserDetails(BuyerInformation buyerInfo ) {			
-		
+	public String addUserDetails(BuyerInformation buyerInfo) {
+
 		User user = (User) session.getAttribute("user");
 
 		BuyerInformation newBI = new BuyerInformation();
-		BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(),buyerInfo.getPropertyId());
-		
-		if (existingBI == null) {	
+		BuyerInformation existingBI = buyerInfoDao.findByUserIdAndPropertyId(user.getId(), buyerInfo.getPropertyId());
+
+		if (existingBI == null) {
 			newBI.setName(user.getUsername());
 			newBI.setEmail(user.getEmail());
-			newBI.setPhone(user.getPhone());	
+			newBI.setPhone(user.getPhone());
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
@@ -410,17 +432,18 @@ public class HomeController {
 			newBI.setId(existingBI.getId());
 			newBI.setName(user.getUsername());
 			newBI.setEmail(user.getEmail());
-			newBI.setPhone(user.getPhone());			
+			newBI.setPhone(user.getPhone());
 			newBI.setComments(buyerInfo.getComments());
 			newBI.setQuote(buyerInfo.getQuote());
 			newBI.setPropertyId(buyerInfo.getPropertyId());
 			newBI.setUser(user);
-			
+
 		}
-				
+
 		buyerInfoDao.save(newBI);
 
-		// we need to go back to the calling page. the Url was saved in the session attribute searchUrlMain
+		// we need to go back to the calling page. the Url was saved in the session
+		// attribute searchUrlMain
 		// after taking the url into a variable, session attribute is removed.
 		String searchUrlMain = (String) session.getAttribute("searchUrlMain");
 		session.removeAttribute("searchUrlMain");

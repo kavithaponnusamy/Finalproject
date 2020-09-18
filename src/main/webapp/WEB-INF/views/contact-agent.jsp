@@ -41,14 +41,17 @@
     
   </form>
 
-<!--	<footer>
+ 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
-	</footer> -->
+
+	</footer>  
+	
 	<div class="footer">
 		<p>© Copyright 2020 All rights reserved by</p>
 	</div>
 	
+
 </body>
 </html>

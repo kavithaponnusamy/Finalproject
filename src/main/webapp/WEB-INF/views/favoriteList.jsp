@@ -47,9 +47,10 @@
 							
 						</div>
 						<div class="float-right mt-1">
-							<a href="/contact-submit?propertyId=${prop.property_id}" class="btn btn-outline-primary">Contact Agent</a>						
-							
-							</div>
+
+							<a href="/contact-submit?propertyId=${prop.property_id}" class="btn btn-outline-primary">Contact Agent</a>
+						</div>
+
 					</div>
 
 				</div>
@@ -58,11 +59,11 @@
 	</div>
 	<br>
 
-<!--	<footer>
+ 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
-	</footer> -->
+	</footer>  
 
 </body>
 </html>
