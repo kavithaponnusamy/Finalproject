@@ -57,15 +57,33 @@ public class HomeController {
 	HttpSession session;
 
 	@RequestMapping("/")
-	public String showHome(Model model) {
-		
-		//List<NearByPlaces> places = apiServ.getAllGoogleSearch();
-		List<String> states = apiServ.getStates();
-		List<SavedSearches> searches = searchesDao.findAll();
-		model.addAttribute("searches", searches);
-		model.addAttribute("states", states);		
-		//model.addAttribute("places", places);
+	public String showProperty(Model model) {
+
 		return "homepage";
+	}
+
+	@RequestMapping("/search")
+	public String showPropertyList(@RequestParam String search, Model model) {
+		
+		try {
+			
+		
+		String[] ctST=search.split("-");
+		String state="";
+		String city= ctST[0];
+		//state=ctST[1];
+		if( ctST.length>1) {
+		
+		 state=ctST[1];
+		} 
+		 
+
+		return "redirect:/submit-list?city="+city+"&state="+state;
+		}
+		catch(Exception e) {
+			model.addAttribute("errorMsg",e.getMessage());
+			return "error";
+		}
 	}
 	
 	@RequestMapping("/saved-searches")

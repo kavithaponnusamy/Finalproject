@@ -143,6 +143,7 @@
 			  
 				<div id="map" class="details-map"></div>
 <script>
+
 let map;
 function initMap() {
 	console.log("API LOADED");
@@ -166,12 +167,13 @@ function initMap() {
 		 });
 </c:forEach>
 
+
 <c:forEach var="restaurant" items="${restaurants}">
 new google.maps.Marker({
   position: { lat: ${restaurant.geometry.location.lat}, lng: ${restaurant.geometry.location.lng}},
   map: map,
-  title: 'PetStore',
-  label: 'P'
+  title: 'Restaurent',
+  label: 'R'
  });
 </c:forEach> 
 
@@ -192,6 +194,7 @@ new google.maps.Marker({
 		  label: 'S'
 		 });
 </c:forEach>
+
 
 <c:forEach var="petstore" items="${petstores}">
 	new google.maps.Marker({
@@ -219,6 +222,7 @@ new google.maps.Marker({
   label: 'T'
  });
 </c:forEach> 
+
 
 
 

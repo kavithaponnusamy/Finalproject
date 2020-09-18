@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import co.grandcircus.FinalProject.entity.AutoCompleteResponse;
 import co.grandcircus.FinalProject.entity.GoogleResponse;
 import co.grandcircus.FinalProject.entity.NearByPlaces;
 
@@ -149,5 +150,15 @@ public class ApiService {
 		GoogleResponse vet=rt.getForObject(url,GoogleResponse.class,lat,lon,key);
 		return vet;
 	}
+	public AutoCompleteResponse getCityStateResponse(String citytext ) {
+
+		 
+		String url="https://realtor.p.rapidapi.com/locations/auto-complete?input={citytext}&rapidapi-key={apiKey}";
+		AutoCompleteResponse response = rt.getForObject(url, AutoCompleteResponse.class,citytext,apiKey);
+
+		return response;
+
+	}
+
 
 }
