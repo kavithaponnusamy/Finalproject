@@ -472,9 +472,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/saved-searches")
-	public String showSearches(Model model) {		
-		List<SavedSearches> searches = searchesDao.findAll();
-		model.addAttribute("searches", searches);	
+	public String showSearches(Model model) {	
+		List<SavedSearches> searches = new ArrayList<SavedSearches>();
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "login";
+		}
+		searches = searchesDao.findByUserId(user.getId());
+		model.addAttribute("searches", searches);
+
+		// setting the session attribute ContactCalledFrom as this page.
+		// because, after submitting the details in the contact agent form, 
+		// it has to be come back to this page:
+		session.removeAttribute("ContactCalledFrom");
+		session.setAttribute("ContactCalledFrom", "favorite-list");
+		
 		return "saved-searches";
 	}
 	
