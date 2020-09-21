@@ -90,7 +90,6 @@ function addMaker(typelat, typelng,title, label,icon){
 	new google.maps.Marker({
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
-
 		  title: title, 
 		//  label: label,
 		  icon: icon
@@ -112,16 +111,16 @@ function addMaker(typelat, typelng,title, label,icon){
 	<fieldset>
 	<c:forEach var="prop" items="${property}">
 	<legend>Update Your Lifestyle Preferences:</legend>
-	<label>Kids</label>
-	<input type="checkbox" name="kids" value="kids"/>
+		<label>Kids</label>
+	<input type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
 	<label>Pets</label>
-	<input type="checkbox" name="pets" value="pets"/>
+	<input type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/>
 	<label>Active</label>
-	<input type="checkbox" name="active" value="active"/>
+	<input type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/>
 	<label>Night Life</label>
-	<input type="checkbox" name="nightLife" value="nightLife"/>
+	<input type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/>
 	<label>Public Transportation</label>
-	<input type="checkbox" name="publicTransit" value="publicTransit"/>
+	<input type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/>
 	<input type="hidden" name="propertyId" value="${prop.property_id}"/>
 	<button type="submit" class="btn btn-primary mb-2">Update</button>
 	</c:forEach>
