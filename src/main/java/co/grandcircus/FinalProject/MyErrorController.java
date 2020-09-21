@@ -14,7 +14,7 @@ public class MyErrorController implements ErrorController {
 	@RequestMapping("/error")
 	public String handleError(HttpServletRequest request, Model model) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-		String errorMsg = "Something went wrong";
+		String errorMsg = "";
 
 		if (status != null) {
 			Integer statusCode = Integer.valueOf(status.toString());

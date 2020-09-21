@@ -28,12 +28,12 @@
      <input type="text" name="phoneno" value="${phoneno}"  required>	
       <br>
        <label for="comments"><b>Comments</b></label>
-      <textarea id="comment" name="comment"  value="${existingBI.comments}" rows="4" cols="50"></textarea>
+      <textarea id="comments" name="comments" rows="4" cols="50">${existingBI.comments}</textarea>
      <label for="comments"><b>Comments</b></label>
    <!--   <input type="text" name="comments" value="${existingBI.comments}" required> -->
     <br>
-     <label for="comments"><b>Quote</b></label>
-    <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" required>    
+     <label for="quote"><b>Quote</b></label>
+    <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" min="10000" required>    
     <button type="submit" class="btn">Submit</button>   
     <input type="hidden" name="propertyId" value="${propertyId}">
      <input type="hidden" name="userId" value="${userId}">
@@ -47,11 +47,6 @@
 		</div>
 
 	</footer>  
-	
-	<div class="footer">
-		<p>© Copyright 2020 All rights reserved by</p>
-	</div>
-	
 
 </body>
 </html>

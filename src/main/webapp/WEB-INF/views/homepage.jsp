@@ -77,12 +77,12 @@ $(document).ready(
 				<div class="ui-widget">
 					City/State: <input type="text" id="search" name="search" required
 						class="search" /> <span id="loadSpinner"></span>
-					<button type="submit" class="btn btn-primary mb-2">Search</button>
-				
-</form>
+					<button type="submit" class="btn btn-primary mb-2">Search</button>	
+		</div>
+		</form>	 
 </div>
 
-	<div class = "container">
+	<div class="container">
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>

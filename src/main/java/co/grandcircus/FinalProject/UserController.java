@@ -50,8 +50,18 @@ public class UserController {
 
 		String searchUrl = (String) session.getAttribute("searchUrl");
 		System.out.println("searchUrlExisting" + searchUrl);
+		
+		// If the login page is called from the Contact Agent Form, it has to go back
+		// to Contact Agent Form whose URL has been saved in the session attribute ContactForm:
+		// If the login page is called from any other form, the session attribute searchUrl
+		// is used to go back to the calling page:
+		if (session.getAttribute("ContactForm") != null) {
+			String contactFormUrl = (String) session.getAttribute("ContactForm");
+			session.removeAttribute("ContactForm");
+			return "redirect:/" + contactFormUrl;
+		}
+		
 		if (searchUrl != null) {
-
 			return "redirect:/" + searchUrl;
 		} else {
 			return "redirect:/";
@@ -110,7 +120,5 @@ public class UserController {
 			return "redirect:/";
 		} 
 	}
-
- 
 
 }
