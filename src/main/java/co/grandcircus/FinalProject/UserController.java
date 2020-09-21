@@ -81,6 +81,7 @@ public class UserController {
 			Model model, RedirectAttributes redir) {
 		// Find the matching user.
 		User existingUser = userDao.findByUsername(user.getUsername());
+	
 		if (existingUser != null) {
 			// If user already exists, display an error message.
 			model.addAttribute("message", "A user with that username already exists.");

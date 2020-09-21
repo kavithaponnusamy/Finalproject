@@ -57,6 +57,13 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String showProperty(Model model) {
+		 
+		
+		model.addAttribute("pets", (String) session.getAttribute("pets"));
+		model.addAttribute("kids", (String) session.getAttribute("kids"));
+		model.addAttribute("active", (String) session.getAttribute("active"));
+		model.addAttribute("nightLife", (String) session.getAttribute("nightLife"));
+		model.addAttribute("publicTransit", (String) session.getAttribute("publicTransit"));
 
 		return "homepage";
 	}
@@ -65,18 +72,26 @@ public class HomeController {
 	public String showPropertyList(@RequestParam String search, Model model) {
 		
 		try {
-			
+			if(search!=null && !search.isBlank())
+			{
 			String[] ctST=search.split("-");
+			
 		String state="";
 		String city= ctST[0];
-		//state=ctST[1];
+		state=ctST[1];
 		if( ctST.length>1) {
 		
 		 state=ctST[1];
 		} 
 		 
-
+			
 		return "redirect:/submit-list?city="+city+"&state="+state;
+			
+			}else {
+				model.addAttribute("errorMsg","city or state cannot be empty or null");
+				return "error";
+			}
+			
 		}
 		catch(Exception e) {
 			model.addAttribute("errorMsg",e.getMessage());
@@ -92,8 +107,10 @@ public class HomeController {
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
-
+   //if(session.getAttribute("searchUrl")!=null)
+   //{
 		session.removeAttribute("searchUrl");
+  // }
 
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;
 		session.setAttribute("searchUrl", searchUrl);
@@ -180,40 +197,46 @@ public class HomeController {
 		
 		
 		PropertyResponse property = apiServ.getPropertyByPropertyId(propertyId);
-		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(propertyId);
-		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(propertyId);
-
 		
-		List<NearByPlaces> smSorted = supermarkets.getResults();
+		Double lat=property.getProperties().get(0).getAddress().getLat();
+		Double lon=property.getProperties().get(0).getAddress().getLon();
+		
+
+
+		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(lat,lon);
+        List<NearByPlaces> smSorted = supermarkets.getResults();
 		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(smSorted);// sort by Descending Order
 		
-
+		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(lat,lon);
+        List<NearByPlaces> restSorted = restaurants.getResults();
+		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+		Collections.reverse(restSorted);//sort by Descending Order
 		
 		
-		if (pets != null) {
-			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(propertyId);
+        if (pets != null) {
+			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(lat,lon);
 			List<NearByPlaces> petSorted = petStores.getResults();
 			Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(petSorted);
 			model.addAttribute("petstores", petSorted);
 			}
 		if (kids != null) {
-			GoogleResponse schools = apiServ.getAllGoogleSearchByPrimarySchool(propertyId);
+			GoogleResponse schools = apiServ.getAllGoogleSearchByPrimarySchool(lat,lon);
 			List<NearByPlaces> schoolsSorted = schools.getResults();
 			Collections.sort(schoolsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(schoolsSorted);
 			model.addAttribute("schools", schoolsSorted);
 			}
 		if (active != null) {
-			GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(propertyId);
+			GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(lat,lon);
 			List<NearByPlaces> gymSorted = gyms.getResults();
 			Collections.sort(gymSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(gymSorted);
 			model.addAttribute("gyms", gymSorted);			
 			}
 		if (nightLife != null) {
-			GoogleResponse bars = apiServ.getAllGoogleSearchByBar(propertyId);
+			GoogleResponse bars = apiServ.getAllGoogleSearchByBar(lat,lon);
 			List<NearByPlaces> barsSorted = bars.getResults();
 			Collections.sort(barsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(barsSorted);
@@ -221,7 +244,7 @@ public class HomeController {
 			
 			}
 		if (publicTransit != null) {
-			GoogleResponse transit = apiServ.getAllGoogleSearchByTransitStation(propertyId);
+			GoogleResponse transit = apiServ.getAllGoogleSearchByTransitStation(lat,lon);
 			List<NearByPlaces> transitSorted = transit.getResults();
 			Collections.sort(transitSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(transitSorted);
@@ -229,13 +252,7 @@ public class HomeController {
 			}		
 		
 		
-		//List<NearByPlaces> smSorted = supermarkets.getResults();
-		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
-		Collections.reverse(smSorted);
 		
-		List<NearByPlaces> restSorted = restaurants.getResults();
-		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
-		Collections.reverse(restSorted);//sort by Descending Order
 		
 
 
@@ -249,13 +266,18 @@ public class HomeController {
 
 
 		
+		 
+		String searchUrl = "submit-details?propertyId=" + propertyId;
+		session.setAttribute("searchUrl", searchUrl);
 		
-		//session.removeAttribute("searchUrl");
-		//String searchUrl = "submit-details?propertyId=" + propertyId;
-		//session.setAttribute("searchUrl", searchUrl);
-		String searchUrl = (String) session.getAttribute("searchUrl"); 
+		String city = (String)session.getAttribute("city");
+		String state = (String)session.getAttribute("state");
+		
+		String backtosearchListUrl =  "submit-list?state=" + state + "&city=" + city;
+		 
+		//String searchUrl = (String) session.getAttribute("searchUrl"); 
 
-		model.addAttribute("searchUrl", searchUrl);
+		model.addAttribute("backtosearchListUrl", backtosearchListUrl);
 		return "details";
 	}
 
@@ -289,7 +311,7 @@ public class HomeController {
 			favsDao.save(newFav);
 
 			String searchUrl = (String) session.getAttribute("searchUrl");
-			// System.out.println("searchUrlExisting" + searchUrl);
+			System.out.println("searchUrlExisting" + searchUrl);
 			if (searchUrl != null) {
 
 				return "redirect:/" + searchUrl;
