@@ -17,6 +17,7 @@ public class BuyerInformation {
 	private String name;
 	private String email;
 	private String phone;
+	
 	@ManyToOne
 	private User user;
 	public Long getId() {
@@ -56,8 +57,6 @@ public class BuyerInformation {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-
 	public String getName() {
 		return name;
 	}

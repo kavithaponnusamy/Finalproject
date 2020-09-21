@@ -27,15 +27,15 @@
 
 let map; 
 function initMap() {
-	console.log("API LOADED");
+	console.log("API LOADED"); 
 	var lat=${lat};
 	var lng=${lon};
  map = new google.maps.Map(document.getElementById("map"), {
   center: { lat: lat, lng: lng },
   zoom: 12
- });
+ }); 
   
- addMaker(lat,lng,'House','H','house.png');
+ addMaker(lat,lng,'House','H');
 
  <c:forEach var="smarket" items="${supermarkets}">  
  var smarketLat=${smarket.geometry.location.lat};
@@ -53,20 +53,19 @@ addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png');
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
 var gymLng=${gym.geometry.location.lng};
-	addMaker(gymLat,gymLng,'Gym','G','gym.png' );
+	addMaker(gymLat,gymLng,'Gym','G','gymicon.png' );
 </c:forEach> 
-
+ 
 <c:forEach var="school" items="${schools}"> 	
 var schoolLat=${school.geometry.location.lat};
 var schoolLng=${school.geometry.location.lng};
 	addMaker(schoolLat,schoolLng,'School','S' ,'school.png');
-</c:forEach>
-
+</c:forEach> 
 
 <c:forEach var="petstore" items="${petstores}">
 var petstoreLat=${petstore.geometry.location.lat};
 var petstoreLng=${petstore.geometry.location.lng};
-	addMaker(petstoreLat,petstoreLng,'PetStore','P','petstore.png' );
+	addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png' );
 </c:forEach> 
 
 <c:forEach var="bar" items="${bars}">
@@ -79,31 +78,32 @@ addMaker(barLat,barLng,'Bar','B','bar.png');
 <c:forEach var="transit" items="${transits}">
 var transitLat=${transit.geometry.location.lat};
 var transitLng=${transit.geometry.location.lng};
-addMaker(transitLat,transitLng,'Transport','T','tram.png');
+addMaker(transitLat,transitLng,'Transport','T','transport.png');
 </c:forEach> 
  
 }
+
 
 function addMaker(typelat, typelng,title, label,icon){
 	
 	new google.maps.Marker({
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
-		  title: title,
+		  title: title, 
 		  label: label, 
 		  icon: icon
 		 });
-}
+} 
 
  </script>
 </head>
 <body>
 	<%@include file="partials/header.jsp"%>
-	 
+
 
 	<h3>Property Details</h3>
-	<a href="<c:url value="${backtosearchListUrl}"/>" class="btn btn-secondary">Back
-		to Results</a>
+	<a href="<c:url value="${searchUrl}"/>"
+		class="btn btn-secondary">Back to Results</a>
 	<div class="container-fluid">
 
 		<div class="btn-group float-right">
@@ -210,7 +210,6 @@ function addMaker(typelat, typelng,title, label,icon){
 				</c:forEach>
 			</div>
 
-
 			<div id="divMapView" style="display: block;" class="border col-md">
 
 				<strong>Map View</strong>
@@ -233,7 +232,7 @@ function addMaker(typelat, typelng,title, label,icon){
 						<th>Name</th>
 						<th>Rating</th>
 					</tr>
-					<c:forEach var="supermarket" items="${supermarkets}">
+				<c:forEach var="supermarket" items="${supermarkets}">
 						<tr>
 							<td><c:out value="${supermarket.name}" /></td>
 							<td><c:out value="${supermarket.rating}" /></td>
@@ -241,6 +240,8 @@ function addMaker(typelat, typelng,title, label,icon){
 					</c:forEach>
 				</table>
 			</td>
+
+
 
 			<td style="vertical-align: top">
 				<h3>Restaurants</h3>
