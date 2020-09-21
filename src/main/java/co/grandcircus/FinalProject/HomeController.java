@@ -477,5 +477,21 @@ public class HomeController {
 		model.addAttribute("searches", searches);	
 		return "saved-searches";
 	}
+	
+	@RequestMapping("/updateLifestyle")
+	public String updateLifestyle(Model model,@RequestParam(required = false) String propertyId, @RequestParam(required = false) String pets,
+			@RequestParam(required = false) String kids, @RequestParam(required = false) String active, @RequestParam(required = false) String nightLife, @RequestParam(required = false) String publicTransit) {
+
+		session.setAttribute("pets", pets);
+		session.setAttribute("kids", kids);
+		session.setAttribute("active", active);
+		session.setAttribute("nightLife", nightLife);
+		session.setAttribute("publicTransit", publicTransit);
+		session.setAttribute("propertyId", propertyId);
+		
+	
+				return "redirect:/submit-details?propertyId=" + propertyId;
+				
+	}
 
 }

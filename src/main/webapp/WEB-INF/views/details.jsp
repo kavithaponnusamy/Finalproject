@@ -48,8 +48,9 @@ function initMap() {
 var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
 addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png');
-</c:forEach> 
 
+
+</c:forEach>
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
 var gymLng=${gym.geometry.location.lng};
@@ -89,8 +90,9 @@ function addMaker(typelat, typelng,title, label,icon){
 	new google.maps.Marker({
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
+
 		  title: title, 
-		  label: label, 
+		//  label: label,
 		  icon: icon
 		 });
 } 
@@ -106,6 +108,27 @@ function addMaker(typelat, typelng,title, label,icon){
 		class="btn btn-secondary">Back to Results</a>
 	<div class="container-fluid">
 
+	<form action="/updateLifestyle">
+	<fieldset>
+	<c:forEach var="prop" items="${property}">
+	<legend>Update Your Lifestyle Preferences:</legend>
+	<label>Kids</label>
+	<input type="checkbox" name="kids" value="kids"/>
+	<label>Pets</label>
+	<input type="checkbox" name="pets" value="pets"/>
+	<label>Active</label>
+	<input type="checkbox" name="active" value="active"/>
+	<label>Night Life</label>
+	<input type="checkbox" name="nightLife" value="nightLife"/>
+	<label>Public Transportation</label>
+	<input type="checkbox" name="publicTransit" value="publicTransit"/>
+	<input type="hidden" name="propertyId" value="${prop.property_id}"/>
+	<button type="submit" class="btn btn-primary mb-2">Update</button>
+	</c:forEach>
+	</fieldset>
+	</form>
+
+	
 		<div class="btn-group float-right">
 			<button class="btn btn-primary" value="Details"
 				onClick="onBtnDetailViewClick();">Details</button>

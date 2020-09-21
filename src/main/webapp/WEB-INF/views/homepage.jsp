@@ -82,7 +82,7 @@ $(document).ready(
 		</form>	 
 </div>
 
-	<div class="container">
+	<div class="container-fluid">
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>
@@ -100,8 +100,7 @@ $(document).ready(
 	</fieldset>
 	</form>
 	</div>
-	<p></p>
-
+	
 
 
 	 <footer>
