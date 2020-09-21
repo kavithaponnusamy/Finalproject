@@ -318,6 +318,14 @@ public class HomeController {
 			favsDao.save(newFav);
 
 			String searchUrl = (String) session.getAttribute("searchUrl");
+			
+			//  Add Favorites, redirect the called form
+			
+			if (session.getAttribute("favoriteCalledFrom") != null) {
+				String favoriteFormUrl = (String) session.getAttribute("favoriteCalledFrom");
+				session.removeAttribute("favoriteCalledFrom");
+				return "redirect:/" + favoriteFormUrl;
+			}
  
 			if (searchUrl != null) {
 
