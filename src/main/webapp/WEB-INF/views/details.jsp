@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -22,82 +22,119 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script
-	src="/script.js"></script>
-	<script>
-let map;
+<script src="/script.js"></script>
+<script>
+
+let map; 
 function initMap() {
+	console.log("API LOADED"); 
 	var lat=${lat};
 	var lng=${lon};
  map = new google.maps.Map(document.getElementById("map"), {
   center: { lat: lat, lng: lng },
   zoom: 12
- });
+ }); 
+  
  addMaker(lat,lng,'House','H');
- <c:forEach var="smarket" items="${supermarkets}">
+
+ <c:forEach var="smarket" items="${supermarkets}">  
  var smarketLat=${smarket.geometry.location.lat};
  var smarketLng=${smarket.geometry.location.lng};
- addMaker(smarketLat,smarketLng,'SuperMarket','SM','supermarket.png');
+ addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png');
 </c:forEach>
-<c:forEach var="restaurant" items="${restaurants}">
+
+
+<c:forEach var="restaurant" items="${restaurants}"> 
 var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
 addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png');
+
 </c:forEach>
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
 var gymLng=${gym.geometry.location.lng};
 	addMaker(gymLat,gymLng,'Gym','G','gymicon.png' );
-</c:forEach>
+</c:forEach> 
+ 
 <c:forEach var="school" items="${schools}"> 	
 var schoolLat=${school.geometry.location.lat};
 var schoolLng=${school.geometry.location.lng};
 	addMaker(schoolLat,schoolLng,'School','S' ,'school.png');
-</c:forEach>
+</c:forEach> 
+
 <c:forEach var="petstore" items="${petstores}">
 var petstoreLat=${petstore.geometry.location.lat};
 var petstoreLng=${petstore.geometry.location.lng};
 	addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png' );
-</c:forEach>
+</c:forEach> 
+
 <c:forEach var="bar" items="${bars}">
 var barLat=${bar.geometry.location.lat};
 var barLng=${bar.geometry.location.lng};
+ 
 addMaker(barLat,barLng,'Bar','B','bar.png');
-</c:forEach>
+</c:forEach> 
+
 <c:forEach var="transit" items="${transits}">
 var transitLat=${transit.geometry.location.lat};
 var transitLng=${transit.geometry.location.lng};
 addMaker(transitLat,transitLng,'Transport','T','transport.png');
-</c:forEach>
+</c:forEach> 
+ 
 }
+
+
 function addMaker(typelat, typelng,title, label,icon){
 	
 	new google.maps.Marker({
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
-		  title: title,
-		  //label: label,
+		  title: title, 
+		//  label: label,
 		  icon: icon
 		 });
-}
+} 
+
  </script>
 </head>
 <body>
-<%@include file="partials/header.jsp" %>
-	<p class="message"><c:out value="${ message }"/></p>
+	<%@include file="partials/header.jsp"%>
 
 
 	<h3>Property Details</h3>
-	<a href="<c:url value="${searchUrl}"/>" class="btn btn-secondary">Back to Results</a>
+	<a href="<c:url value="${searchUrl}"/>"
+		class="btn btn-secondary">Back to Results</a>
 	<div class="container-fluid">
+
+	<form action="/updateLifestyle">
+	<fieldset>
+	<c:forEach var="prop" items="${property}">
+	<legend>Update Your Lifestyle Preferences:</legend>
+	<label>Kids</label>
+	<input type="checkbox" name="kids" value="kids"/>
+	<label>Pets</label>
+	<input type="checkbox" name="pets" value="pets"/>
+	<label>Active</label>
+	<input type="checkbox" name="active" value="active"/>
+	<label>Night Life</label>
+	<input type="checkbox" name="nightLife" value="nightLife"/>
+	<label>Public Transportation</label>
+	<input type="checkbox" name="publicTransit" value="publicTransit"/>
+	<input type="hidden" name="propertyId" value="${prop.property_id}"/>
+	<button type="submit" class="btn btn-primary mb-2">Update</button>
+	</c:forEach>
+	</fieldset>
+	</form>
+
 	
 		<div class="btn-group float-right">
-			<button class="btn btn-primary" value="Details" onClick="onBtnDetailViewClick();">Details</button>
-			<button id="btnMapView" class="btn btn-secondary" onClick="onBtnMapViewClick();">Maps</button>
+			<button class="btn btn-primary" value="Details"
+				onClick="onBtnDetailViewClick();">Details</button>
+			<button id="btnMapView" class="btn btn-secondary"
+				onClick="onBtnMapViewClick();">Maps</button>
 		</div>
-	
-		<br>
-		<br>
+
+		<br> <br>
 
 		<div class="row">
 
@@ -128,10 +165,11 @@ function addMaker(typelat, typelng,title, label,icon){
 								<c:set var="cnts" value="${cnts+1}" />
 								<div class="${cnts==1? 'item active':'item'}">
 									<img class="img-fav" style="height: 400px; width: 100%;"
-										src="${photo.href}" alt="no image"> 
-										<a href="/addFavorites?propertyId=${prop.property_id}&thumbnail=${prop.photos[0].href}&weburl=${prop.weburl}"
-										class="img_fav_details_a" data-toggle="tooltip" title="Add Favorite">
-										<i class="fa fa-star-o" style="font-size:30px"></i>
+										src="${photo.href}" alt="no image"> <a
+										href="/addFavorites?propertyId=${prop.property_id}&thumbnail=${prop.photos[0].href}&weburl=${prop.weburl}"
+										class="img_fav_details_a" data-toggle="tooltip"
+										title="Add Favorite"> <i class="fa fa-star-o"
+										style="font-size: 30px"></i>
 									</a>
 								</div>
 							</c:forEach>
@@ -175,80 +213,84 @@ function addMaker(typelat, typelng,title, label,icon){
 							</p>
 							<p>
 								Address:
-								<c:out value="${prop.address.line}" />					
-						
+								<c:out value="${prop.address.line}" />
 							<p>
 								Baths:
 								<c:out value="${prop.baths}" />
-								<p>
+							<p>
 								Beds:
 								<c:out value="${prop.beds}" />
-							 
 						</div>
 						<div class="float-right mt-1">
-							<a href="/contact-submit?propertyId=${prop.property_id}" class="border-primary btn btn-outline-primary">Contact
-								Agent</a>
+							<a href="/contact-submit?propertyId=${prop.property_id}"
+								class="border-primary btn btn-outline-primary">Contact Agent</a>
 
-						
+
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-			
 
-			<div id="divMapView" style="display:block;" class="border col-md">
+			<div id="divMapView" style="display: block;" class="border col-md">
 
-			<strong>Map View</strong>
-			  
+				<strong>Map View</strong>
+
 				<div id="map" class="details-map"></div>
-				
 
- 			</div>
+			</div>
 
 
 		</div>
 	</div>
-<h2>Nearby locations</h2>
-<table>
-	<tr>
-		<td style="vertical-align:top" >
-			<h3>Super Markets</h3>
-			<table>
-				<tr><th>Name</th><th>Rating</th></tr>
-				<c:forEach var="supermarket" items="${supermarkets}">
-					<tr>	<td> <c:out value="${supermarket.name}" /> </td>
-							<td> <c:out value="${supermarket.rating}" /> </td>
-					</tr>
-				</c:forEach>
-			</table>
-		</td>
 
-		<td style="vertical-align:top">
-			<h3>Restaurants</h3>
-			<table>
-				<tr><th>Name</th><th>Rating</th></tr>
-				<c:forEach var="restaurant" items="${restaurants}">
-					<tr>	<td> <c:out value="${restaurant.name}" /> </td>
-							<td> <c:out value="${restaurant.rating}" /> </td>
+	<h2>Nearby locations</h2>
+	<table>
+		<tr>
+			<td style="vertical-align: top">
+				<h3>Super Markets</h3>
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
 					</tr>
-				</c:forEach>
-			</table>
-		</td>
-	</tr>
-</table>
-<br>
-<br>
-<br>
+				<c:forEach var="supermarket" items="${supermarkets}">
+						<tr>
+							<td><c:out value="${supermarket.name}" /></td>
+							<td><c:out value="${supermarket.rating}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</td>
+
+			<td style="vertical-align: top">
+				<h3>Restaurants</h3>
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
+					</tr>
+					<c:forEach var="restaurant" items="${restaurants}">
+						<tr>
+							<td><c:out value="${restaurant.name}" /></td>
+							<td><c:out value="${restaurant.rating}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
 	</footer>
 	<script
-   src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
-   defer
-  ></script>
-			  	
+		src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
+		defer></script>
+
 
 </body>
 </html>

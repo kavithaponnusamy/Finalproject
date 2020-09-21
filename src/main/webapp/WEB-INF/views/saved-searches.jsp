@@ -8,6 +8,8 @@
 	content="width=device-width, initial-scale=1.0">
 <title>Home Page</title>
 <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
@@ -28,8 +30,6 @@
 					<c:forEach items="${searches}" var="searches">
 					
 					<tr>
-
-
 					<td><a class = "nav-link" href="${searches.searchUrl}">${searches.name}</a></td>
 				    <td><a href="<c:url value="/removeSearch?id=${searches.id}"/>" class="btn btn-dark">Delete</a></td>
              </tr>
@@ -37,7 +37,7 @@
 					</tbody>
 					</table>
 			</div>
-
+<br>
 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>

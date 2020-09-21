@@ -82,26 +82,25 @@ $(document).ready(
 		</form>	 
 </div>
 
-	<div class="container">
+	<div class="container-fluid">
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>
 	<label>Kids</label>
-	<input type="checkbox" name="kids" value="kids"/><br>
+	<input type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/><br>
 	<label>Pets</label>
-	<input type="checkbox" name="pets" value="pets"/><br>
+	<input type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/><br>
 	<label>Active</label>
-	<input type="checkbox" name="active" value="active"/><br>
+	<input type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/><br>
 	<label>Night Life</label>
-	<input type="checkbox" name="nightLife" value="nightLife"/><br>
+	<input type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/><br>
 	<label>Public Transportation</label>
-	<input type="checkbox" name="publicTransit" value="publicTransit"/><br>
+	<input type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/><br>
 	<button type="submit" class="btn btn-primary mb-2">Save Selected</button>
 	</fieldset>
 	</form>
 	</div>
-	<p></p>
-
+	
 
 
 	 <footer>

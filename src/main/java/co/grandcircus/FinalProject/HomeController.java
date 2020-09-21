@@ -56,7 +56,15 @@ public class HomeController {
 	HttpSession session;
 
 	@RequestMapping("/")
-	public String showProperty(Model model) {
+	public String showProperty(Model model) { 
+		
+		model.addAttribute("pets", (String) session.getAttribute("pets"));
+		model.addAttribute("kids", (String) session.getAttribute("kids"));
+		model.addAttribute("active", (String) session.getAttribute("active"));
+		model.addAttribute("nightLife", (String) session.getAttribute("nightLife"));
+		model.addAttribute("publicTransit", (String) session.getAttribute("publicTransit"));
+
+ 
 		return "homepage";
 	}
 
@@ -64,18 +72,26 @@ public class HomeController {
 	public String showPropertyList(@RequestParam String search, Model model) {
 		
 		try {
-			
+			if(search!=null && !search.isBlank())
+			{
 			String[] ctST=search.split("-");
+			
 		String state="";
 		String city= ctST[0];
-		//state=ctST[1];
+		state=ctST[1];
 		if( ctST.length>1) {
 		
 		 state=ctST[1];
 		} 
 		 
-
+			
 		return "redirect:/submit-list?city="+city+"&state="+state;
+			
+			}else {
+				model.addAttribute("errorMsg","city or state cannot be empty or null");
+				return "error";
+			}
+			
 		}
 		catch(Exception e) {
 			model.addAttribute("errorMsg",e.getMessage());
@@ -91,8 +107,10 @@ public class HomeController {
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
-
+   //if(session.getAttribute("searchUrl")!=null)
+   //{
 		session.removeAttribute("searchUrl");
+  // }
 
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;
 		session.setAttribute("searchUrl", searchUrl);
@@ -190,22 +208,24 @@ public class HomeController {
 		
 		
 		PropertyResponse property = apiServ.getPropertyByPropertyId(propertyId);
+ 
+		
 		Double lat=property.getProperties().get(0).getAddress().getLat();
 		Double lon=property.getProperties().get(0).getAddress().getLon();
-		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(lat,lon);
-		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(lat,lon);	
-
 		
-		List<NearByPlaces> smSorted = supermarkets.getResults();
-		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating));
-		Collections.reverse(smSorted);// sort by Descending Order	
-					
-		List<NearByPlaces> restSorted = restaurants.getResults();
+
+
+		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(lat,lon);
+        List<NearByPlaces> smSorted = supermarkets.getResults();
+		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating)); 
+		Collections.reverse(smSorted);// sort by Descending Order
+		
+		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(lat,lon);
+        List<NearByPlaces> restSorted = restaurants.getResults();  
 		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(restSorted);//sort by Descending Order
-		
-		
-		if (pets != null) {
+		 
+		if (pets != null) { 
 			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(lat,lon);
 			List<NearByPlaces> petSorted = petStores.getResults();
 			Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
@@ -240,7 +260,8 @@ public class HomeController {
 			Collections.sort(transitSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(transitSorted);
 			model.addAttribute("transits", transitSorted);
-			}			
+  
+			}			 
 
 		model.addAttribute("property", property.getProperties());
 		model.addAttribute("supermarkets", smSorted);
@@ -250,6 +271,7 @@ public class HomeController {
 		model.addAttribute("lat", lat);
 		model.addAttribute("lon", lon);
 
+
 		String searchUrl = (String) session.getAttribute("searchUrl"); 
 		model.addAttribute("searchUrl", searchUrl);
 		
@@ -258,7 +280,12 @@ public class HomeController {
 		// it has to be come back to this page:
 		session.removeAttribute("ContactCalledFrom");
 		session.setAttribute("ContactCalledFrom", "submit-details?propertyId=" + propertyId);
-				
+				 
+		//adding this session variable for favorites as we are not saving the detail page url 
+		// in searchurl session variable as we want to use searchurl for back to list.
+		session.removeAttribute("favoriteCalledFrom");
+		session.setAttribute("favoriteCalledFrom", "submit-details?propertyId=" + propertyId);
+		
 		return "details";
 	}
 
@@ -291,7 +318,7 @@ public class HomeController {
 			favsDao.save(newFav);
 
 			String searchUrl = (String) session.getAttribute("searchUrl");
-	
+ 
 			if (searchUrl != null) {
 
 				return "redirect:/" + searchUrl;
@@ -449,6 +476,22 @@ public class HomeController {
 		List<SavedSearches> searches = searchesDao.findAll();
 		model.addAttribute("searches", searches);	
 		return "saved-searches";
+	}
+	
+	@RequestMapping("/updateLifestyle")
+	public String updateLifestyle(Model model,@RequestParam(required = false) String propertyId, @RequestParam(required = false) String pets,
+			@RequestParam(required = false) String kids, @RequestParam(required = false) String active, @RequestParam(required = false) String nightLife, @RequestParam(required = false) String publicTransit) {
+
+		session.setAttribute("pets", pets);
+		session.setAttribute("kids", kids);
+		session.setAttribute("active", active);
+		session.setAttribute("nightLife", nightLife);
+		session.setAttribute("publicTransit", publicTransit);
+		session.setAttribute("propertyId", propertyId);
+		
+	
+				return "redirect:/submit-details?propertyId=" + propertyId;
+				
 	}
 
 }

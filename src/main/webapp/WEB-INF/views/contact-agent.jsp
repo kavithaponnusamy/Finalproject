@@ -27,13 +27,13 @@
      <label for="phoneno"><b>Phoneno</b></label>
      <input type="text" name="phoneno" value="${phoneno}"  required>	
       <br>
-       <label for="comments"><b>Comments</b></label>
-      <textarea id="comments" name="comments" rows="4" cols="50">${existingBI.comments}</textarea>
-     <label for="comments"><b>Comments</b></label>
+       <label for="comments"><b>Comments</b></label> 
+      <textarea id="comments" name="comments"  value="${existingBI.comments}" rows="4" cols="50"></textarea>
    <!--   <input type="text" name="comments" value="${existingBI.comments}" required> -->
     <br>
      <label for="quote"><b>Quote</b></label>
-    <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" min="10000" required>    
+     <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" min="10000" required>
+ 
     <button type="submit" class="btn">Submit</button>   
     <input type="hidden" name="propertyId" value="${propertyId}">
      <input type="hidden" name="userId" value="${userId}">
