@@ -42,7 +42,7 @@ function initMap() {
 <c:forEach var="restaurant" items="${restaurants}">
 var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
-addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurent.png');
+addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png');
 </c:forEach>
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
@@ -76,7 +76,7 @@ function addMaker(typelat, typelng,title, label,icon){
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
 		  title: title,
-		  label: label,
+		  //label: label,
 		  icon: icon
 		 });
 }
@@ -208,7 +208,6 @@ function addMaker(typelat, typelng,title, label,icon){
 
 		</div>
 	</div>
-
 <h2>Nearby locations</h2>
 <table>
 	<tr>
