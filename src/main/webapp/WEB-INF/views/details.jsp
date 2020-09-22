@@ -26,6 +26,7 @@
 <script>
 
 let map; 
+
 function initMap() {
 	console.log("API LOADED"); 
 	var lat=${lat};
@@ -42,59 +43,85 @@ function initMap() {
  <c:forEach var="smarket" items="${supermarkets}">  
  var smarketLat=${smarket.geometry.location.lat};
  var smarketLng=${smarket.geometry.location.lng};
- addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png');
+ var smarketInfo='<h6>Name: <c:out value="${smarket.name}" /></h6><br><h6>Address:<c:out value="${smarket.vicinity}"/></h6><br>';
+ addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png',smarketInfo);
 </c:forEach>
 
 
 <c:forEach var="restaurant" items="${restaurants}"> 
 var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
-addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png');
+var restaurantInfo='<h6>Name: <c:out value="${restaurant.name}" /></h6><br><h6>Address:<c:out value="${restaurant.vicinity}"/></h6><br>';
+addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png',restaurantInfo);
 
 </c:forEach>
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
 var gymLng=${gym.geometry.location.lng};
-	addMaker(gymLat,gymLng,'Gym','G','gymicon.png' );
+var gymInfo='<h6>Name: <c:out value="${gym.name}" /></h6><br><h6>Address:<c:out value="${gym.vicinity}"/></h6><br>';
+addMaker(gymLat,gymLng,'Gym','G','gymicon.png',gymInfo );
 </c:forEach> 
  
 <c:forEach var="school" items="${schools}"> 	
 var schoolLat=${school.geometry.location.lat};
 var schoolLng=${school.geometry.location.lng};
-	addMaker(schoolLat,schoolLng,'School','S' ,'school.png');
+var schoolInfo='<h6>Name: <c:out value="${school.name}" /></h6><br><h6>Address:<c:out value="${school.vicinity}"/></h6><br>';
+	addMaker(schoolLat,schoolLng,'School','S' ,'school.png',schoolInfo);
 </c:forEach> 
 
 <c:forEach var="petstore" items="${petstores}">
 var petstoreLat=${petstore.geometry.location.lat};
 var petstoreLng=${petstore.geometry.location.lng};
-	addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png' );
+var petstoreInfo='<h6>Name: <c:out value="${petstore.name}" /></h6><br><h6>Address:<c:out value="${petstore.vicinity}"/></h6><br>';
+	addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png',petstoreInfo );
 </c:forEach> 
 
 <c:forEach var="bar" items="${bars}">
 var barLat=${bar.geometry.location.lat};
 var barLng=${bar.geometry.location.lng};
- 
-addMaker(barLat,barLng,'Bar','B','bar.png');
+var barInfo='<h6>Name: <c:out value="${bar.name}" /></h6><br><h6>Address:<c:out value="${bar.vicinity}"/></h6><br>';
+addMaker(barLat,barLng,'Bar','B','bar.png',barInfo);
 </c:forEach> 
 
 <c:forEach var="transit" items="${transits}">
 var transitLat=${transit.geometry.location.lat};
 var transitLng=${transit.geometry.location.lng};
-addMaker(transitLat,transitLng,'Transport','T','transport.png');
+var transitInfo='<h6>Name: <c:out value="${transit.name}" /></h6><br><h6>Address:<c:out value="${transit.vicinity}"/></h6><br>';
+addMaker(transitLat,transitLng,'Transport','T','transport.png',transitInfo);
 </c:forEach> 
  
 }
 
 
-function addMaker(typelat, typelng,title, label,icon){
+function addMaker(typelat, typelng,title, label,icon, popupInfo){
 	
-	new google.maps.Marker({
+	var marker= new google.maps.Marker({
 		  position: { lat:typelat , lng: typelng},
 		  map: map,
 		  title: title, 
 		//  label: label,
 		  icon: icon
 		 });
+	
+	if(popupInfo){
+		 
+		let baseDirectionurl="https://www.google.com/maps/dir/?api=1&origin="+${lat}+","+${lon}+"&destination=";
+		baseDirectionurl+=typelat+","+typelng; 
+		 
+		popupInfo+='<a target="_blank" href="'+baseDirectionurl+'">Get Directions</a>'
+		var infoWindow=new google.maps.InfoWindow({
+			content:popupInfo
+		});
+		
+		
+		marker.addListener('click', function(){
+			infoWindow.open(marker.get('map'), marker);
+			
+		})
+	
+	
+	}
+	
 } 
 
  </script>
