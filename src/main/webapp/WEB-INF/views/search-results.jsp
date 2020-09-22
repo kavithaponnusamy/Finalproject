@@ -8,15 +8,67 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>search-results page</title>
- 
- 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link href="/style.css" rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="/script.js"></script>
+<script>
+let map;
+function initMap() {
+	var lat=${lat};
+	 var lng=${lon};	
+ map = new google.maps.Map(document.getElementById("map"), { 
+	 center: {lat: lat, lng: lng},
+  zoom: 12
+ }); 
+ addMaker(lat,lng,'House','H');
+ 
+ <c:forEach var="property" items="${properties}">  
+ var houseLat=${property.address.lat};
+ var houseLon=${property.address.lon};
+ var houseInfo='<h6>Address: <c:out value="${property.address.line}" /></h6><br><h5><img src="${property.thumbnail}"/></h6><br>';
+ addMaker(houseLat,houseLon,'House','H',houseInfo);
+ </c:forEach>
+ 
+}
+function addMaker(typelat, typelng,title,label,popupInfo){	
+	var marker= new google.maps.Marker({
+		  position: { lat:typelat , lng: typelng},
+		  map: map,
+		  title: title, 
+		  label: label,
+		 
+		 });
+	if(popupInfo){
+		
+		var infoWindow=new google.maps.InfoWindow({
+			content:popupInfo
+		});
+		
+		
+		marker.addListener('click', function(){
+			infoWindow.open(marker.get('map'), marker);
+			
+		})
+	
+	
+	}
+			
+} 
+
+</script>
 </head>
 <body>
 <%@include file="partials/header.jsp" %>
@@ -81,6 +133,17 @@
 
 <br>
 
+		<div class="btn-group float-right">
+			<button class="btn btn-primary" value="Details"
+				onClick="onBtnDetailViewClick();">Details</button>
+			<button id="btnMapView" class="btn btn-secondary"
+				onClick="onBtnMapViewClick();">Maps</button>
+		</div>
+<div class="row">
+
+			<div class="border col-md">
+
+
 <form class="form" action="addSearch">
 <input type="text" name="name"> 
 <button type="submit" class="btn btn-outline-primary">Save Search</button>
@@ -114,16 +177,26 @@
 					</div>
 
 				</div>
+				
 			</c:forEach>
 		</div>
+		<div id="divMapView" style="display: block;" class="border col-md">
+				<strong>Map View</strong>
+				<div id="map" class="details-map"></div>
+			</div>	
 	</div>
+</div>
 	<br>
-	
+
 	
 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
 		</div>
 	</footer>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
+		defer></script>
+	
 </body>
 </html>

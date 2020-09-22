@@ -107,11 +107,13 @@ public class HomeController {
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
-   //if(session.getAttribute("searchUrl")!=null)
-   //{
+		Double lat=properties.get(0).getAddress().getLat();
+		System.out.println(lat);
+		Double lon=properties.get(0).getAddress().getLon();
+		System.out.println(lon);
+  
 		session.removeAttribute("searchUrl");
-  // }
-
+  
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;
 		session.setAttribute("searchUrl", searchUrl);
 		session.setAttribute("city", city);
@@ -122,6 +124,9 @@ public class HomeController {
 		// we have to come back to this page:
 		session.removeAttribute("ContactCalledFrom");
 		session.setAttribute("ContactCalledFrom", searchUrl);
+		model.addAttribute("lat",lat);
+		model.addAttribute("lon",lon);
+		model.addAttribute("key", key);
 		
 		return "search-results";
 	}
