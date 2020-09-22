@@ -213,59 +213,84 @@ public class HomeController {
 		Double lat=property.getProperties().get(0).getAddress().getLat();
 		Double lon=property.getProperties().get(0).getAddress().getLon();
 		
+		List<Thread> threads = new ArrayList<>();
 
-
-		GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(lat,lon);
-        List<NearByPlaces> smSorted = supermarkets.getResults();
-		Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating)); 
-		Collections.reverse(smSorted);// sort by Descending Order
+		threads.add(new Thread(() -> {
+			GoogleResponse supermarkets = apiServ.getAllGoogleSearchBySupermarket(lat,lon);
+	        List<NearByPlaces> smSorted = supermarkets.getResults();
+			Collections.sort(smSorted, Comparator.comparingDouble(NearByPlaces::getRating)); 
+			Collections.reverse(smSorted);// sort by Descending Order
+			model.addAttribute("supermarkets", smSorted);
+		}));
 		
+		
+		threads.add(new Thread(() -> {
 		GoogleResponse restaurants = apiServ.getAllGoogleSearchByRestaurants(lat,lon);
         List<NearByPlaces> restSorted = restaurants.getResults();  
 		Collections.sort(restSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 		Collections.reverse(restSorted);//sort by Descending Order
-		 
+		model.addAttribute("restaurants", restSorted);
+		}));
+		
 		if (pets != null) { 
-			GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(lat,lon);
-			List<NearByPlaces> petSorted = petStores.getResults();
-			Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
-			Collections.reverse(petSorted);
-			model.addAttribute("petstores", petSorted);
+			threads.add(new Thread(() -> {
+				GoogleResponse petStores = apiServ.getAllGoogleSearchByPetStore(lat,lon);
+				List<NearByPlaces> petSorted = petStores.getResults();
+				Collections.sort(petSorted, Comparator.comparingDouble(NearByPlaces::getRating));
+				Collections.reverse(petSorted);
+				model.addAttribute("petstores", petSorted);
+			}));
 			}
 		if (kids != null) {
+			threads.add(new Thread(() -> {
 			GoogleResponse schools = apiServ.getAllGoogleSearchByPrimarySchool(lat,lon);
 			List<NearByPlaces> schoolsSorted = schools.getResults();
 			Collections.sort(schoolsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(schoolsSorted);
 			model.addAttribute("schools", schoolsSorted);
+			}));
 			}
 		if (active != null) {
+			threads.add(new Thread(() -> {
 			GoogleResponse gyms = apiServ.getAllGoogleSearchByGym(lat,lon);
 			List<NearByPlaces> gymSorted = gyms.getResults();
 			Collections.sort(gymSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(gymSorted);
-			model.addAttribute("gyms", gymSorted);			
+			model.addAttribute("gyms", gymSorted);
+			}));
 			}
 		if (nightLife != null) {
+			threads.add(new Thread(() -> {
 			GoogleResponse bars = apiServ.getAllGoogleSearchByBar(lat,lon);
 			List<NearByPlaces> barsSorted = bars.getResults();
 			Collections.sort(barsSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(barsSorted);
 			model.addAttribute("bars", barsSorted);
-			
+			}));
 			}
 		if (publicTransit != null) {
+			threads.add(new Thread(() -> {
 			GoogleResponse transit = apiServ.getAllGoogleSearchByTransitStation(lat,lon);
 			List<NearByPlaces> transitSorted = transit.getResults();
 			Collections.sort(transitSorted, Comparator.comparingDouble(NearByPlaces::getRating));
 			Collections.reverse(transitSorted);
 			model.addAttribute("transits", transitSorted);
-  
-			}			 
+			}));
+			}	
+		
+		for (Thread thread : threads) {
+			thread.start();
+		}
+		// Wait here for all the threads to finish.
+		for (Thread thread : threads) {
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				System.err.println("Nearby Result thread interrupted. This is okay.");
+			}
+		}
 
 		model.addAttribute("property", property.getProperties());
-		model.addAttribute("supermarkets", smSorted);
-		model.addAttribute("restaurants", restSorted);
 		model.addAttribute("key", key);
 		
 		model.addAttribute("lat", lat);

@@ -236,7 +236,7 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 								<c:out value="${prop.prop_status}" />
 							</p>
 							<p>
-								Price:
+								Price: $
 								<c:out value="${prop.price}" />
 							</p>
 							<p>
