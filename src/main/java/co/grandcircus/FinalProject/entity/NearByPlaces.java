@@ -7,8 +7,15 @@ public class NearByPlaces {
 	private double rating;
 	private String place_id;
 	private String icon;
+	private String vicinity;
 	
 	
+	public String getVicinity() {
+		return vicinity;
+	}
+	public void setVicinity(String vicinity) {
+		this.vicinity = vicinity;
+	}
 	public Geometry getGeometry() {
 		return geometry;
 	}
