@@ -28,7 +28,6 @@
 let map; 
 
 function initMap() {
-	console.log("API LOADED"); 
 	var lat=${lat};
 	var lng=${lon};
  map = new google.maps.Map(document.getElementById("map"), {
