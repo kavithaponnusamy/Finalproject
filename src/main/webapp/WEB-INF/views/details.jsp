@@ -34,6 +34,8 @@ function initMap() {
   center: { lat: lat, lng: lng },
   zoom: 12
  }); 
+
+	    
   
  addMaker(lat,lng,'House','H');
 
@@ -196,53 +198,44 @@ function addMaker(typelat, typelng,title, label,icon){
 						<div class="float-left">
 
 							<p>
-								Id:
+								<strong>Id:</strong>
 								<c:out value="${prop.property_id}" />
 							</p>
 							<p>
-								Type:
+								<strong>Type:</strong>
 								<c:out value="${prop.prop_type}" />
 							</p>
 							<p>
-								Status:
+								<strong>Status:</strong>
 								<c:out value="${prop.prop_status}" />
 							</p>
 							<p>
-								Price:
+								<strong>Price:</strong>
 								<c:out value="${prop.price}" />
 							</p>
 							<p>
-								Address:
+								<strong>Address:</strong>
 								<c:out value="${prop.address.line}" />
 							<p>
-								Baths:
+								<strong>Baths:</strong>
 								<c:out value="${prop.baths}" />
 							<p>
-								Beds:
+								<strong>Beds:</strong>
 								<c:out value="${prop.beds}" />
 						</div>
 						<div class="float-right mt-1">
 							<a href="/contact-submit?propertyId=${prop.property_id}"
 								class="border-primary btn btn-outline-primary">Contact Agent</a>
-
-
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-
 			<div id="divMapView" style="display: block;" class="border col-md">
-
 				<strong>Map View</strong>
-
 				<div id="map" class="details-map"></div>
-
 			</div>
-
-
 		</div>
 	</div>
-
 	<h2>Nearby locations</h2>
 	<table>
 		<tr>
