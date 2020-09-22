@@ -52,11 +52,7 @@ function addMaker(typelat, typelng,title,label,popupInfo){
 		 
 		 });
 	if(popupInfo){
-		 
-		//let baseDirectionurl="https://www.google.com/maps/dir/?api=1&origin="+${lat}+","+${lon}+"&destination=";
-		//baseDirectionurl+=typelat+","+typelng; 
-		 
-		//popupInfo+='<a target="_blank" href="'+baseDirectionurl+'">Get Directions</a>'
+		
 		var infoWindow=new google.maps.InfoWindow({
 			content:popupInfo
 		});
