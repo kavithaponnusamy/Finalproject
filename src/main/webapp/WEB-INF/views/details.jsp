@@ -312,16 +312,16 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 		<br>
 	</div>
 		
-	<h2>Nearby locations</h2>
-	<table>
+	<h2>Highest Rated Amenities Nearby</h2>
+	<table class = "paddingBetweenCols">
 		<tr>
 			<td style="vertical-align: top">
-				<h3>Super Markets</h3>
-				<table>
+				<h3 class = "titles">Super Markets</h3>
+				<table class = "paddingBetweenCols">
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
-						<th>Distance(miles)</th>
+						<th>Distance</th>
 					</tr>
 				<c:forEach var="supermarket" items="${supermarkets}">
 						<tr>
@@ -338,18 +338,18 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 			</td>
 
 			<td style="vertical-align: top">
-				<h3>Restaurants</h3>
-				<table>
+				<h3 class = "titles">Restaurants</h3>
+				<table class = "paddingBetweenCols">
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
-						<th>Distance (miles)</th>
+						<th>Distance</th>
 					</tr>
 					<c:forEach var="restaurant" items="${restaurants}">
 						<tr>
-						    <td><c:out value="${restaurant.name}" /></td>
-							<td><c:out value="${restaurant.rating}" /></td>
-							<td id="res${restaurant.place_id}"></td>					
+						    <td><c:out value="${restaurant.name}" />&nbsp;&nbsp;</td>
+							<td><c:out value="${restaurant.rating}" />&nbsp;&nbsp;</td>
+							<td id="res${restaurant.place_id}">&nbsp;&nbsp;</td>					
 						</tr>
 						<script type="text/javascript">
 							var resDistance=distance('${lat}','${lon}','${restaurant.geometry.location.lat}','${restaurant.geometry.location.lng}')
@@ -358,6 +358,49 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					</c:forEach>
 				</table>
 				</td>
+				<td style="vertical-align: top">
+				<h3 class = "titles">Gyms</h3>
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
+						<th>Distance</th>
+					</tr>
+				<c:forEach var="gym" items="${gyms}">
+						<tr>
+							<td><c:out value="${gym.name}" /></td>
+							<td><c:out value="${gym.rating}" /></td>
+							<td id="gym${gym.place_id}"></td>					
+						</tr>
+						<script type="text/javascript">
+							var gymDistance=distance('${lat}','${lon}','${gym.geometry.location.lat}','${gym.geometry.location.lng}')
+							document.getElementById('gym${gym.place_id}').innerHTML = gymDistance;	
+						</script>
+					</c:forEach>
+				</table>
+				</td>
+
+			<td style="vertical-align: top">
+				<h3 class = "titles">Bars</h3>
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Rating</th>
+						<th>Distance</th>
+					</tr>
+					<c:forEach var="bar" items="${bars}">
+						<tr>
+						    <td><c:out value="${bar.name}" />&nbsp;&nbsp;</td>
+							<td><c:out value="${bar.rating}" />&nbsp;&nbsp;</td>
+							<td id="bar${bar.place_id}">&nbsp;&nbsp;</td>					
+						</tr>
+						<script type="text/javascript">
+							var barDistance=distance('${lat}','${lon}','${bar.geometry.location.lat}','${bar.geometry.location.lng}')
+							document.getElementById('bar${bar.place_id}').innerHTML = barDistance;
+						</script>
+					</c:forEach>
+				</table>
+			</td>
 				</table>
 	
 		
