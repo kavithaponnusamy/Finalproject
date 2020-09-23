@@ -24,6 +24,25 @@
 
 <script src="/script.js"></script>
 <script>
+function distance(lat1, lon1, lat2, lon2) {
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		return (dist.toFixed(1));
+	}
+}
 
 let map; 
 
@@ -34,63 +53,68 @@ function initMap() {
   center: { lat: lat, lng: lng },
   zoom: 12
  }); 
-
 	    
   
  addMaker(lat,lng,'House','H');
 
- <c:forEach var="smarket" items="${supermarkets}">  
- var smarketLat=${smarket.geometry.location.lat};
- var smarketLng=${smarket.geometry.location.lng};
- var smarketInfo='<h6>Name: <c:out value="${smarket.name}" /></h6><br><h6>Address:<c:out value="${smarket.vicinity}"/></h6><br>';
- addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png',smarketInfo);
+<c:forEach var="smarket" items="${supermarkets}">  
+var smarketLat=${smarket.geometry.location.lat};
+var smarketLng=${smarket.geometry.location.lng};
+var dist=distance(lat,lng,smarketLat,smarketLng);
+var smarketInfo='<h6>Name: <c:out value="${smarket.name}" /></h6><br><h6>Address: <c:out value="${smarket.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
+addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png',smarketInfo);
 </c:forEach>
 
 
 <c:forEach var="restaurant" items="${restaurants}"> 
 var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
-var restaurantInfo='<h6>Name: <c:out value="${restaurant.name}" /></h6><br><h6>Address:<c:out value="${restaurant.vicinity}"/></h6><br>';
+var dist=distance(lat,lng,restaurantLat,restaurantLng);
+var restaurantInfo='<h6>Name: <c:out value="${restaurant.name}" /></h6><br><h6>Address: <c:out value="${restaurant.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
 addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png',restaurantInfo);
-
 </c:forEach>
+
 <c:forEach var="gym" items="${gyms}"> 	
 var gymLat=${gym.geometry.location.lat};
 var gymLng=${gym.geometry.location.lng};
-var gymInfo='<h6>Name: <c:out value="${gym.name}" /></h6><br><h6>Address:<c:out value="${gym.vicinity}"/></h6><br>';
+var dist=distance(lat,lng,gymLat,gymLng);
+var gymInfo='<h6>Name: <c:out value="${gym.name}" /></h6><br><h6>Address: <c:out value="${gym.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
 addMaker(gymLat,gymLng,'Gym','G','gymicon.png',gymInfo );
 </c:forEach> 
  
 <c:forEach var="school" items="${schools}"> 	
 var schoolLat=${school.geometry.location.lat};
 var schoolLng=${school.geometry.location.lng};
-var schoolInfo='<h6>Name: <c:out value="${school.name}" /></h6><br><h6>Address:<c:out value="${school.vicinity}"/></h6><br>';
-	addMaker(schoolLat,schoolLng,'School','S' ,'school.png',schoolInfo);
+var dist=distance(lat,lng,schoolLat,schoolLng);
+var schoolInfo='<h6>Name: <c:out value="${school.name}" /></h6><br><h6>Address: <c:out value="${school.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
+addMaker(schoolLat,schoolLng,'School','S' ,'school.png',schoolInfo);
 </c:forEach> 
 
 <c:forEach var="petstore" items="${petstores}">
 var petstoreLat=${petstore.geometry.location.lat};
 var petstoreLng=${petstore.geometry.location.lng};
-var petstoreInfo='<h6>Name: <c:out value="${petstore.name}" /></h6><br><h6>Address:<c:out value="${petstore.vicinity}"/></h6><br>';
-	addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png',petstoreInfo );
+var dist=distance(lat,lng,petstoreLat,petstoreLng);
+var petstoreInfo='<h6>Name: <c:out value="${petstore.name}" /></h6><br><h6>Address: <c:out value="${petstore.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
+addMaker(petstoreLat,petstoreLng,'PetStore','P','pet-store.png',petstoreInfo );
 </c:forEach> 
 
 <c:forEach var="bar" items="${bars}">
 var barLat=${bar.geometry.location.lat};
 var barLng=${bar.geometry.location.lng};
-var barInfo='<h6>Name: <c:out value="${bar.name}" /></h6><br><h6>Address:<c:out value="${bar.vicinity}"/></h6><br>';
+var dist=distance(lat,lng,barLat,barLng);
+var barInfo='<h6>Name: <c:out value="${bar.name}" /></h6><br><h6>Address: <c:out value="${bar.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
 addMaker(barLat,barLng,'Bar','B','bar.png',barInfo);
 </c:forEach> 
 
 <c:forEach var="transit" items="${transits}">
 var transitLat=${transit.geometry.location.lat};
 var transitLng=${transit.geometry.location.lng};
-var transitInfo='<h6>Name: <c:out value="${transit.name}" /></h6><br><h6>Address:<c:out value="${transit.vicinity}"/></h6><br>';
+var dist=distance(lat,lng,transitLat,transitLng);
+var transitInfo='<h6>Name: <c:out value="${transit.name}" /></h6><br><h6>Address: <c:out value="${transit.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
 addMaker(transitLat,transitLng,'Transport','T','transport.png',transitInfo);
 </c:forEach> 
  
 }
-
 
 function addMaker(typelat, typelng,title, label,icon, popupInfo){
 	
@@ -273,12 +297,18 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
+						<th>Distance(miles)</th>
 					</tr>
 				<c:forEach var="supermarket" items="${supermarkets}">
 						<tr>
 							<td><c:out value="${supermarket.name}" /></td>
 							<td><c:out value="${supermarket.rating}" /></td>
+							<td id="sm${supermarket.place_id}"></td>					
 						</tr>
+						<script type="text/javascript">
+							var smDistance=distance('${lat}','${lon}','${supermarket.geometry.location.lat}','${supermarket.geometry.location.lng}')
+							document.getElementById('sm${supermarket.place_id}').innerHTML = smDistance;	
+						</script>
 					</c:forEach>
 				</table>
 			</td>
@@ -289,12 +319,18 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
+						<th>Distance (miles)</th>
 					</tr>
 					<c:forEach var="restaurant" items="${restaurants}">
 						<tr>
-							<td><c:out value="${restaurant.name}" /></td>
+						    <td><c:out value="${restaurant.name}" /></td>
 							<td><c:out value="${restaurant.rating}" /></td>
+							<td id="res${restaurant.place_id}"></td>					
 						</tr>
+						<script type="text/javascript">
+							var resDistance=distance('${lat}','${lon}','${restaurant.geometry.location.lat}','${restaurant.geometry.location.lng}')
+							document.getElementById('res${restaurant.place_id}').innerHTML = resDistance;
+						</script>
 					</c:forEach>
 				</table>
 			</td>

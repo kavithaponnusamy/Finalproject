@@ -38,7 +38,7 @@ function initMap() {
  <c:forEach var="property" items="${properties}">  
  var houseLat=${property.address.lat};
  var houseLon=${property.address.lon};
- var houseInfo='<h6>Address: <c:out value="${property.address.line}" /></h6><br><h5><img src="${property.thumbnail}"/></h6><br>';
+ var houseInfo='<h6>Address: <c:out value="${property.address.line}"/></h6><br><h5><img src="${property.thumbnail}"/></h6><br>';
  addMaker(houseLat,houseLon,'House','H',houseInfo);
  </c:forEach>
  
@@ -52,7 +52,6 @@ function addMaker(typelat, typelng,title,label,popupInfo){
 		 
 		 });
 	if(popupInfo){
-		
 		var infoWindow=new google.maps.InfoWindow({
 			content:popupInfo
 		});
