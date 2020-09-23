@@ -28,8 +28,7 @@
      <input type="text" name="phoneno" value="${phoneno}"  required>	
       <br>
        <label for="comments"><b>Comments</b></label> 
-      <textarea id="comments" name="comments"  value="${existingBI.comments}" rows="4" cols="50"></textarea>
-   <!--   <input type="text" name="comments" value="${existingBI.comments}" required> -->
+      <textarea id="comments" name="comments"  rows="4" cols="50">${existingBI.comments}</textarea>
     <br>
      <label for="quote"><b>Quote</b></label>
      <input type="number" placeholder="Enter Quote" name="quote" value="${existingBI.quote}" min="10000" required>
