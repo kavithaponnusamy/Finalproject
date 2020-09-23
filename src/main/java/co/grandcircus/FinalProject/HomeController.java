@@ -108,10 +108,8 @@ public class HomeController {
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
 		Double lat=properties.get(0).getAddress().getLat();
-		System.out.println(lat);
 		Double lon=properties.get(0).getAddress().getLon();
-		System.out.println(lon);
-  
+		  
 		session.removeAttribute("searchUrl");
   
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;
