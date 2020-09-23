@@ -286,13 +286,32 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				</c:forEach>
 			</div>
 			<div id="divMapView" style="display: block;" class="border col-md">
-				<strong>Map View</strong>
+			<table class = "key">
+				<th>Map Key</th>
+						<tr>
+							<td><img src = "school.png">
+							Schools &nbsp;&nbsp;</td>
+							<td><img src = "pet-store.png"></td>
+							<td> Pet Store &nbsp;&nbsp;</td>
+							<td><img src = "gymicon.png"></td>
+							<td> Gym &nbsp;&nbsp; </td>
+							<td><img src = "restaurant.png"></td>
+							<td> Restaurant &nbsp;&nbsp;</td>	
+							<td><img src = "bar.png"></td>
+							<td> Bar &nbsp;&nbsp;</td>
+							<td><img src = "supermarket.png"></td>
+							<td> Grocery Store &nbsp;&nbsp;</td>	
+								<td><img src = "transport.png"></td>
+							<td> Transit Station &nbsp;&nbsp;</td>
+						</tr>
+				</table>
 				<div id="map" class="details-map"></div>
 			</div>
 		</div>
 		<br>
 		<br>
 	</div>
+		
 	<h2>Nearby locations</h2>
 	<table>
 		<tr>
@@ -338,48 +357,10 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</script>
 					</c:forEach>
 				</table>
-				<table>      </table>
-	
-			<td style="vertical-align: top">
-				<h3>Map Key</h3>
-				<table>
-					<tr>
-						<th>Icon</th>
-						<th>Name</th>
-					</tr>
-				
-						<tr>
-							<td><img src = "school.png"></td>
-							<td>Schools</td>
-						</tr>
-						<tr>
-							<td><img src = "pet-store.png"></td>
-							<td>Pet Store</td>
-						</tr>
-						<tr>
-							<td><img src = "gymicon.png"></td>
-							<td>Gym</td>
-						</tr>
-						<tr>
-							<td><img src = "restaurant.png"></td>
-							<td>Restaurant</td>				
-						</tr>
-						<tr>
-							<td><img src = "bar.png"></td>
-							<td>Bar</td>				
-						</tr>
-						<tr>
-							<td><img src = "supermarket.png"></td>
-							<td>Grocery Store</td>				
-						</tr>
-						<tr>
-							<td><img src = "transport.png"></td>
-							<td>Transit Station</td>				
-						</tr>
-				</table>
 				</td>
-				</tr>
-			</table>
+				</table>
+	
+		
 	<br>
 	<br>
 	<br>
