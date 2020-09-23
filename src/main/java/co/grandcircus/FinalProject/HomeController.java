@@ -118,6 +118,9 @@ public class HomeController {
 		session.setAttribute("city", city);
 		session.setAttribute("state", state);
 
+		//Removing fav session variable if exists as we are setting in Add
+		session.removeAttribute("favoriteCalledFrom");
+		
 		// setting the session variable ContactCalledFrom as this page.
 		// because, after submitting the details in the contact agent form, 
 		// we have to come back to this page:
@@ -185,6 +188,9 @@ public class HomeController {
 		session.setAttribute("city", city);
 		session.setAttribute("state", state);
 
+		//Removing fav session variable if exists as we are setting in Add
+		session.removeAttribute("favoriteCalledFrom");
+				
 		// setting the session variable ContactCalledFrom as this page.
 		// because, after submitting the details in the contact agent form, 
 		// we have to come back to this page:
@@ -349,7 +355,8 @@ public class HomeController {
 			String searchUrl = (String) session.getAttribute("searchUrl");
 			
 			//  Add Favorites, redirect the called form
-			
+			System.out.println("AddFav-searchUrl"+searchUrl);
+			System.out.println("session.getAttribute(\"favoriteCalledFrom\")"+session.getAttribute("favoriteCalledFrom"));
 			if (session.getAttribute("favoriteCalledFrom") != null) {
 				String favoriteFormUrl = (String) session.getAttribute("favoriteCalledFrom");
 				session.removeAttribute("favoriteCalledFrom");

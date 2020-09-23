@@ -308,6 +308,8 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				<div id="map" class="details-map"></div>
 			</div>
 		</div>
+		<br>
+		<br>
 	</div>
 		
 	<h2>Highest Rated Amenities Nearby</h2>

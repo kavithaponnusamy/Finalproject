@@ -66,6 +66,8 @@ $(document).ready(
 		});
 
 </script>
+
+
 </head>
 <body class = "homepage">
 
