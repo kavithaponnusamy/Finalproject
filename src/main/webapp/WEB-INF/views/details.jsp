@@ -356,6 +356,8 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					</c:forEach>
 				</table>
 				</td>
+				<c:choose>
+				<c:when test="${gyms!=null}">
 				<td style="vertical-align: top">
 				<h3 class = "titles">Gyms</h3>
 				<table>
@@ -377,7 +379,10 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					</c:forEach>
 				</table>
 				</td>
-
+				</c:when>
+				</c:choose>
+			<c:choose>
+				<c:when test="${bars!=null}">
 			<td style="vertical-align: top">
 				<h3 class = "titles">Bars</h3>
 				<table>
@@ -398,8 +403,12 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</script>
 					</c:forEach>
 				</table>
-			</td>
+				</td>
+				</c:when>
+				</c:choose>
+			
 				</table>
+				
 	<br>
 	<br>
 	<br>
