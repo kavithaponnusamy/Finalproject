@@ -339,45 +339,26 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				<table>      </table>
 	
 			<td style="vertical-align: top">
-				<h3>Map Key</h3>
-				<table>
-					<tr>
-						<th>Icon</th>
-						<th>Name</th>
-					</tr>
+				<th>Map Key</th>
 				
 						<tr>
 							<td><img src = "school.png"></td>
-							<td>Schools</td>
-						</tr>
-						<tr>
+							<td>Schools &nbsp;&nbsp;</td>
 							<td><img src = "pet-store.png"></td>
-							<td>Pet Store</td>
-						</tr>
-						<tr>
+							<td>Pet Store&nbsp;&nbsp;</td>
 							<td><img src = "gymicon.png"></td>
-							<td>Gym</td>
-						</tr>
-						<tr>
+							<td>Gym&nbsp;&nbsp;</td>
 							<td><img src = "restaurant.png"></td>
-							<td>Restaurant</td>				
-						</tr>
-						<tr>
+							<td>Restaurant&nbsp;&nbsp;</td>	
 							<td><img src = "bar.png"></td>
-							<td>Bar</td>				
-						</tr>
-						<tr>
+							<td>Bar&nbsp;&nbsp;</td>
 							<td><img src = "supermarket.png"></td>
-							<td>Grocery Store</td>				
-						</tr>
-						<tr>
+							<td>Grocery Store&nbsp;&nbsp;</td>
 							<td><img src = "transport.png"></td>
-							<td>Transit Station</td>				
+							<td>Transit Station&nbsp;&nbsp;</td>				
 						</tr>
 				</table>
-				</td>
-				</tr>
-			</table>
+				
 	<br>
 	<br>
 	<br>
