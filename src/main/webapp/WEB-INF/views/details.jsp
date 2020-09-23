@@ -286,11 +286,30 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				</c:forEach>
 			</div>
 			<div id="divMapView" style="display: block;" class="border col-md">
-				<strong>Map View</strong>
+			<table class = "key">
+				<th>Map Key</th>
+						<tr>
+							<td><img src = "school.png">
+							Schools &nbsp;&nbsp;</td>
+							<td><img src = "pet-store.png"></td>
+							<td> Pet Store &nbsp;&nbsp;</td>
+							<td><img src = "gymicon.png"></td>
+							<td> Gym &nbsp;&nbsp; </td>
+							<td><img src = "restaurant.png"></td>
+							<td> Restaurant &nbsp;&nbsp;</td>	
+							<td><img src = "bar.png"></td>
+							<td> Bar &nbsp;&nbsp;</td>
+							<td><img src = "supermarket.png"></td>
+							<td> Grocery Store &nbsp;&nbsp;</td>	
+								<td><img src = "transport.png"></td>
+							<td> Transit Station &nbsp;&nbsp;</td>
+						</tr>
+				</table>
 				<div id="map" class="details-map"></div>
 			</div>
 		</div>
 	</div>
+		
 	<h2>Nearby locations</h2>
 	<table>
 		<tr>
@@ -336,6 +355,7 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</script>
 					</c:forEach>
 				</table>
+<<<<<<< HEAD
 				<table>      </table>
 	
 			<td style="vertical-align: top">
@@ -359,6 +379,12 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</tr>
 				</table>
 				
+=======
+				</td>
+				</table>
+	
+		
+>>>>>>> e793e651a899e6c30c2f5c23927a3be0962a6222
 	<br>
 	<br>
 	<br>

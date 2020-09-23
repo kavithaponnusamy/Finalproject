@@ -173,7 +173,7 @@
 										<fmt:formatNumber value="${property.price}" type="currency" currencySymbol="$"/>
 									</span><br> <span>${property.address.line} </span><br>
 
-									<p>${city},${state}${property.address.postal_code}</p>
+									<p>${city}, ${state} ${property.address.postal_code}</p>
 
 								</div>
 								<div class="float-right mt-1">
