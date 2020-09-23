@@ -107,9 +107,10 @@ public class HomeController {
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
-		Double lat=properties.get(0).getAddress().getLat();
-		Double lon=properties.get(0).getAddress().getLon();
-		  
+		//Double lat=properties.get(0).getAddress().getLat();
+		//Double lon=properties.get(0).getAddress().getLon();
+		Double lat= apiServ.getCityLatLong(city, state).getResults().get(0).getGeometry().getLocation().getLat();
+		Double lon= apiServ.getCityLatLong(city, state).getResults().get(0).getGeometry().getLocation().getLng();
 		session.removeAttribute("searchUrl");
   
 		String searchUrl = "submit-list?state=" + state + "&city=" + city;

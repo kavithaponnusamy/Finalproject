@@ -118,6 +118,12 @@ public class ApiService {
 		return vet;
 	}
 	
+	public GoogleResponse getCityLatLong(String city, String state_code) {
+		 
+		String url="https://maps.googleapis.com/maps/api/geocode/json?address={city},{state_code}&key={key}";
+		GoogleResponse cityLatLong=rt.getForObject(url,GoogleResponse.class,city,state_code,key);
+		return cityLatLong;
+	}
 
 
 }

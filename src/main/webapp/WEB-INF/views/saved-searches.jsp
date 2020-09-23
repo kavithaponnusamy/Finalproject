@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html class = "newpage">
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 	crossorigin="anonymous">
 <link href="/style.css" rel="stylesheet" />
 </head>
-<body>
+<body class = "newpage">
 
 <%@include file="partials/header.jsp" %>
 	<h1>Saved Searches</h1>

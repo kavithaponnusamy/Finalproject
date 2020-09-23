@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html class = "homepage">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login</title>
@@ -14,7 +14,7 @@
 	crossorigin="anonymous">
 <link href="/style.css" rel="stylesheet" />
 </head>
-<body>
+<body class = "homepage">
 	<%@include file="partials/header.jsp" %>
 	<h1>Login</h1>
 	

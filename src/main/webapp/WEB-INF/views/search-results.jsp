@@ -34,9 +34,8 @@
 				lng : lng
 			},
 			zoom : 12
-
 		});
-		addMaker(lat, lng, 'House', 'H');
+	
 
 		<c:forEach var="property" items="${properties}">
 		var houseLat = ${property.address.lat};

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html class = "homepage">
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
@@ -69,7 +69,8 @@ $(document).ready(
 
 
 </head>
-<body>
+<body class = "homepage">
+
 <%@include file="partials/header.jsp" %>
 	<p class="message"><c:out value="${ message }"/></p>
 
@@ -80,8 +81,7 @@ $(document).ready(
 						class="search" /> <span id="loadSpinner"></span>
 					<button type="submit" class="btn btn-primary mb-2">Search</button>	
 			 </div>
-		</form>	 
-		
+		</form>	 	
 		<br><br>
 	<div >
 	<form action="/saveLifestyle">
