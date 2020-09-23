@@ -66,6 +66,8 @@ $(document).ready(
 		});
 
 </script>
+
+
 </head>
 <body>
 <%@include file="partials/header.jsp" %>
