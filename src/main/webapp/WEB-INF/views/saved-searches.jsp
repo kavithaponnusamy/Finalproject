@@ -19,7 +19,7 @@
 
 <%@include file="partials/header.jsp" %>
 	<h1>Saved Searches</h1>
-	<div>
+	<div  class="container-fluid">
 			<table class="table"> 
 			<thead>
 				<tr>

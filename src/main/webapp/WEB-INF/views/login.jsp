@@ -19,7 +19,8 @@
 	<h1>Login</h1>
 	
 	<p class="message"><c:out value="${ message }"/></p>
-	
+
+<div class="container-fluid">	
 	<form action="/login" method="post">
 		<p>
 			<label for="username">Username:</label> <input id="username" name="username" value="<c:out value="${ param.username }"/>" required minlength="2" />
@@ -36,6 +37,7 @@
 	<p>
 		Don't have an account yet? <a href="/signup">Sign up here</a>.
 	</p>
+</div>
 	<br>
 	<footer>
 		<div>

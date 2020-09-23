@@ -72,17 +72,16 @@ $(document).ready(
 	<p class="message"><c:out value="${ message }"/></p>
 
 	<div class="container-fluid">
-		<form action="/search">		
-			<div class="search-container">
+		<form action="/search">		 
 				<div class="ui-widget">
 					City/State: <input type="text" id="search" name="search" required
 						class="search" /> <span id="loadSpinner"></span>
 					<button type="submit" class="btn btn-primary mb-2">Search</button>	
-		</div>
+			 </div>
 		</form>	 
-</div>
-
-	<div class="container-fluid">
+		
+		<br><br>
+	<div >
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>
@@ -100,6 +99,9 @@ $(document).ready(
 	</fieldset>
 	</form>
 	</div>
+</div>
+
+	
 	
 
 
