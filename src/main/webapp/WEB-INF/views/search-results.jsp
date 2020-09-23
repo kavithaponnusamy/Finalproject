@@ -170,7 +170,7 @@
 								<div class="float-left">
 									<span>${property.beds} beds ${property.baths} bath </span><br>
 									<span>Type: ${property.prop_type}</span><br> <span>Price:
-										<fmt:formatNumber value="${property.price}" type="currency" />
+										<fmt:formatNumber value="${property.price}" type="currency" currencySymbol="$"/>
 									</span><br> <span>${property.address.line} </span><br>
 
 									<p>${city}, ${state} ${property.address.postal_code}</p>
