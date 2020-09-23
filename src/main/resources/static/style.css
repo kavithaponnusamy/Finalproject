@@ -175,3 +175,18 @@ footer {
 	float: right;
 
 }
+
+.paddingBetweenCols td 
+{
+    padding:0 15px;
+}
+
+.paddingBetweenCols th 
+{
+    padding:0 15px;
+}
+
+.titles 
+{
+    padding:0 15px;
+}
