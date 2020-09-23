@@ -154,14 +154,17 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 
 
 	<h3>Property Details</h3>
+	
 	<a href="<c:url value="${searchUrl}"/>"
 		class="btn btn-secondary">Back to Results</a>
-	<div class="container-fluid">
 
+	
+	<div class="container-fluid">
+	<br>
 	<form action="/updateLifestyle">
 	<fieldset>
 	<c:forEach var="prop" items="${property}">
-	<legend>Update Your Lifestyle Preferences:</legend>
+	<legend><strong>Update Your Lifestyle Preferences:</strong></legend>
 		<label>Kids</label>
 	<input type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
 	<label>Pets</label>
@@ -333,9 +336,48 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</script>
 					</c:forEach>
 				</table>
-			</td>
-		</tr>
-	</table>
+				<table>      </table>
+	
+			<td style="vertical-align: top">
+				<h3>Map Key</h3>
+				<table>
+					<tr>
+						<th>Icon</th>
+						<th>Name</th>
+					</tr>
+				
+						<tr>
+							<td><img src = "school.png"></td>
+							<td>Schools</td>
+						</tr>
+						<tr>
+							<td><img src = "pet-store.png"></td>
+							<td>Pet Store</td>
+						</tr>
+						<tr>
+							<td><img src = "gymicon.png"></td>
+							<td>Gym</td>
+						</tr>
+						<tr>
+							<td><img src = "restaurant.png"></td>
+							<td>Restaurant</td>				
+						</tr>
+						<tr>
+							<td><img src = "bar.png"></td>
+							<td>Bar</td>				
+						</tr>
+						<tr>
+							<td><img src = "supermarket.png"></td>
+							<td>Grocery Store</td>				
+						</tr>
+						<tr>
+							<td><img src = "transport.png"></td>
+							<td>Transit Station</td>				
+						</tr>
+				</table>
+				</td>
+				</tr>
+			</table>
 	<br>
 	<br>
 	<br>
