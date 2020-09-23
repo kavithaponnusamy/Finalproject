@@ -290,6 +290,8 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				<div id="map" class="details-map"></div>
 			</div>
 		</div>
+		<br>
+		<br>
 	</div>
 	<h2>Nearby locations</h2>
 	<table>
