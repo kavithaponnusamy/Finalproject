@@ -14,9 +14,10 @@
 </head>
 <body class="homepage">
 	
+	<%@include file="partials/header.jsp"%>
 	<h1>Sign up</h1>
 
-	<%@include file="partials/header.jsp"%>
+	
 	<p class="message"><c:out value="${ message }" /></p>
 
 	<div class="container-fluid">

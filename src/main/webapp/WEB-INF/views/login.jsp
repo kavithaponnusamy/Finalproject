@@ -16,10 +16,12 @@
 </head>
 <body class="homepage">
 	
-	<h1>Login</h1>
-
 	<%@include file="partials/header.jsp"%>
+
+	
+	<h1>Login</h1>
 	<p class="message"><c:out value="${ message }" /></p>
+	
 
 	<div class="container-fluid">
 		<form action="/login" method="post">
