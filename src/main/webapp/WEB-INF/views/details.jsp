@@ -62,7 +62,7 @@ var smarketLat=${smarket.geometry.location.lat};
 var smarketLng=${smarket.geometry.location.lng};
 var dist=distance(lat,lng,smarketLat,smarketLng);
 var smarketInfo='<h6>Name: <c:out value="${smarket.name}" /></h6><br><h6>Address: <c:out value="${smarket.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
-addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png',smarketInfo);
+addMaker(smarketLat,smarketLng,'SuperMarket','SM','supermarket.png',smarketInfo);
 </c:forEach>
 
 
