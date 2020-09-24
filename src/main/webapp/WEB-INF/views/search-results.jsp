@@ -106,16 +106,16 @@
 					<option ${ param.beds==5?'selected':'' } value="5">5</option>
 					<option ${ param.beds==6?'selected':'' } value="6">6</option>
 				</select> <label for="baths">Baths</label> <select id="baths" name="baths">
-					<option ${ param.baths==0?'selected':'' } value="0">Any</option>
-					<option ${ param.baths==1?'selected':'' } value="1">1</option>
+					<option ${ param.baths==0.0?'selected':'' } value="0">Any</option>
+					<option ${ param.baths==1.0?'selected':'' } value="1">1</option>
 					<option ${ param.baths==1.5?'selected':'' } value="1.5">1.5</option>
-					<option ${ param.baths==2?'selected':'' } value="2">2</option>
+					<option ${ param.baths==2.0?'selected':'' } value="2">2</option>
 					<option ${ param.baths==2.5?'selected':'' } value="2.5">2.5</option>
-					<option ${ param.baths==3?'selected':'' } value="3">3</option>
+					<option ${ param.baths==3.0?'selected':'' } value="3">3</option>
 					<option ${ param.baths==3.5?'selected':'' } value="3.5">3.5</option>
-					<option ${ param.baths==4?'selected':'' } value="4">4</option>
+					<option ${ param.baths==4.0?'selected':'' } value="4">4</option>
 					<option ${ param.baths==4.5?'selected':'' } value="4.5">4.5</option>
-					<option ${ param.baths==5?'selected':'' } value="5">5</option>
+					<option ${ param.baths==5.0?'selected':'' } value="5">5</option>
 				</select>
 				<button type="submit" class="btn btn-outline-primary">Filter
 					By</button>

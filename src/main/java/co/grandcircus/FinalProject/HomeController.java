@@ -202,6 +202,7 @@ public class HomeController {
 			model.addAttribute("key", key);
 			return "search-results";
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("error message", e.getMessage());
 			return "error";
 		}
