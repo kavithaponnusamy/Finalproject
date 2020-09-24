@@ -87,16 +87,16 @@ $(document).ready(
 	<form action="/saveLifestyle">
 	<fieldset>
 	<legend>Select all that fit your lifestyle:</legend>
-	<label>Kids</label>
-	<input type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/><br>
-	<label>Pets</label>
-	<input type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/><br>
-	<label>Active</label>
-	<input type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/><br>
-	<label>Night Life</label>
-	<input type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/><br>
-	<label>Public Transportation</label>
-	<input type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/><br>
+	<input id = "kids" type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
+	<label for = "kids">Kids</label><br>
+	<input id = "pets" type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/>
+	<label for="pets">Pets</label><br>
+	<input id = "active" type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/>
+	<label for = "active">Active</label><br>
+	<input id = "nightLife" type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/>
+	<label for = "nightLife">Night Life</label><br>
+	<input id = "publicTransit" type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/>
+	<label for = "publicTransit">Public Transportation</label><br>
 	<button type="submit" class="btn btn-primary mb-2">Save Selected</button>
 	</fieldset>
 	</form>

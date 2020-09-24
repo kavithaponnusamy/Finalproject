@@ -179,7 +179,9 @@ public class HomeController {
 				filteredProperties.add(properties.get(i));
 			}
 		}
-
+		
+		Double lat= apiServ.getCityLatLong(city, state).getResults().get(0).getGeometry().getLocation().getLat();
+		Double lon= apiServ.getCityLatLong(city, state).getResults().get(0).getGeometry().getLocation().getLng();
 		session.removeAttribute("searchUrl");
 
 		String searchUrl = "search-result?state=" + state + "&city=" + city + "&minprice=" + minprice + "&maxprice="
@@ -200,6 +202,9 @@ public class HomeController {
 		model.addAttribute("properties", filteredProperties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
+		model.addAttribute("lat",lat);
+		model.addAttribute("lon",lon);
+		model.addAttribute("key", key);
 		return "search-results";
 		}catch(Exception e) {
 			model.addAttribute("error message", e.getMessage());

@@ -145,7 +145,7 @@
 		</div> 
 
 		<form class="form" action="addSearch">
-			<input type="text" name="name">
+			<input type="text" name="name" placeholder = "Save Search Name">
 			<button type="submit" class="btn btn-outline-primary">Save
 				Search</button>
 		</form>

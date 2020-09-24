@@ -165,16 +165,16 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 	<fieldset>
 	<c:forEach var="prop" items="${property}">
 	<legend><strong>Update Your Lifestyle Preferences:</strong></legend>
-		<label>Kids</label>
-	<input type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
-	<label>Pets</label>
-	<input type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/>
-	<label>Active</label>
-	<input type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/>
-	<label>Night Life</label>
-	<input type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/>
-	<label>Public Transportation</label>
-	<input type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/>
+	<input id = "kids" type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
+	<label for = "kids">Kids</label>
+	<input id = "pets" type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/>
+	<label for="pets">Pets</label>
+	<input id = "active" type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/>
+	<label for = "active">Active</label>
+	<input id = "nightLife" type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/>
+	<label for = "nightLife">Night Life</label>
+	<input id = "publicTransit" type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/>
+	<label for = "publicTransit">Public Transportation</label>
 	<input type="hidden" name="propertyId" value="${prop.property_id}"/>
 	<button type="submit" class="btn btn-primary mb-2">Update</button>
 	</c:forEach>
