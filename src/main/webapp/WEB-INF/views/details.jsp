@@ -62,7 +62,7 @@ var smarketLat=${smarket.geometry.location.lat};
 var smarketLng=${smarket.geometry.location.lng};
 var dist=distance(lat,lng,smarketLat,smarketLng);
 var smarketInfo='<h6>Name: <c:out value="${smarket.name}" /></h6><br><h6>Address: <c:out value="${smarket.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
-addMaker(smarketLat,smarketLng,'SuperMarket','SM','superMarket.png',smarketInfo);
+addMaker(smarketLat,smarketLng,'SuperMarket','SM','supermarket.png',smarketInfo);
 </c:forEach>
 
 
@@ -71,7 +71,7 @@ var restaurantLat=${restaurant.geometry.location.lat};
 var restaurantLng=${restaurant.geometry.location.lng};
 var dist=distance(lat,lng,restaurantLat,restaurantLng);
 var restaurantInfo='<h6>Name: <c:out value="${restaurant.name}" /></h6><br><h6>Address: <c:out value="${restaurant.vicinity}"/></h6><br><h6>Distance: '+dist+' miles</h6><br>';
-addMaker(restaurantLat,restaurantLng,'Restaurent','R','restaurant.png',restaurantInfo);
+addMaker(restaurantLat,restaurantLng,'Restaurant','R','restaurant.png',restaurantInfo);
 </c:forEach>
 
 <c:forEach var="gym" items="${gyms}"> 	

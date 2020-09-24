@@ -112,7 +112,7 @@ $(document).ready(
 
 		<div>
 			<p>© Copyright 2020 All rights reserved by 
-			<img style="width:100px;"  src="logo.png" class="float-right" class="logo"/> </p>
+			<img style="width:100px;"  src="Logo.png" class="float-right" class="logo"/> </p>
 		</div>
 
 	</footer>
