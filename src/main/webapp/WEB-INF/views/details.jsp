@@ -154,34 +154,43 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 
 
 	<h3>Property Details</h3>
-	
-	<a href="<c:url value="${searchUrl}"/>"
-		class="btn btn-secondary">Back to Results</a>
 
-	
+	<a href="<c:url value="${searchUrl}"/>" class="btn btn-secondary">Back
+		to Results</a>
+
+
 	<div class="container-fluid">
-	<br>
-	<form action="/updateLifestyle">
-	<fieldset>
-	<c:forEach var="prop" items="${property}">
-	<legend><strong>Update Your Lifestyle Preferences:</strong></legend>
-	<input id = "kids" type="checkbox"  ${kids=='kids'?'checked':'' } name="kids" value="kids"/>
-	<label for = "kids">Kids</label>
-	<input id = "pets" type="checkbox"  ${pets=='pets'?'checked':'' }  name="pets" value="pets"/>
-	<label for="pets">Pets</label>
-	<input id = "active" type="checkbox" ${active=='active'?'checked':'' } name="active" value="active"/>
-	<label for = "active">Active</label>
-	<input id = "nightLife" type="checkbox" ${nightLife=='nightLife'?'checked':'' } name="nightLife" value="nightLife"/>
-	<label for = "nightLife">Night Life</label>
-	<input id = "publicTransit" type="checkbox" ${publicTransit=='publicTransit'?'checked':'' }  name="publicTransit" value="publicTransit"/>
-	<label for = "publicTransit">Public Transportation</label>
-	<input type="hidden" name="propertyId" value="${prop.property_id}"/>
-	<button type="submit" class="btn btn-primary mb-2">Update</button>
-	</c:forEach>
-	</fieldset>
-	</form>
+		<br>
+		<form action="/updateLifestyle">
+			<fieldset>
+				<c:forEach var="prop" items="${property}">
+					<legend>
+						<strong>Update Your Lifestyle Preferences:</strong>
+					</legend>
+					<input id="kids" type="checkbox" ${kids=='kids'?'checked':'' }
+						name="kids" value="kids" />
+					<label for="kids">Kids</label>
+					<input id="pets" type="checkbox" ${pets=='pets'?'checked':'' }
+						name="pets" value="pets" />
+					<label for="pets">Pets</label>
+					<input id="active" type="checkbox"
+						${active=='active'?'checked':'' } name="active" value="active" />
+					<label for="active">Active</label>
+					<input id="nightLife" type="checkbox"
+						${nightLife=='nightLife'?'checked':'' } name="nightLife"
+						value="nightLife" />
+					<label for="nightLife">Night Life</label>
+					<input id="publicTransit" type="checkbox"
+						${publicTransit=='publicTransit'?'checked':'' }
+						name="publicTransit" value="publicTransit" />
+					<label for="publicTransit">Public Transportation</label>
+					<input type="hidden" name="propertyId" value="${prop.property_id}" />
+					<button type="submit" class="btn btn-primary mb-2">Update</button>
+				</c:forEach>
+			</fieldset>
+		</form>
 
-	
+
 		<div class="btn-group float-right">
 			<button class="btn btn-primary" value="Details"
 				onClick="onBtnDetailViewClick();">Details</button>
@@ -286,48 +295,46 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 				</c:forEach>
 			</div>
 			<div id="divMapView" style="display: block;" class="border col-md">
-			<table class = "key">
-				<th>Map Key</th>
-						<tr>
-							<td><img src = "school.png">
-							Schools &nbsp;&nbsp;</td>
-							<td><img src = "pet-store.png"></td>
-							<td> Pet Store &nbsp;&nbsp;</td>
-							<td><img src = "gymicon.png"></td>
-							<td> Gym &nbsp;&nbsp; </td>
-							<td><img src = "restaurant.png"></td>
-							<td> Restaurant &nbsp;&nbsp;</td>	
-							<td><img src = "bar.png"></td>
-							<td> Bar &nbsp;&nbsp;</td>
-							<td><img src = "supermarket.png"></td>
-							<td> Grocery Store &nbsp;&nbsp;</td>	
-								<td><img src = "transport.png"></td>
-							<td> Transit Station &nbsp;&nbsp;</td>
-						</tr>
+				<table class="key">
+					<th>Map Key</th>
+					<tr>
+						<td><img src="school.png"> Schools &nbsp;&nbsp;</td>
+						<td><img src="pet-store.png"></td>
+						<td>Pet Store &nbsp;&nbsp;</td>
+						<td><img src="gymicon.png"></td>
+						<td>Gym &nbsp;&nbsp;</td>
+						<td><img src="restaurant.png"></td>
+						<td>Restaurant &nbsp;&nbsp;</td>
+						<td><img src="bar.png"></td>
+						<td>Bar &nbsp;&nbsp;</td>
+						<td><img src="supermarket.png"></td>
+						<td>Grocery Store &nbsp;&nbsp;</td>
+						<td><img src="transport.png"></td>
+						<td>Transit Station &nbsp;&nbsp;</td>
+					</tr>
 				</table>
 				<div id="map" class="details-map"></div>
 			</div>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 	</div>
-		
+
 	<h2>Highest Rated Amenities Nearby</h2>
-	<table class = "paddingBetweenCols">
+	<table class="paddingBetweenCols">
 		<tr>
 			<td style="vertical-align: top">
-				<h3 class = "titles">Super Markets</h3>
-				<table class = "paddingBetweenCols">
+				<h3 class="titles">Super Markets</h3>
+				<table class="paddingBetweenCols">
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
 						<th>Distance</th>
 					</tr>
-				<c:forEach var="supermarket" items="${supermarkets}">
+					<c:forEach var="supermarket" items="${supermarkets}">
 						<tr>
 							<td><c:out value="${supermarket.name}" /></td>
 							<td><c:out value="${supermarket.rating}" /></td>
-							<td id="sm${supermarket.place_id}"></td>					
+							<td id="sm${supermarket.place_id}"></td>
 						</tr>
 						<script type="text/javascript">
 							var smDistance=distance('${lat}','${lon}','${supermarket.geometry.location.lat}','${supermarket.geometry.location.lng}')
@@ -338,8 +345,8 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 			</td>
 
 			<td style="vertical-align: top">
-				<h3 class = "titles">Restaurants</h3>
-				<table class = "paddingBetweenCols">
+				<h3 class="titles">Restaurants</h3>
+				<table class="paddingBetweenCols">
 					<tr>
 						<th>Name</th>
 						<th>Rating</th>
@@ -347,9 +354,9 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 					</tr>
 					<c:forEach var="restaurant" items="${restaurants}">
 						<tr>
-						    <td><c:out value="${restaurant.name}" />&nbsp;&nbsp;</td>
+							<td><c:out value="${restaurant.name}" />&nbsp;&nbsp;</td>
 							<td><c:out value="${restaurant.rating}" />&nbsp;&nbsp;</td>
-							<td id="res${restaurant.place_id}">&nbsp;&nbsp;</td>					
+							<td id="res${restaurant.place_id}">&nbsp;&nbsp;</td>
 						</tr>
 						<script type="text/javascript">
 							var resDistance=distance('${lat}','${lon}','${restaurant.geometry.location.lat}','${restaurant.geometry.location.lng}')
@@ -357,60 +364,59 @@ function addMaker(typelat, typelng,title, label,icon, popupInfo){
 						</script>
 					</c:forEach>
 				</table>
-				</td>
-				<c:choose>
+			</td>
+			<c:choose>
 				<c:when test="${gyms!=null}">
-				<td style="vertical-align: top">
-				<h3 class = "titles">Gyms</h3>
-				<table>
-					<tr>
-						<th>Name</th>
-						<th>Rating</th>
-						<th>Distance</th>
-					</tr>
-				<c:forEach var="gym" items="${gyms}">
-						<tr>
-							<td><c:out value="${gym.name}" /></td>
-							<td><c:out value="${gym.rating}" /></td>
-							<td id="gym${gym.place_id}"></td>					
-						</tr>
-						<script type="text/javascript">
+					<td style="vertical-align: top">
+						<h3 class="titles">Gyms</h3>
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>Rating</th>
+								<th>Distance</th>
+							</tr>
+							<c:forEach var="gym" items="${gyms}">
+								<tr>
+									<td><c:out value="${gym.name}" /></td>
+									<td><c:out value="${gym.rating}" /></td>
+									<td id="gym${gym.place_id}"></td>
+								</tr>
+								<script type="text/javascript">
 							var gymDistance=distance('${lat}','${lon}','${gym.geometry.location.lat}','${gym.geometry.location.lng}')
 							document.getElementById('gym${gym.place_id}').innerHTML = gymDistance;	
 						</script>
-					</c:forEach>
-				</table>
-				</td>
+							</c:forEach>
+						</table>
+					</td>
 				</c:when>
-				</c:choose>
+			</c:choose>
 			<c:choose>
 				<c:when test="${bars!=null}">
-			<td style="vertical-align: top">
-				<h3 class = "titles">Bars</h3>
-				<table>
-					<tr>
-						<th>Name</th>
-						<th>Rating</th>
-						<th>Distance</th>
-					</tr>
-					<c:forEach var="bar" items="${bars}">
-						<tr>
-						    <td><c:out value="${bar.name}" />&nbsp;&nbsp;</td>
-							<td><c:out value="${bar.rating}" />&nbsp;&nbsp;</td>
-							<td id="bar${bar.place_id}">&nbsp;&nbsp;</td>					
-						</tr>
-						<script type="text/javascript">
+					<td style="vertical-align: top">
+						<h3 class="titles">Bars</h3>
+						<table>
+							<tr>
+								<th>Name</th>
+								<th>Rating</th>
+								<th>Distance</th>
+							</tr>
+							<c:forEach var="bar" items="${bars}">
+								<tr>
+									<td><c:out value="${bar.name}" />&nbsp;&nbsp;</td>
+									<td><c:out value="${bar.rating}" />&nbsp;&nbsp;</td>
+									<td id="bar${bar.place_id}">&nbsp;&nbsp;</td>
+								</tr>
+								<script type="text/javascript">
 							var barDistance=distance('${lat}','${lon}','${bar.geometry.location.lat}','${bar.geometry.location.lng}')
 							document.getElementById('bar${bar.place_id}').innerHTML = barDistance;
 						</script>
-					</c:forEach>
-				</table>
-				</td>
+							</c:forEach>
+						</table>
+					</td>
 				</c:when>
-				</c:choose>
-			
-				</table>
-				
+			</c:choose>
+	</table>
+
 	<br>
 	<br>
 	<br>
