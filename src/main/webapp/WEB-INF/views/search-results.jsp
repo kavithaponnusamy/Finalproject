@@ -25,35 +25,16 @@
 <script>
 	let map;
 	function initMap() {
-		var lat = $
-		{
-			lat
-		}
-		;
-		var lng = $
-		{
-			lon
-		}
-		;
+		var lat = ${lat};
+		var lng = ${lon};
 		map = new google.maps.Map(document.getElementById("map"), {
-			center : {
-				lat : lat,
-				lng : lng
-			},
+			center : {lat : lat,lng : lng},
 			zoom : 12
 		});
 
 		<c:forEach var="property" items="${properties}">
-		var houseLat = $
-		{
-			property.address.lat
-		}
-		;
-		var houseLon = $
-		{
-			property.address.lon
-		}
-		;
+		var houseLat = ${property.address.lat};
+		var houseLon = ${property.address.lon};
 		var houseInfo = '<h6>Address: <c:out value="${property.address.line}" /></h6><br><h5><img src="${property.thumbnail}"/></h6><br>';
 		addMaker(houseLat, houseLon, 'House', 'H', houseInfo);
 		</c:forEach>
@@ -61,14 +42,10 @@
 	}
 	function addMaker(typelat, typelng, title, label, popupInfo) {
 		var marker = new google.maps.Marker({
-			position : {
-				lat : typelat,
-				lng : typelng
-			},
+			position : {lat : typelat,lng : typelng},
 			map : map,
 			title : title,
 			label : label,
-
 		});
 		if (popupInfo) {
 

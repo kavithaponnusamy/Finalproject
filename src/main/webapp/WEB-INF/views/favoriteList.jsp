@@ -22,7 +22,7 @@
 </head>
 <body>
 	<%@include file="partials/header.jsp"%>
-	<p class="message"><c:out value="${ message }" /></p>
+	<p class="message"><c:out value="${ message }" />\</p>
 
 	<h2>Favorite List</h2>
 	<div class="container-fluid">
