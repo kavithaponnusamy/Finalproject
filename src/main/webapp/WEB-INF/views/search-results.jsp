@@ -23,11 +23,18 @@
 
 <script src="/script.js"></script>
 <script>
-
 	let map;
 	function initMap() {
-		var lat = ${lat};
-		var lng = ${lon};
+		var lat = $
+		{
+			lat
+		}
+		;
+		var lng = $
+		{
+			lon
+		}
+		;
 		map = new google.maps.Map(document.getElementById("map"), {
 			center : {
 				lat : lat,
@@ -35,11 +42,18 @@
 			},
 			zoom : 12
 		});
-	
 
 		<c:forEach var="property" items="${properties}">
-		var houseLat = ${property.address.lat};
-		var houseLon = ${property.address.lon};
+		var houseLat = $
+		{
+			property.address.lat
+		}
+		;
+		var houseLon = $
+		{
+			property.address.lon
+		}
+		;
 		var houseInfo = '<h6>Address: <c:out value="${property.address.line}" /></h6><br><h5><img src="${property.thumbnail}"/></h6><br>';
 		addMaker(houseLat, houseLon, 'House', 'H', houseInfo);
 		</c:forEach>
@@ -74,7 +88,7 @@
 </head>
 <body>
 	<%@include file="partials/header.jsp"%>
-	 
+
 
 	<h2>List of properties in ${city}, ${state}</h2>
 	<div class="container-fluid">
@@ -142,20 +156,20 @@
 				onClick="onBtnDetailViewClick();">List</button>
 			<button id="btnMapView" class="btn btn-secondary"
 				onClick="onBtnMapViewClick();">Maps</button>
-		</div> 
+		</div>
 
 		<form class="form" action="addSearch">
-			<input type="text" name="name" placeholder = "Save Search Name">
+			<input type="text" name="name" placeholder="Save Search Name">
 			<button type="submit" class="btn btn-outline-primary">Save
 				Search</button>
 		</form>
-		
-		
+
+
 		<div class="row">
 			<div class="border col-md">
 				<div id="image-list" class="row">
 					<c:forEach var="property" items="${properties}">
-						<div  data-card class="card col-md-4">
+						<div data-card class="card col-md-4">
 							<div>
 								<a href="/submit-details?propertyId=${property.property_id}">
 									<img class="img-fav" style="width: 100%; height: 400px"
@@ -170,10 +184,11 @@
 								<div class="float-left">
 									<span>${property.beds} beds ${property.baths} bath </span><br>
 									<span>Type: ${property.prop_type}</span><br> <span>Price:
-										<fmt:formatNumber value="${property.price}" type="currency" currencySymbol="$"/>
+										<fmt:formatNumber value="${property.price}" type="currency"
+											currencySymbol="$" />
 									</span><br> <span>${property.address.line} </span><br>
 
-									<p>${city}, ${state} ${property.address.postal_code}</p>
+									<p>${city},${state} ${property.address.postal_code}</p>
 
 								</div>
 								<div class="float-right mt-1">
@@ -192,20 +207,20 @@
 			</div>
 
 		</div>
-		
-		<br>
-		
 
-</div>
-		
+		<br>
+
+
+	</div>
+
 	<footer>
-			<div>
-				<p>© Copyright 2020 All rights reserved by</p>
-			</div>
-		</footer>	
-	
-		<script
-			src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
-			defer></script>
+		<div>
+			<p>© Copyright 2020 All rights reserved by</p>
+		</div>
+	</footer>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap&libraries=&v=weekly"
+		defer></script>
 </body>
 </html>

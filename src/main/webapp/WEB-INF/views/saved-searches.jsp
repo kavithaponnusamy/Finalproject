@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html class = "newpage">
+<html class="newpage">
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
@@ -15,29 +15,31 @@
 	crossorigin="anonymous">
 <link href="/style.css" rel="stylesheet" />
 </head>
-<body class = "newpage">
+<body class="newpage">
 
-<%@include file="partials/header.jsp" %>
+	<%@include file="partials/header.jsp"%>
 	<h1>Saved Searches</h1>
-	<div  class="container-fluid">
-			<table class="table"> 
+	<div class="container-fluid">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Search Name</th>
 				</tr>
 			</thead>
 			<tbody>
-					<c:forEach items="${searches}" var="searches">
-					
+				<c:forEach items="${searches}" var="searches">
+
 					<tr>
-					<td><a class = "nav-link" href="${searches.searchUrl}">${searches.name}</a></td>
-				    <td><a href="<c:url value="/removeSearch?id=${searches.id}"/>" class="btn btn-dark">Delete</a></td>
-             </tr>
-					</c:forEach>
-					</tbody>
-					</table>
-			</div>
-<br>
+						<td><a class="nav-link" href="${searches.searchUrl}">${searches.name}</a></td>
+						<td><a
+							href="<c:url value="/removeSearch?id=${searches.id}"/>"
+							class="btn btn-dark">Delete</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<br>
 	<footer>
 		<div>
 			<p>© Copyright 2020 All rights reserved by</p>
