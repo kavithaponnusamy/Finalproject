@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import co.grandcircus.FinalProject.entity.User;
-
 @Entity
 public class Favorites {
 		

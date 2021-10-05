@@ -54,7 +54,7 @@ public class HomeController {
 
 	@Autowired
 	HttpSession session;
-
+	//Testing
 	@RequestMapping("/")
 	public String showProperty(Model model) {
 
@@ -100,6 +100,7 @@ public class HomeController {
 			@RequestParam(required = false) String city) {
 
 		List<Property> properties = apiServ.getProperiesByCityState(state, city).getProperties();
+
 		model.addAttribute("properties", properties);
 		model.addAttribute("city", (city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase()));
 		model.addAttribute("state", state);
